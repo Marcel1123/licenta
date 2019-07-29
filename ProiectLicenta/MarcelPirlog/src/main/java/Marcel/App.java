@@ -1,34 +1,33 @@
 package Marcel;
 
+import Marcel.controllers.fxmlcontroller.FxmlController;
+import Marcel.controllers.uicontrollers.CreateProjectController;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * JavaFX App
- */
 public class App extends Application {
 
-    private static Scene scene;
+    private static AppConfiguration appConfiguration = new AppConfiguration();
+
+    public Stage stage;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"));
-        stage.setScene(scene);
+        FxmlController.scene = new Scene(new FxmlController().loadFXML("/Marcel/CreateProject"));
+        stage.setScene(FxmlController.scene);
+        this.stage = stage;
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+    public static AppConfiguration getAppConfiguration() {
+        return appConfiguration;
     }
 
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
+    public static void setAppConfiguration(AppConfiguration appConfiguration) {
+        App.appConfiguration = appConfiguration;
     }
 
     public static void main(String[] args) {
