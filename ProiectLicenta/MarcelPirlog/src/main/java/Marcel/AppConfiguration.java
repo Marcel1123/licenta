@@ -11,6 +11,16 @@ public class AppConfiguration {
 
     private  Student student = null;
 
+    private String programmingLanguageSelected = null;
+
+    public String getProgrammingLanguageSelected() {
+        return programmingLanguageSelected;
+    }
+
+    public void setProgrammingLanguageSelected(String programmingLanguageSelected) {
+        this.programmingLanguageSelected = programmingLanguageSelected;
+    }
+
     public  LocalProjectLocation getLocalProjectLocation() {
         return localProjectLocation;
     }

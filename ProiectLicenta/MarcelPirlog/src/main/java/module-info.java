@@ -7,6 +7,6 @@ module Marcel {
     exports Marcel.controllers.uicontrollers;
     exports Marcel.entities;
     exports Marcel.controllers.entitycontrollers;
-    opens Marcel to javafx.fxml;
     exports Marcel.controllers.fxmlcontroller;
+    opens Marcel to javafx.fxml;
 }

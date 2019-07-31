@@ -3,12 +3,12 @@ package Marcel.controllers.uicontrollers;
 import Marcel.App;
 import Marcel.controllers.entitycontrollers.LocalProjectLocationController;
 import Marcel.entities.LocalProjectLocation;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,29 +22,34 @@ public class CreateProjectController {
     public Button serachButton;
 
     @FXML
-    public TextField buttonPressMessage;
+    public Text responseMessage;
 
     @FXML
     public ChoiceBox<String> programmingLanguageOption;
 
     @FXML
-    public boolean searchForFileInPath(ActionEvent actionEvent){
-        System.out.println("Start search...");
-
-        if(directoryPath.getText().isEmpty() || !(LocalProjectLocationController.checkIfThePathExists(Paths.get(directoryPath.getText())))){
-            buttonPressMessage.setText("Please enter a valid path from your computer.");
-            return false;
+    public void searchForFileInPath(ActionEvent actionEvent){
+        if(!(directoryPath.getText().isEmpty())){
+            if(!(LocalProjectLocationController.checkIfThePathExists(Paths.get(directoryPath.getText()))) || !(Files.isDirectory(Paths.get(directoryPath.getText())))){
+                responseMessage.setText("Write a directory path from your computer");
+                responseMessage.setVisible(true);
+            } else {
+                responseMessage.setVisible(false);
+                App.getAppConfiguration().setLocalProjectLocation(new LocalProjectLocation(directoryPath.getText()));
+                App.getAppConfiguration().setProgrammingLanguageSelected(programmingLanguageOption.getValue());
+            }
+        } else {
+            responseMessage.setText("Write a directory path from your computer");
+            responseMessage.setVisible(true);
         }
-
-        if(!(Files.isDirectory(Paths.get(directoryPath.getText())))){
-            buttonPressMessage.setText("Please enter a valid directory path");
-            
-            return false;
-        }
-        programmingLanguageOption = new ChoiceBox<>(FXCollections.observableArrayList("Java","C", "Python"));
-        App.getAppConfiguration().setLocalProjectLocation(new LocalProjectLocation(directoryPath.getText()));
-        System.out.println("Atata:  " + programmingLanguageOption.getValue());
-        System.out.println("Asta e: " + App.getAppConfiguration());
-        return true;
     }
+    @FXML
+    public void buildList(){
+        if(programmingLanguageOption.getItems().size() == 0){
+            programmingLanguageOption.getItems().add("Java");
+            programmingLanguageOption.getItems().add("C");
+            programmingLanguageOption.getItems().add("Python");
+        }
+    }
+//C:\Program Files\SceneBuilder
 }
