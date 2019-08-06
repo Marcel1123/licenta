@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Marcel.controllers.uicontrollers.ShowAllCodeFileFromPathController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Marcel.controllers.uicontrollers.ShowAllCodeFileFromPathController">
+    <AnchorPane prefHeight="700.0" prefWidth="1000.0">
+        <TableView fx:id="listWithAllFiles" layoutX="10.0" layoutY="116.0" prefHeight="584.0" prefWidth="980.0">
+            <columns>
+                <TableColumn fx:id="fileName" prefWidth="365.0" text="Name" />
+                <TableColumn fx:id="fileCreateDate" minWidth="0.0" prefWidth="187.0" text="Create Date" />
+                <TableColumn fx:id="fileLastUpdate" minWidth="0.0" prefWidth="241.0" text="Last Update" />
+                <TableColumn fx:id="fileSize" prefWidth="186.0" text="Size" />
+            </columns>
+        </TableView>
+    </AnchorPane>
 </AnchorPane>

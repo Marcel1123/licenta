@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Marcel.controllers.uicontrollers.CreateProjectController">
    <children>
-      <AnchorPane prefHeight="608.0" prefWidth="800.0" style="-fx-background-color: #061283;" stylesheets="@style.css">
+      <AnchorPane fx:id="rootPane" prefHeight="608.0" prefWidth="800.0" style="-fx-background-color: #061283;" stylesheets="@style.css">
          <children>
             <TextField fx:id="directoryPath" layoutX="100.0" layoutY="116.0" prefHeight="40.0" prefWidth="600.0" promptText="Enter the search path ..." style="-fx-background-color: #FFB47C;" stylesheets="@style.css">
                <font>

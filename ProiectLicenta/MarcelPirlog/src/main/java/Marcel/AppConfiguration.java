@@ -5,13 +5,13 @@ import Marcel.entities.LocalProjectLocation;
 import Marcel.entities.Student;
 
 public class AppConfiguration {
-    private  LocalProjectLocation localProjectLocation = null;
+    private  LocalProjectLocation localProjectLocation = new LocalProjectLocation("C:\\Users\\User\\Documents\\GitHub\\E-Catalog\\Client");
 
-    private  LocalProjectLocationController localProjectLocationController = null;
+//    private  LocalProjectLocationController localProjectLocationController = null;
 
     private  Student student = null;
 
-    private String programmingLanguageSelected = null;
+    private String programmingLanguageSelected = ".java";
 
     public String getProgrammingLanguageSelected() {
         return programmingLanguageSelected;
@@ -29,13 +29,13 @@ public class AppConfiguration {
         this.localProjectLocation = localProjectLocation;
     }
 
-    public  LocalProjectLocationController getLocalProjectLocationController() {
-        return localProjectLocationController;
-    }
-
-    public  void setLocalProjectLocationController(LocalProjectLocationController localProjectLocationController) {
-        this.localProjectLocationController = localProjectLocationController;
-    }
+//    public  LocalProjectLocationController getLocalProjectLocationController() {
+//        return localProjectLocationController;
+//    }
+//
+//    public  void setLocalProjectLocationController(LocalProjectLocationController localProjectLocationController) {
+//        this.localProjectLocationController = localProjectLocationController;
+//    }
 
     public  Student getStudent() {
         return student;
@@ -49,7 +49,7 @@ public class AppConfiguration {
     public String toString() {
         return "AppConfiguration{" +
                 "localProjectLocation=" + localProjectLocation +
-                ", localProjectLocationController=" + localProjectLocationController +
+//                ", localProjectLocationController=" + localProjectLocationController +
                 ", student=" + student +
                 '}';
     }

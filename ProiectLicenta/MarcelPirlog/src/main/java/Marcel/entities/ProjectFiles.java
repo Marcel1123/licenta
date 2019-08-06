@@ -1,15 +1,24 @@
 package Marcel.entities;
 
-import java.util.List;
+import java.io.File;
+import java.util.HashSet;
 
 public class ProjectFiles {
-    private List<CodeFile> projectCodeFiles = null;
+    private HashSet<File> projectCodeFiles = null;
 
-    public List<CodeFile> getProjectCodeFiles() {
+    public HashSet<File> getProjectCodeFiles() {
         return projectCodeFiles;
     }
 
-    public void setProjectCodeFiles(List<CodeFile> projectCodeFiles) {
+    public void setProjectCodeFiles(HashSet<File> projectCodeFiles) {
         this.projectCodeFiles = projectCodeFiles;
+    }
+
+    public void addOtherList(HashSet<File> projectCodeFiles){
+        this.projectCodeFiles.addAll(projectCodeFiles);
+    }
+
+    public void addNewFile(File projectCodeFiles){
+        this.projectCodeFiles.add(projectCodeFiles);
     }
 }

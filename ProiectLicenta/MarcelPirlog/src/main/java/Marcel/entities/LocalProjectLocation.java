@@ -19,4 +19,8 @@ public class LocalProjectLocation {
     public void setLocalProjectLocation(Path localProjectLocation) {
         this.localProjectLocation = localProjectLocation;
     }
+
+    public String getToString(){
+        return localProjectLocation.toString();
+    }
 }
