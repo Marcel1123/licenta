@@ -1,12 +1,7 @@
 package Marcel.myutil;
 
-import Marcel.entities.FileCode;
-import Marcel.entities.ProjectFiles;
-
 import java.io.File;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 
 public class SearchInDirectory {
 

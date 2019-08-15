@@ -2,20 +2,15 @@ package Marcel.controllers.uicontrollers;
 
 import Marcel.App;
 import Marcel.controllers.entitycontrollers.LocalProjectLocationController;
-import Marcel.controllers.fxmlcontroller.FxmlController;
 import Marcel.entities.LocalProjectLocation;
+import Marcel.entities.ProjectFiles;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -46,6 +41,7 @@ public class CreateProjectController {
                 responseMessage.setVisible(false);
                 App.getAppConfiguration().setLocalProjectLocation(new LocalProjectLocation(directoryPath.getText()));
                 App.getAppConfiguration().setProgrammingLanguageSelected(programmingLanguageOption.getValue());
+                App.getAppConfiguration().setProjectFiles(new ProjectFiles());
             }
         } else {
             responseMessage.setText("Write a directory path from your computer");

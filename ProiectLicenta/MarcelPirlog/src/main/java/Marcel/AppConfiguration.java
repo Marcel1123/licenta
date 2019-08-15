@@ -1,15 +1,15 @@
 package Marcel;
 
-import Marcel.controllers.entitycontrollers.LocalProjectLocationController;
 import Marcel.entities.LocalProjectLocation;
+import Marcel.entities.ProjectFiles;
 import Marcel.entities.Student;
 
 public class AppConfiguration {
     private  LocalProjectLocation localProjectLocation = new LocalProjectLocation("C:\\Users\\User\\Documents\\GitHub\\E-Catalog\\Client");
 
-//    private  LocalProjectLocationController localProjectLocationController = null;
-
     private  Student student = null;
+
+    private ProjectFiles projectFiles = new ProjectFiles();
 
     private String programmingLanguageSelected = ".java";
 
@@ -29,14 +29,6 @@ public class AppConfiguration {
         this.localProjectLocation = localProjectLocation;
     }
 
-//    public  LocalProjectLocationController getLocalProjectLocationController() {
-//        return localProjectLocationController;
-//    }
-//
-//    public  void setLocalProjectLocationController(LocalProjectLocationController localProjectLocationController) {
-//        this.localProjectLocationController = localProjectLocationController;
-//    }
-
     public  Student getStudent() {
         return student;
     }
@@ -45,12 +37,11 @@ public class AppConfiguration {
         this.student = student;
     }
 
-    @Override
-    public String toString() {
-        return "AppConfiguration{" +
-                "localProjectLocation=" + localProjectLocation +
-//                ", localProjectLocationController=" + localProjectLocationController +
-                ", student=" + student +
-                '}';
+    public ProjectFiles getProjectFiles() {
+        return projectFiles;
+    }
+
+    public void setProjectFiles(ProjectFiles projectFiles) {
+        projectFiles = projectFiles;
     }
 }

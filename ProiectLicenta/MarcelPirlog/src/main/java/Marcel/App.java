@@ -7,11 +7,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class App extends Application {
+public class App extends Application implements Runnable {
 
     private static AppConfiguration appConfiguration = new AppConfiguration();
 
     public static Stage stage;
+
+    public static Thread primaryThread;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -36,7 +38,13 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        App app = new App();
+        primaryThread = new Thread(app,"Primary thread");
+        primaryThread.start();
     }
 
+    @Override
+    public void run() {
+        launch();
+    }
 }

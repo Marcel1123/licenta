@@ -4,7 +4,9 @@ import Marcel.App;
 import Marcel.controllers.entitycontrollers.FileCodeController;
 import Marcel.entities.FileCode;
 import Marcel.entities.ProjectFiles;
+import Marcel.myutil.MyThread;
 import Marcel.myutil.SearchInDirectory;
+import Marcel.myutil.Utilitar;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,13 +15,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-
-import java.io.File;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
-public class ShowAllCodeFileFromPathController implements Initializable {
+public class ShowAllCodeFileFromPathController  implements Initializable {
 //    FileCode
     @FXML
     public TableView<FileCode> listWithAllFiles;
@@ -34,37 +34,26 @@ public class ShowAllCodeFileFromPathController implements Initializable {
     @FXML
     public AnchorPane rootPane;
 
+    private MyThread watchThread;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         ObservableList<FileCode> observableList = FXCollections.observableArrayList();
         fileName.setCellValueFactory(new PropertyValueFactory<FileCode, String>("fileName"));
         fileCreateDate.setCellValueFactory(new PropertyValueFactory<FileCode, LocalDateTime>("createDate"));
         fileLastUpdate.setCellValueFactory(new PropertyValueFactory<FileCode, LocalDateTime>("lastUpdate"));
         fileSize.setCellValueFactory(new PropertyValueFactory<FileCode, Integer>("size"));
 
-        listWithAllFiles.setItems(seti());
-        ProjectFiles projectFiles = new ProjectFiles();
-        getAllFile(projectFiles);
-        listWithAllFiles.setItems(FXCollections.observableList(FileCodeController.converToFileCode(projectFiles.getProjectCodeFiles())));
+        Utilitar.getAllFile(App.getAppConfiguration().getProjectFiles());
+        listWithAllFiles.setItems(FXCollections.observableList(FileCodeController.converToFileCode(App.getAppConfiguration().getProjectFiles().getProjectCodeFiles())));
+
+        watchThread = new MyThread("Watch for modification", App.getAppConfiguration().getLocalProjectLocation().getToString());
+
     }
 
-    public ObservableList<FileCode> seti(){
-        ObservableList<FileCode> observableList = FXCollections.observableArrayList();
-
-        observableList.add(new FileCode("dasd",LocalDateTime.now(),LocalDateTime.now(),(long)12314));
-        observableList.add(new FileCode("dasd",LocalDateTime.now(),LocalDateTime.now(),(long)12314));
-        observableList.add(new FileCode("dasd",LocalDateTime.now(),LocalDateTime.now(),(long)12314));
-        return  observableList;
-    }
-
-    private ObservableList<FileCode> fileCodeObservableList(ProjectFiles projectFiles){
-        return FXCollections.observableList(FileCodeController.converToFileCode(projectFiles.getProjectCodeFiles()));
-    }
-
-    private void getAllFile(ProjectFiles projectFiles){
-        projectFiles.setProjectCodeFiles(SearchInDirectory.searchInDirectoryAndSubDirectory(App.getAppConfiguration().getLocalProjectLocation().getToString(),App.getAppConfiguration().getProgrammingLanguageSelected()));
+    public void endThreadAction() {
+        watchThread.stopWatch();
+        watchThread = null;
     }
 }
-//createDate;
-//        lastUpdate;
-//        roperty size;
