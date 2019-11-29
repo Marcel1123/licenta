@@ -6,7 +6,7 @@ import Marcel.entities.Student;
 
 public class AppConfiguration {
     private  LocalProjectLocation localProjectLocation = new LocalProjectLocation("C:\\Users\\User\\Documents\\GitHub\\E-Catalog\\Client");
-
+//    private LocalProjectLocation localProjectLocation = new LocalProjectLocation("C:\\Users\\User\\Documents\\GitHub\\licenta\\ProiectLicenta\\MarcelPirlog");
     private  Student student = null;
 
     private ProjectFiles projectFiles = new ProjectFiles();

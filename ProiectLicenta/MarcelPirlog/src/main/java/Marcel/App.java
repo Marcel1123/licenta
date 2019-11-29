@@ -26,6 +26,7 @@ public class App extends Application implements Runnable {
 
     @Override
     public void stop(){
+        primaryThread.stop();
         System.out.println("Safe stop...");
     }
 

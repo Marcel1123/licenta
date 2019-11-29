@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class ShowAllCodeFileFromPathController  implements Initializable {
 //    FileCode
@@ -49,7 +50,8 @@ public class ShowAllCodeFileFromPathController  implements Initializable {
         listWithAllFiles.setItems(FXCollections.observableList(FileCodeController.converToFileCode(App.getAppConfiguration().getProjectFiles().getProjectCodeFiles())));
 
         watchThread = new MyThread("Watch for modification", App.getAppConfiguration().getLocalProjectLocation().getToString());
-
+//        Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
+//        System.out.println("ALL THREAD: " + threadSet);
     }
 
     public void endThreadAction() {
