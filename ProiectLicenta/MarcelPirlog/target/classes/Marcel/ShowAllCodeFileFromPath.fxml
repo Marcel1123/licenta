@@ -15,6 +15,6 @@
                 <TableColumn fx:id="fileSize" prefWidth="186.0" text="Size" />
             </columns>
         </TableView>
-      <Button fx:id="stopThread" layoutX="851.0" layoutY="48.0" mnemonicParsing="false" onAction="#endThreadAction" text="Button" />
+      <Button fx:id="stopThread" layoutX="851.0" layoutY="48.0" mnemonicParsing="false" onAction="#endThreadAction" text="Finish" />
     </AnchorPane>
 </AnchorPane>
