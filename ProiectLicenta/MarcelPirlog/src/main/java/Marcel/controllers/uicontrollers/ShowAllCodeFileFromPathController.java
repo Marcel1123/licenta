@@ -2,6 +2,7 @@ package Marcel.controllers.uicontrollers;
 
 import Marcel.App;
 import Marcel.controllers.entitycontrollers.FileCodeController;
+import Marcel.controllers.fxmlcontroller.FxmlController;
 import Marcel.entities.FileCode;
 import Marcel.entities.ProjectFiles;
 import Marcel.myutil.MyThread;
@@ -11,10 +12,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
@@ -34,6 +39,7 @@ public class ShowAllCodeFileFromPathController  implements Initializable {
     public TableColumn<FileCode, Integer> fileSize;
     @FXML
     public AnchorPane rootPane;
+    public Button stopThread;
 
     private MyThread watchThread;
 
@@ -50,12 +56,12 @@ public class ShowAllCodeFileFromPathController  implements Initializable {
         listWithAllFiles.setItems(FXCollections.observableList(FileCodeController.converToFileCode(App.getAppConfiguration().getProjectFiles().getProjectCodeFiles())));
 
         watchThread = new MyThread("Watch for modification", App.getAppConfiguration().getLocalProjectLocation().getToString());
-//        Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
-//        System.out.println("ALL THREAD: " + threadSet);
     }
 
-    public void endThreadAction() {
+    public void endThreadAction() throws IOException {
         watchThread.stopWatch();
         watchThread = null;
+        FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/CreateProject"));
+        App.stage.setScene(FxmlController.currentScene);
     }
 }

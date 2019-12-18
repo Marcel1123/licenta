@@ -10,6 +10,8 @@ public class FxmlController {
 
     public static Scene scene;
 
+    public static Scene currentScene;
+
     public void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }

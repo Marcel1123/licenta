@@ -17,7 +17,7 @@ public class App extends Application implements Runnable {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FxmlController.scene = new Scene(new FxmlController().loadFXML("/Marcel/ShowAllCodeFileFromPath"));
+        FxmlController.scene = new Scene(new FxmlController().loadFXML("/Marcel/LoginScreen"));
         stage.setScene(FxmlController.scene);
         App.stage = stage;
         App.stage.resizableProperty().setValue(Boolean.FALSE);

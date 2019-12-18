@@ -2,15 +2,19 @@ package Marcel.controllers.uicontrollers;
 
 import Marcel.App;
 import Marcel.controllers.entitycontrollers.LocalProjectLocationController;
+import Marcel.controllers.fxmlcontroller.FxmlController;
 import Marcel.entities.LocalProjectLocation;
 import Marcel.entities.ProjectFiles;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -32,7 +36,7 @@ public class CreateProjectController {
     public AnchorPane rootPane;
 
     @FXML
-    public void searchForFileInPath(ActionEvent actionEvent){
+    public void searchForFileInPath(ActionEvent actionEvent) throws IOException {
         if(!(directoryPath.getText().isEmpty())){
             if(!(LocalProjectLocationController.checkIfThePathExists(Paths.get(directoryPath.getText()))) || !(Files.isDirectory(Paths.get(directoryPath.getText())))){
                 responseMessage.setText("Write a directory path from your computer");
@@ -42,6 +46,8 @@ public class CreateProjectController {
                 App.getAppConfiguration().setLocalProjectLocation(new LocalProjectLocation(directoryPath.getText()));
                 App.getAppConfiguration().setProgrammingLanguageSelected(programmingLanguageOption.getValue());
                 App.getAppConfiguration().setProjectFiles(new ProjectFiles());
+                FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/ShowAllCodeFileFromPath"));
+                App.stage.setScene(FxmlController.currentScene);
             }
         } else {
             responseMessage.setText("Write a directory path from your computer");
