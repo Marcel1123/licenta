@@ -19,7 +19,7 @@ public class StudentController {
     }
 
     @GetMapping(value = "/")
-    public List<Student> getAllMethod(){
+    public List<Student> getAllMethod() {
         return studentRepository.retrieve();
     }
 }

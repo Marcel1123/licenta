@@ -35,6 +35,8 @@ public class CreateProjectController {
     @FXML
     public AnchorPane rootPane;
 
+    @FXML public Button backToProfileButton;
+
     @FXML
     public void searchForFileInPath(ActionEvent actionEvent) throws IOException {
         if(!(directoryPath.getText().isEmpty())){
@@ -62,7 +64,10 @@ public class CreateProjectController {
             programmingLanguageOption.getItems().add(".py");
         }
     }
-//C:\Program Files\SceneBuilder
-}
 
-//:\Users\User\Documents\GitHub\licenta\ProiectLicenta\MarcelPirlog\src\main\resources\Marcel
+    @FXML public void backToProfile() throws IOException {
+        FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/ProfilePage"));
+        App.stage.setScene(FxmlController.currentScene);
+    }
+
+}

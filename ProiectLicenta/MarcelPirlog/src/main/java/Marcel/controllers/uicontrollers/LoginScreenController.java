@@ -2,14 +2,21 @@ package Marcel.controllers.uicontrollers;
 
 import Marcel.App;
 import Marcel.controllers.fxmlcontroller.FxmlController;
+import Marcel.entities.Student;
+import Marcel.myutil.HttpRequestAPI;
+import Marcel.myutil.MapFromUserEntityToJson;
+import com.google.gson.Gson;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
 import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+import java.net.HttpURLConnection;
+import java.net.http.HttpResponse;
 
 public class LoginScreenController {
     @FXML
@@ -24,26 +31,28 @@ public class LoginScreenController {
     public Button loginButton;
 
     @FXML
-    public void LoginFunction() throws IOException {
-        if(usernameField.getText().equals("marcel.pirlog") && passwordField.getText().equals("marcel")){
-            System.out.println("Ok!");
-            errorLabel.setVisible(false);
-            FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/CreateProject"));
+    public void LoginFunction() throws IOException, InterruptedException {
+        String credential = MapFromUserEntityToJson.returnCredentialsInJson(usernameField.getText(), passwordField.getText());
+
+        HttpResponse httpResponse = HttpRequestAPI.POSTMethod("http://localhost:9091/login", credential);
+
+        if(httpResponse.statusCode() == HttpURLConnection.HTTP_CREATED){
+            String response = (String) httpResponse.body();
+
+            String response1 = HttpRequestAPI.GETMethod("http://localhost:9091/student/", response);
+
+            Gson g = new Gson();
+            Reader reader = new StringReader(response1);
+            App.getAppConfiguration().setStudent(g.fromJson(reader, Student.class));
+
+            FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/ProfilePage"));
             App.stage.setScene(FxmlController.currentScene);
+
+            errorLabel.setText("");
+            errorLabel.setVisible(false);
         } else {
-            System.out.println("Not Ok!");
             errorLabel.setText("Invalid username or password!");
             errorLabel.setVisible(true);
-        }
-    }
-
-    @FXML
-    public  void CheckUsernameLength(){
-        if(usernameField.getText().length() > 32){
-            errorLabel.setText("Username too long!");
-            errorLabel.setVisible(true);
-        } else {
-            errorLabel.setVisible(false);
         }
     }
 }

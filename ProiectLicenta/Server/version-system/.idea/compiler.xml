@@ -9,6 +9,9 @@
         <module name="version-system" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="version-system" target="11" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

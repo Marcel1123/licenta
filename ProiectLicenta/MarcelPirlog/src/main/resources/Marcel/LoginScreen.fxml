@@ -18,7 +18,7 @@
                </font>
             </Text>
             <Button fx:id="loginButton" layoutX="80.0" layoutY="302.0" mnemonicParsing="false" onAction="#LoginFunction" prefHeight="36.0" prefWidth="142.0" text="Login" />
-            <TextField fx:id="usernameField" layoutX="76.0" layoutY="167.0" onKeyPressed="#CheckUsernameLength" promptText="Username" />
+            <TextField fx:id="usernameField" layoutX="76.0" layoutY="167.0" promptText="Username" />
             <PasswordField fx:id="passwordField" layoutX="76.0" layoutY="233.0" promptText="Password" />
             <Label fx:id="errorLabel" layoutX="62.0" layoutY="90.0" prefHeight="36.0" prefWidth="222.0" text="Error" textAlignment="CENTER" visible="false">
                <font>

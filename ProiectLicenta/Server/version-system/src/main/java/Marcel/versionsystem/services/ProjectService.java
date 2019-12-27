@@ -17,16 +17,16 @@ public class ProjectService implements IProjectService {
 
     @Override
     public Project findById(long projectId) {
-        projects.add(new Project(2,new ArrayList<>()));
-        projects.add(new Project(3,new ArrayList<>()));
-        projects.add(new Project(4,new ArrayList<>()));
-        projects.add(new Project(5,new ArrayList<>()));
-        projects.add(new Project(6,new ArrayList<>()));
-        projects.add(new Project(7,new ArrayList<>()));
+        projects.add(new Project(2, new ArrayList<>()));
+        projects.add(new Project(3, new ArrayList<>()));
+        projects.add(new Project(4, new ArrayList<>()));
+        projects.add(new Project(5, new ArrayList<>()));
+        projects.add(new Project(6, new ArrayList<>()));
+        projects.add(new Project(7, new ArrayList<>()));
         final Project[] returnres = {new Project()};
         Predicate<Project> predicate = new Predicate<Project>() {
             @Override
-            public boolean test(Project project){
+            public boolean test(Project project) {
                 return project.getId() == projectId;
             }
         };
@@ -40,7 +40,7 @@ public class ProjectService implements IProjectService {
 
     @Override
     public List<Project> findAll() {
-            return projects;
+        return projects;
     }
 
     @Override
