@@ -26,6 +26,10 @@
         <mapping class="marcel.pirlog.licenta.userManagement.entities.StudentEntity"/>
         <mapping class="marcel.pirlog.licenta.userManagement.entities.AccountEntity"/>
         <mapping class="marcel.pirlog.licenta.userManagement.entities.TeacherEntity"/>
-
+        <mapping class="marcel.pirlog.licenta.userManagement.entities.ProjectEntity"/>
+        <mapping class="marcel.pirlog.licenta.userManagement.entities.DidacticEntity"/>
+        <mapping class="marcel.pirlog.licenta.userManagement.entities.MaterialEntity"/>
+        <mapping class="marcel.pirlog.licenta.userManagement.entities.GroupEntity"/>
+        <mapping class="marcel.pirlog.licenta.userManagement.entities.GroupMemberEntity"/>
     </session-factory>
 </hibernate-configuration>

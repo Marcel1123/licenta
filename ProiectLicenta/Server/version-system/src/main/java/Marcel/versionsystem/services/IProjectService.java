@@ -1,17 +1,17 @@
 package Marcel.versionsystem.services;
 
-import Marcel.versionsystem.entities.Project;
+import Marcel.versionsystem.entities.ProjectEntity;
 
 import java.util.List;
 
 public interface IProjectService {
-    Project findById(long projectId);
+    ProjectEntity findById(long projectId);
 
-    List<Project> findAll();
+    List<ProjectEntity> findAll();
 
     boolean projectExist(long projectId);
 
-    void add(Project project);
+    void add(ProjectEntity projectEntity);
 
-    void update(long projectId, Project project);
+    void update(long projectId, ProjectEntity projectEntity);
 }

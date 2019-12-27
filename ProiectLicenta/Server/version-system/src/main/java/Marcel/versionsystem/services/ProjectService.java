@@ -1,46 +1,43 @@
 package Marcel.versionsystem.services;
 
-import Marcel.versionsystem.entities.Project;
-import org.springframework.core.PriorityOrdered;
+import Marcel.versionsystem.entities.ProjectEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 @Service("ProjectService")
 public class ProjectService implements IProjectService {
 
-    ArrayList<Project> projects = new ArrayList<>();
+    ArrayList<ProjectEntity> projectEntities = new ArrayList<>();
 
     @Override
-    public Project findById(long projectId) {
-        projects.add(new Project(2, new ArrayList<>()));
-        projects.add(new Project(3, new ArrayList<>()));
-        projects.add(new Project(4, new ArrayList<>()));
-        projects.add(new Project(5, new ArrayList<>()));
-        projects.add(new Project(6, new ArrayList<>()));
-        projects.add(new Project(7, new ArrayList<>()));
-        final Project[] returnres = {new Project()};
-        Predicate<Project> predicate = new Predicate<Project>() {
+    public ProjectEntity findById(long projectId) {
+        projectEntities.add(new ProjectEntity(2, new ArrayList<>()));
+        projectEntities.add(new ProjectEntity(3, new ArrayList<>()));
+        projectEntities.add(new ProjectEntity(4, new ArrayList<>()));
+        projectEntities.add(new ProjectEntity(5, new ArrayList<>()));
+        projectEntities.add(new ProjectEntity(6, new ArrayList<>()));
+        projectEntities.add(new ProjectEntity(7, new ArrayList<>()));
+        final ProjectEntity[] returnres = {new ProjectEntity()};
+        Predicate<ProjectEntity> predicate = new Predicate<ProjectEntity>() {
             @Override
-            public boolean test(Project project) {
+            public boolean test(ProjectEntity project) {
                 return project.getId() == projectId;
             }
         };
-        projects.stream()
+        projectEntities.stream()
                 .filter(predicate)
-                .forEach(project -> {
-                    returnres[0] = project;
+                .forEach(projectEntity -> {
+                    returnres[0] = projectEntity;
                 });
         return returnres[0];
     }
 
     @Override
-    public List<Project> findAll() {
-        return projects;
+    public List<ProjectEntity> findAll() {
+        return projectEntities;
     }
 
     @Override
@@ -49,12 +46,12 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
-    public void add(Project project) {
-        projects.add(project);
+    public void add(ProjectEntity projectEntity) {
+        projectEntities.add(projectEntity);
     }
 
     @Override
-    public void update(long projectId, Project project) {
+    public void update(long projectId, ProjectEntity projectEntity) {
 
     }
 }

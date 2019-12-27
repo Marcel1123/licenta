@@ -1,25 +1,26 @@
 package Marcel.versionsystem.entities;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.UUID;
 
-
-public class Project {
+@Table(name = "Versiuni")
+@Entity(name = "ProjectEntity")
+public class ProjectEntity {
 
     @Id
     @GeneratedValue
-    private long id;
+    @Column(name = "id")
+    private UUID id;
+
+
     private ArrayList<File> files;
 
-    public Project() {
-        id = 0;
-        files = new ArrayList<>();
+    public ProjectEntity() {
     }
 
-    public Project(long id, ArrayList<File> files) {
+    public ProjectEntity(long id, ArrayList<File> files) {
         this.id = id;
         this.files = files;
     }
@@ -43,15 +44,10 @@ public class Project {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Project)) return false;
-        Project project = (Project) o;
-        return id == project.id &&
-                files.equals(project.files);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, files);
+        if (!(o instanceof ProjectEntity)) return false;
+        ProjectEntity projectEntity = (ProjectEntity) o;
+        return id == projectEntity.id &&
+                files.equals(projectEntity.files);
     }
 
     @Override
