@@ -4,10 +4,8 @@ import Marcel.App;
 import Marcel.controllers.entitycontrollers.FileCodeController;
 import Marcel.controllers.fxmlcontroller.FxmlController;
 import Marcel.entities.FileCode;
-import Marcel.entities.ProjectFiles;
-import Marcel.myutil.MyThread;
 import Marcel.myutil.SearchInDirectory;
-import Marcel.myutil.Utilitar;
+import javafx.animation.AnimationTimer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,10 +21,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 public class ShowAllCodeFileFromPathController  implements Initializable {
-//    FileCode
     @FXML
     public TableView<FileCode> listWithAllFiles;
     @FXML
@@ -39,9 +35,20 @@ public class ShowAllCodeFileFromPathController  implements Initializable {
     public TableColumn<FileCode, Integer> fileSize;
     @FXML
     public AnchorPane rootPane;
+    @FXML
     public Button stopThread;
 
-    private MyThread watchThread;
+    private long startTime = System.currentTimeMillis();
+    private AnimationTimer animationTimer = new AnimationTimer() {
+        @Override
+        public void handle(long l) {
+            if(System.currentTimeMillis() - startTime > 120_000){
+                App.getAppConfiguration().setFiles(SearchInDirectory.searchInDirectoryAndSubDirectory(App.getAppConfiguration().getLocalProjectLocation().toString(), App.getAppConfiguration().getProgrammingLanguageSelected()));
+                listWithAllFiles.getItems().clear();
+                listWithAllFiles.setItems(FXCollections.observableList(FileCodeController.converToFileCode(App.getAppConfiguration().getFiles())));
+            }
+        }
+    };
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -52,15 +59,14 @@ public class ShowAllCodeFileFromPathController  implements Initializable {
         fileLastUpdate.setCellValueFactory(new PropertyValueFactory<FileCode, LocalDateTime>("lastUpdate"));
         fileSize.setCellValueFactory(new PropertyValueFactory<FileCode, Integer>("size"));
 
-        Utilitar.getAllFile(App.getAppConfiguration().getProjectFiles());
-        listWithAllFiles.setItems(FXCollections.observableList(FileCodeController.converToFileCode(App.getAppConfiguration().getProjectFiles().getProjectCodeFiles())));
+        App.getAppConfiguration().setFiles(SearchInDirectory.searchInDirectoryAndSubDirectory(App.getAppConfiguration().getLocalProjectLocation().toString(), App.getAppConfiguration().getProgrammingLanguageSelected()));
+        listWithAllFiles.setItems(FXCollections.observableList(FileCodeController.converToFileCode(App.getAppConfiguration().getFiles())));
 
-        watchThread = new MyThread("Watch for modification", App.getAppConfiguration().getLocalProjectLocation().getToString());
+        animationTimer.start();
     }
 
     public void endThreadAction() throws IOException {
-        watchThread.stopWatch();
-        watchThread = null;
+        animationTimer.stop();
         FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/CreateProject"));
         App.stage.setScene(FxmlController.currentScene);
     }

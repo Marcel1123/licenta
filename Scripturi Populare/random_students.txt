@@ -1,0 +1,255 @@
+INSERT INTO public.conturi( id, password, username) VALUES ('2044b0eb-7619-48b0-b1bc-e39f224a6dd3', 'UA38kxt81VN66', 'rusu.stefana');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('0330b000-7e7e-445b-a72b-eb306c87147e', '2044b0eb-7619-48b0-b1bc-e39f224a6dd3', 'Rusu', 'Stefana', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('238c204f-29f4-4558-8845-5334d322e930', 'z0fcEd6g', 'vlad.sanda');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('021a9064-035a-42fe-adb2-ed518a0055ee', '238c204f-29f4-4558-8845-5334d322e930', 'Vlad', 'Sanda', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('ac6be3ef-aaaa-4deb-b0fa-b515fc0da8de', 'm2C0LF15cYTi47', 'bota.radu');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('5b4283da-6c05-44d8-a700-e4228f2f4b7d', 'ac6be3ef-aaaa-4deb-b0fa-b515fc0da8de', 'Bota', 'Radu', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('e51cb988-6e6b-431a-b56d-6a58e7962ffa', 'DrRd7kWAZN', 'stancu.sabin');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('39c32643-00a0-4881-ac73-73b6ff9108b3', 'e51cb988-6e6b-431a-b56d-6a58e7962ffa', 'Stancu', 'Sabin', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('6d5e10e3-9ed1-4589-acc5-527dcd4ac1a0', 'k7331A1H', 'banica.anastasia');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('2cfed27b-de71-4a34-86f0-a40b9fb1087b', '6d5e10e3-9ed1-4589-acc5-527dcd4ac1a0', 'Banica', 'Anastasia', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('888d4de8-c11e-48bd-8f8f-0d5f910a1501', 'Kw9iwDb541kT0T9', 'fratila.olimpia');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('faa9b36f-b3de-4739-a5fa-bfc6b28e6351', '888d4de8-c11e-48bd-8f8f-0d5f910a1501', 'Fratila', 'Olimpia', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('c858d4f0-dd72-48d7-8a72-1e1e345a2dca', '1hwo94YaRo9f', 'mihai.avram');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('97c87b45-581d-442e-a57b-2a4fa4047052', 'c858d4f0-dd72-48d7-8a72-1e1e345a2dca', 'Mihai', 'Avram', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('73f59af9-d1a5-4ff8-a806-c57c271b64e8', 'yzJe78TrI34', 'voinea.rozalia');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('2540920b-4234-4c7b-b7ac-1e0b5577f253', '73f59af9-d1a5-4ff8-a806-c57c271b64e8', 'Voinea', 'Rozalia', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('c830c5b9-d787-4e37-8202-06775291ab73', '7365nWUwBp', 'blaga.diana');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('54c30c30-9e0f-4212-accd-2749d12fe2d1', 'c830c5b9-d787-4e37-8202-06775291ab73', 'Blaga', 'Diana', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('199b4127-f11c-43b8-bedb-76389413ee05', 'Z7k4ejC7zKN8', 'buda.serban');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('216bcfbb-12ba-4f91-b319-89a66a840144', '199b4127-f11c-43b8-bedb-76389413ee05', 'Buda', 'Serban', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('2de13dd7-c851-4696-846a-7f3f67b4da31', '3D98vbFoT', 'moise.tudora');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('d3a50226-c1b4-4d01-b3c3-2b97ce88b968', '2de13dd7-c851-4696-846a-7f3f67b4da31', 'Moise', 'Tudora', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('c6cf92aa-46f4-466f-98d8-2440914215d2', 'V54dbdE2I', 'tamas.alis');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('e9843cc5-dc02-47e3-8b11-d561bb39a41e', 'c6cf92aa-46f4-466f-98d8-2440914215d2', 'Tamas', 'Alis', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('cf06206c-516e-4315-bce9-8ea6e4a1cf4f', 'Adh4UJK10p2XfSJ', 'fodor.roxana');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('27fd7d8f-4774-4294-a0a9-298e66ed0568', 'cf06206c-516e-4315-bce9-8ea6e4a1cf4f', 'Fodor', 'Roxana', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('ccec2435-1612-4394-b8c7-e9adc6314283', 'DayWMcKfq2v', 'oprea.eufrosina');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('e8b672e1-079d-48dd-b4e5-d7003f695a4f', 'ccec2435-1612-4394-b8c7-e9adc6314283', 'Oprea', 'Eufrosina', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('e4a07e26-b52a-4447-93be-4c9e72ccc60c', 'ccmEue3e0Y', 'trif.iolanda');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('7197055a-9daa-4361-9248-6de1caa075cb', 'e4a07e26-b52a-4447-93be-4c9e72ccc60c', 'Trif', 'Iolanda', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('cf112167-ab11-4607-b6c1-0f828fe75a9b', '8YOxK0K5', 'andrei.veronica');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('fad3c8bd-0ffd-4f3f-b0b1-b33e2fd2b535', 'cf112167-ab11-4607-b6c1-0f828fe75a9b', 'Andrei', 'Veronica', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('6577b6b1-ad45-4ca3-9e67-29d06aab5faa', 'R6b0DR5te76d', 'barbu.nicusor');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('4b272422-2773-40c3-b104-112417f2a378', '6577b6b1-ad45-4ca3-9e67-29d06aab5faa', 'Barbu', 'Nicusor', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('0e5b2f81-3611-4201-8d82-c3a7dc380a23', 'Je0I8NtmJ4nrkP', 'szasz.georgel');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('050fa6de-1f52-448f-bdcc-8185555f5495', '0e5b2f81-3611-4201-8d82-c3a7dc380a23', 'Szasz', 'Georgel', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('795a0899-73f8-4bce-b62a-4f3747e4620b', 'iW2rEoK69', 'maftei.silviana');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('f0dd2a65-7cb0-41bb-9ec1-cf397144dd07', '795a0899-73f8-4bce-b62a-4f3747e4620b', 'Maftei', 'Silviana', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('4921d1ab-5016-4595-9295-d6ed28d42a1a', '42Mc9m7j0', 'cojocaru.draga');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('6ad305bf-139b-4594-870c-c463e81c4648', '4921d1ab-5016-4595-9295-d6ed28d42a1a', 'Cojocaru', 'Draga', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('8b37b2ad-7b89-4b0e-995a-f090821536cd', '6pvGZ7I32U9jp', 'musat.irinel');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('dde778a3-3b09-4c3d-b5dc-c64c10579415', '8b37b2ad-7b89-4b0e-995a-f090821536cd', 'Musat', 'Irinel', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('ac42ec7a-9572-4874-9fc3-2330ee8003a4', '55Y67Tc4bae', 'ispas.silviu');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('f47b4d03-7ef6-4ba3-9c05-0aa81d88620c', 'ac42ec7a-9572-4874-9fc3-2330ee8003a4', 'Ispas', 'Silviu', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('0bbca84e-8f25-4054-9e4b-6978ecc4e6d1', 'h09Y0td7Osc75j', 'anton.denisa');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('e8373ce4-7117-4c46-aeab-685e36f01860', '0bbca84e-8f25-4054-9e4b-6978ecc4e6d1', 'Anton', 'Denisa', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('05f54a08-f53e-4966-9a53-3715102db666', 'CFPsUHab', 'mihaila.roxana');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('165b2be3-b738-4f88-9d48-ef657bdb7bc5', '05f54a08-f53e-4966-9a53-3715102db666', 'Mihaila', 'Roxana', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('275630e9-0c9a-4a4c-8f4c-22aa20a4d0e7', 'WaYjFvpJ43E', 'danciu.fiodor');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('9b4ca07b-5538-42e6-ae10-3f740752caea', '275630e9-0c9a-4a4c-8f4c-22aa20a4d0e7', 'Danciu', 'Fiodor', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('9d62dfbf-1f2b-4fcc-9464-d11bc2aa34de', 'GrIpi5Zi90V', 'chiriac.octaviana');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('fc094afc-3893-4843-9162-9e23d69a0686', '9d62dfbf-1f2b-4fcc-9464-d11bc2aa34de', 'Chiriac', 'Octaviana', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('b83a7731-3a34-4df8-9c74-2ca72afeed9e', 'loxxHxpr85eO2', 'alexe.costel');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('2dec9a26-3eb2-4320-a81e-0dc5ce006670', 'b83a7731-3a34-4df8-9c74-2ca72afeed9e', 'Alexe', 'Costel', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('b3308afe-a28a-4053-97c8-61b56ef66366', '1ujNa8yPZtM7', 'costache.bradut');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('21091698-f7c5-434c-8f76-34ca12c44636', 'b3308afe-a28a-4053-97c8-61b56ef66366', 'Costache', 'Bradut', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('3eadf221-a840-4b21-84af-2ee01cc69c6b', 'O7AgaGyx55g0', 'costea.anamaria');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('f178a19c-ba39-4f0d-83ff-e0de8d835ad7', '3eadf221-a840-4b21-84af-2ee01cc69c6b', 'Costea', 'Anamaria', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('9ba3b97f-cb62-485b-9c64-d3bb634e75cc', 'b0uvvp74Z', 'david.patricia');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('ab1c2695-646a-4c1f-bfba-c78e1e53c8b5', '9ba3b97f-cb62-485b-9c64-d3bb634e75cc', 'David', 'Patricia', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('20dfb7b8-e8a4-4f05-8cd7-36ed8fb0421b', '7e22D48KMI4sZ', 'miu.adonis');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('1c2401d0-d5c4-40c1-a66e-1a720be49781', '20dfb7b8-e8a4-4f05-8cd7-36ed8fb0421b', 'Miu', 'Adonis', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('728cc63a-2bee-492f-af32-d5ac978e5b6f', '7Y1FVSR5vzgaVQz', 'micu.ciprian');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('a7a00aeb-aa4c-4de4-b483-a6525aca3f19', '728cc63a-2bee-492f-af32-d5ac978e5b6f', 'Micu', 'Ciprian', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('ade32ce6-72f1-4c8d-887b-81988f90185d', 'FFV6Y5sN68BtFDe', 'coman.valeria');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('f056bf1e-45b5-4d60-bd25-a30d2db76493', 'ade32ce6-72f1-4c8d-887b-81988f90185d', 'Coman', 'Valeria', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('466a39c4-9dd3-4ce8-8485-93fa9e40b399', '3oc8Z0N3G3SF1nc', 'pirvu.corvin');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('62e95254-d72a-4d0b-ad72-131efacec252', '466a39c4-9dd3-4ce8-8485-93fa9e40b399', 'Pirvu', 'Corvin', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('8a17199f-6b25-4ff7-80dc-568dad74d16f', 'cvYYu6z7S39VLil', 'dumitrascu.vlad');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('b91c16bc-4bd8-429f-96c7-536787cbfcee', '8a17199f-6b25-4ff7-80dc-568dad74d16f', 'Dumitrascu', 'Vlad', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('19638ce8-d733-48e6-bfb9-16ca4c43ccec', '8JH314Y66S', 'petrea.heracleea');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('20611e2d-b9d3-4820-9cbb-a899733a35d8', '19638ce8-d733-48e6-bfb9-16ca4c43ccec', 'Petrea', 'Heracleea', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('968ca6b1-bc38-403c-9e53-876776da52db', 'iQ15235vL', 'moise.ion');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('bea7115b-120c-40bf-acb0-48cd51540fe3', '968ca6b1-bc38-403c-9e53-876776da52db', 'Moise', 'Ion', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('96eee94b-246e-4795-bd65-bbcde89338cd', 'f4eohG1VPklN7', 'calin.emanuil');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('7e13f821-7f39-4920-b1bd-6b0a1d3d2207', '96eee94b-246e-4795-bd65-bbcde89338cd', 'Calin', 'Emanuil', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('2d078f3f-c7ff-446b-b9fb-5c62a708ae00', 'xHC49zX8fCqC', 'cristescu.melania');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('f220e746-e9d8-4269-b6d3-eab2944f0f49', '2d078f3f-c7ff-446b-b9fb-5c62a708ae00', 'Cristescu', 'Melania', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('f575d004-120b-4e01-9dee-59703882f177', 'lSC9CF8jRTzQ021', 'iacob.aneta');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('35966236-bb0c-40c2-ac9a-62927023c064', 'f575d004-120b-4e01-9dee-59703882f177', 'Iacob', 'Aneta', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('120ef6f6-3e2c-426c-8047-b3e8134713ad', 'A5ITX20nJMzS4uf', 'grigorescu.miruna');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('709fcf02-0489-4af9-847e-13cd1cd7bb1d', '120ef6f6-3e2c-426c-8047-b3e8134713ad', 'Grigorescu', 'Miruna', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('7be8ac90-028d-4eb0-826d-533eed1c2726', 'Uc6S59m4P', 'lazar.carol');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('09f3c9fd-cfe1-4520-bd9f-767120ea45b4', '7be8ac90-028d-4eb0-826d-533eed1c2726', 'Lazar', 'Carol', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('029c27bd-a472-4d31-80fc-aec91c9e7cb7', 'QVSBV7759', 'pavel.dan');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('773b82a9-d282-4225-8f62-8b9bb23399dd', '029c27bd-a472-4d31-80fc-aec91c9e7cb7', 'Pavel', 'Dan', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('8a406b10-46cb-4dd3-9f79-036ceabf9057', 'LlOQ4xH8cc1', 'florescu.dorin');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('41c072cf-7cb8-4f1d-bbef-d471b93fc378', '8a406b10-46cb-4dd3-9f79-036ceabf9057', 'Florescu', 'Dorin', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('d1f8239c-4139-422e-92b5-5a08cc4babcb', '924qSnm15W', 'dascalu.iustinian');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('9120e4d5-fda3-4bd6-9ffc-070836764f56', 'd1f8239c-4139-422e-92b5-5a08cc4babcb', 'Dascalu', 'Iustinian', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('3b30124b-36ac-46c9-bb25-de1150f18d8c', 'r17CzxlSYa', 'muresan.teodosia');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('7c4dc0a6-d96a-4d3e-aa69-aac101caaccd', '3b30124b-36ac-46c9-bb25-de1150f18d8c', 'Muresan', 'Teodosia', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('9bae7436-2667-4229-a254-e7a0a9b231b5', 'Xj4h98lWtFE3', 'florea.anton');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('4d8ab89b-1679-41bf-811b-8f9a50079d1b', '9bae7436-2667-4229-a254-e7a0a9b231b5', 'Florea', 'Anton', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('6547c847-4b1b-4f73-8b89-6a4d55f96559', '5580R2cp6Nv', 'patrascu.nicu');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('bd929a41-9a3b-4f45-8a14-87e4871f8229', '6547c847-4b1b-4f73-8b89-6a4d55f96559', 'Patrascu', 'Nicu', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('8a935182-f608-4f03-8fc3-e16d238522b8', 'IJDNvy33b33d', 'ciocan.noemi');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('a79eba7e-e5f6-401a-a960-59d041bfe3ec', '8a935182-f608-4f03-8fc3-e16d238522b8', 'Ciocan', 'Noemi', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('43ad7ddd-e361-494f-9582-22339b2e2461', '7J5LjvnpA1x', 'ardelean.julieta');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('ccfc3b54-09af-4370-9229-f2964dc300d1', '43ad7ddd-e361-494f-9582-22339b2e2461', 'Ardelean', 'Julieta', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('2010aea6-0a05-4549-bd63-bcd38ca1a152', '3y9jT4W1', 'mazilu.crin');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('11fc1bf5-2c0f-46d3-b00f-a41d4a504dc2', '2010aea6-0a05-4549-bd63-bcd38ca1a152', 'Mazilu', 'Crin', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('9b3cc4c9-8b6a-4c5d-acc9-a6b598e417de', 'NEqn6T6Y1Lx', 'fratila.speranta');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('c5481370-2df8-45c4-ba93-e7d5d8a7ac7b', '9b3cc4c9-8b6a-4c5d-acc9-a6b598e417de', 'Fratila', 'Speranta', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('e46cf903-a0cb-4471-9853-163ca082c469', 'G129r8dxF', 'rusu.marilena');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('1746e34b-dab3-42e7-a628-d3208579253d', 'e46cf903-a0cb-4471-9853-163ca082c469', 'Rusu', 'Marilena', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('6a3d44a5-6a57-46b6-ae6c-7c9a71faf208', 'n1s7Xu24', 'mircea.maxim');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('e9c6b052-2245-4ebd-8e55-23d1a2dbe38b', '6a3d44a5-6a57-46b6-ae6c-7c9a71faf208', 'Mircea', 'Maxim', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('bdfefc05-fe0f-436d-bfc2-78a35f1fe567', '59OUoa3ykAK6', 'nicolescu.marcheta');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('698ef29c-da7c-450d-a2ad-db98cf54b2a1', 'bdfefc05-fe0f-436d-bfc2-78a35f1fe567', 'Nicolescu', 'Marcheta', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('c23f51a0-66a6-450e-b058-abc1bdce075f', 'D5FdMwfD72', 'alexe.laurian');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('a0ba9cc8-7d8e-4417-80cc-89e8b47e8782', 'c23f51a0-66a6-450e-b058-abc1bdce075f', 'Alexe', 'Laurian', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('372d1595-76d7-4fc7-a43d-c888c15e61ad', 'eQVf5fhT69', 'paraschiv.caius');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('5411aa33-2312-4bab-978f-87115656349f', '372d1595-76d7-4fc7-a43d-c888c15e61ad', 'Paraschiv', 'Caius', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('df317d7f-3b3a-481f-9497-f062369294dc', 'g1saP30UQ', 'chirila.vicentia');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('08ca4a39-9b90-468e-8dd3-acaf26d5b776', 'df317d7f-3b3a-481f-9497-f062369294dc', 'Chirila', 'Vicentia', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('b3b1eca5-5505-46e0-8910-093ba69ce70e', 'S791JTbH44D', 'grecu.suzana');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('f0fab062-0d0b-4c2b-b70f-1b59e5013ff1', 'b3b1eca5-5505-46e0-8910-093ba69ce70e', 'Grecu', 'Suzana', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('979bf518-bfaf-46f8-8af4-dd1be0b46316', '70035zPab99sclG', 'ganea.panagachie');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('6ca07826-4bed-4f59-a4ca-b85bfbb6fe5f', '979bf518-bfaf-46f8-8af4-dd1be0b46316', 'Ganea', 'Panagachie', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('a3fb1c08-e429-4bbf-89f0-d23d66f40bb5', 'lfEDvOktIZ6p', 'olteanu.floarea');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('44fde0fd-76a7-47bb-a18d-c96fb92f3fae', 'a3fb1c08-e429-4bbf-89f0-d23d66f40bb5', 'Olteanu', 'Floarea', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('59d9da19-5bcd-4ceb-b544-7c85f2559a03', 'HiVwl0X41pC', 'grigore.alma');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('722808cc-d5f5-4d9d-ba23-62ec625355d7', '59d9da19-5bcd-4ceb-b544-7c85f2559a03', 'Grigore', 'Alma', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('e2e4a2ab-7f5e-466d-b801-b33723f4646e', 'LD9VWf1H9XU', 'cosma.viviana');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('aa35a296-a6d8-499e-a7b0-628ba3b0fae6', 'e2e4a2ab-7f5e-466d-b801-b33723f4646e', 'Cosma', 'Viviana', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('f1d537d3-99e0-4a61-a501-6b261ee086d0', '8wM05v765743B4', 'kovacs.adrian');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('12c86032-1991-4ad7-a077-818681700cea', 'f1d537d3-99e0-4a61-a501-6b261ee086d0', 'Kovacs', 'Adrian', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('8bbb00b6-6ac7-48d3-800b-1eafdc94a31a', 'dG2bsD22y6BXZ', 'apostol.vanesa');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('cb4b32f4-b105-4776-a85e-c8836c3b2e02', '8bbb00b6-6ac7-48d3-800b-1eafdc94a31a', 'Apostol', 'Vanesa', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('f476950b-9d48-4708-a45b-0337c2e2b295', 'tqjfn2eErR42IMe', 'preda.sanda');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('727491dd-7861-471b-bd4d-c2705dc73db8', 'f476950b-9d48-4708-a45b-0337c2e2b295', 'Preda', 'Sanda', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('883dcba8-aa4f-41dc-b5cf-d08911721659', '51XZh3llhRM', 'micu.tincuta');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('af5337db-a844-4800-944b-7ea4dc3a6e25', '883dcba8-aa4f-41dc-b5cf-d08911721659', 'Micu', 'Tincuta', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('b727a4c6-57d4-4e1c-b829-d584f8c4ba96', 'wIOI2h8cJ6j8wq6', 'stefan.fabia');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('16cff612-deb4-4cd6-9942-99769dc19025', 'b727a4c6-57d4-4e1c-b829-d584f8c4ba96', 'Stefan', 'Fabia', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('3cfd3361-ea48-4cd6-b837-ef528cd0217a', 'vZri1XH7gnHxJ', 'cosma.madalin');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('f6ec5880-24f4-4d7c-b35b-8c4c42959349', '3cfd3361-ea48-4cd6-b837-ef528cd0217a', 'Cosma', 'Madalin', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('0c410ba4-541e-4753-b158-889ed211dc73', '4903Js6PJ', 'manole.sabin');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('5d7665f0-b66b-4965-b12e-d682fe5e45d4', '0c410ba4-541e-4753-b158-889ed211dc73', 'Manole', 'Sabin', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('d7171518-59a1-4778-a8d1-60ec1270ed45', 'U95TG5pveCfoQq', 'moise.tudorita');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('81ee9f35-286f-41c8-af9f-bb1b9f27c6d4', 'd7171518-59a1-4778-a8d1-60ec1270ed45', 'Moise', 'Tudorita', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('83ffbcdd-e3d4-448f-a211-62dd696aef66', 'mQf6S0HOA', 'sava.fabian');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('3da29035-23d1-4b56-a5cd-c64f90fa60ef', '83ffbcdd-e3d4-448f-a211-62dd696aef66', 'Sava', 'Fabian', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('0677f9ea-d7ca-4970-a801-b7cee73293cc', '2h8uq4jsuQ', 'moldovan.amelia');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('8576c959-6749-40d4-a038-1f8c5c539cc8', '0677f9ea-d7ca-4970-a801-b7cee73293cc', 'Moldovan', 'Amelia', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('2cc4fbe0-fc55-47ff-949a-091540c788a0', 'Ss33Psv2Hp1', 'stefan.olimpia');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('d53b18d8-bae3-45b0-81df-59273dce9cb1', '2cc4fbe0-fc55-47ff-949a-091540c788a0', 'Stefan', 'Olimpia', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('d99b5578-c1f0-4b4d-84ba-6285a9136fbc', 'vjsr938Fi72LA', 'miu.calin');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('13fe4f04-8d07-42ed-8770-c473f0dfb0cb', 'd99b5578-c1f0-4b4d-84ba-6285a9136fbc', 'Miu', 'Calin', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('8014ce25-1b21-4b2f-ae54-2db30b06a28f', 'OWR2D0OL', 'szasz.camil');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('0495d645-e3c2-4896-af75-70ab7b7e8f47', '8014ce25-1b21-4b2f-ae54-2db30b06a28f', 'Szasz', 'Camil', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('d0da85fc-51d9-4df5-b606-125cbd830952', 'AZ9eQsi1B6139', 'sandor.teodora');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('c5c86b68-b52c-4fea-a44d-2450f2a270dc', 'd0da85fc-51d9-4df5-b606-125cbd830952', 'Sandor', 'Teodora', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('0a096790-cf31-425c-8048-773ae9c1561d', '7e0IrBTht', 'savu.vasilica');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('f244f8f5-4bc4-4034-b5a6-fda314f24656', '0a096790-cf31-425c-8048-773ae9c1561d', 'Savu', 'Vasilica', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('a4b1e44c-58ad-4bdc-9ee0-914244752ee8', '8217JBJex3', 'chivu.delia');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('6df0524e-2212-4f02-b7c7-5caafa7603a4', 'a4b1e44c-58ad-4bdc-9ee0-914244752ee8', 'Chivu', 'Delia', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('0a945776-bd1c-44cb-995f-d79449e8ef1b', 'aW61aQapZ4Dk', 'dragan.ilarie');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('795bcbe2-0d74-4970-8a31-0e42d946c24b', '0a945776-bd1c-44cb-995f-d79449e8ef1b', 'Dragan', 'Ilarie', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('a6ed62e6-19cd-4e42-b84a-56d246666871', 'fS967e2H8', 'simionescu.simi');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('b2135226-9e6a-4c18-a4fe-0567b77cb5b4', 'a6ed62e6-19cd-4e42-b84a-56d246666871', 'Simionescu', 'Simi', '3', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('a547f1f4-5b53-4f16-9f6f-fc88ae7905bd', 'ZS09QSq2X', 'toth.david');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('3fda2eb8-5315-4dfc-b8e5-e355d2656a11', 'a547f1f4-5b53-4f16-9f6f-fc88ae7905bd', 'Toth', 'David', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('e0334f67-5216-4d20-8398-d7c8874b1a36', 'huQ9k90u77ga86y', 'olaru.zaraza');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('bc52b756-6c5e-4e9b-8416-0f313c311c27', 'e0334f67-5216-4d20-8398-d7c8874b1a36', 'Olaru', 'Zaraza', '2', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('b6db4fac-9a76-4daf-b9d8-2f672260de72', 'v6X4oziqh9', 'ungureanu.mihnea');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('15267405-bf73-4cf1-aecb-bb1ff81a247b', 'b6db4fac-9a76-4daf-b9d8-2f672260de72', 'Ungureanu', 'Mihnea', '1', '');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('25d15773-8847-4845-9326-8d19d3d5ca2e', '2l4wgudm26z9', 'iancu.veniamin');
+INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('9db32414-ae66-4de0-a248-b93d12b29e24', '25d15773-8847-4845-9326-8d19d3d5ca2e', 'Iancu', 'Veniamin', '3', '');
+

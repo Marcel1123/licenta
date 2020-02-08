@@ -1,4 +1,4 @@
 package marcel.pirlog.licenta.userManagement.repositorys.versions;
 
-public class VersionRepositories {
+public class VersionRepository {
 }

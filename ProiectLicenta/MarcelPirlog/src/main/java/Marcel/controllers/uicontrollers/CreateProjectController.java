@@ -45,9 +45,8 @@ public class CreateProjectController {
                 responseMessage.setVisible(true);
             } else {
                 responseMessage.setVisible(false);
-                App.getAppConfiguration().setLocalProjectLocation(new LocalProjectLocation(directoryPath.getText()));
+                App.getAppConfiguration().setLocalProjectLocation(directoryPath.getText());
                 App.getAppConfiguration().setProgrammingLanguageSelected(programmingLanguageOption.getValue());
-                App.getAppConfiguration().setProjectFiles(new ProjectFiles());
                 FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/ShowAllCodeFileFromPath"));
                 App.stage.setScene(FxmlController.currentScene);
             }

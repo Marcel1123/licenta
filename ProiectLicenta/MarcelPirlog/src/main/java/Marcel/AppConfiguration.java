@@ -1,15 +1,21 @@
 package Marcel;
 
-import Marcel.entities.LocalProjectLocation;
 import Marcel.entities.ProjectFiles;
 import Marcel.entities.Student;
 
-public class AppConfiguration {
-    private  LocalProjectLocation localProjectLocation = new LocalProjectLocation("C:\\Users\\User\\Documents\\GitHub\\E-Catalog\\Client");
+import java.io.File;
+import java.nio.file.Path;
+import java.util.HashSet;
+
+public final class AppConfiguration {
+
+    private Path localProjectLocation = null;
 
     private  Student student = null;
 
-    private ProjectFiles projectFiles = new ProjectFiles();
+    private HashSet<File> files = null;
+
+//    private ProjectFiles projectFiles = new ProjectFiles();
 
     private String programmingLanguageSelected = ".java";
 
@@ -21,12 +27,12 @@ public class AppConfiguration {
         this.programmingLanguageSelected = programmingLanguageSelected;
     }
 
-    public  LocalProjectLocation getLocalProjectLocation() {
+    public Path getLocalProjectLocation() {
         return localProjectLocation;
     }
 
-    public  void setLocalProjectLocation(LocalProjectLocation localProjectLocation) {
-        this.localProjectLocation = localProjectLocation;
+    public void setLocalProjectLocation(String localProjectLocation) {
+        this.localProjectLocation = Path.of(localProjectLocation);
     }
 
     public  Student getStudent() {
@@ -37,11 +43,18 @@ public class AppConfiguration {
         this.student = student;
     }
 
-    public ProjectFiles getProjectFiles() {
-        return projectFiles;
+//    public ProjectFiles getProjectFiles() {
+//        return projectFiles;
+//    }
+//
+//    public void setProjectFiles(ProjectFiles projectFiles) {
+//        this.projectFiles = projectFiles;
+//    }
+    public HashSet<File> getFiles() {
+        return files;
     }
 
-    public void setProjectFiles(ProjectFiles projectFiles) {
-        this.projectFiles = projectFiles;
+    public void setFiles(HashSet<File> files) {
+        this.files = files;
     }
 }
