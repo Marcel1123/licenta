@@ -38,5 +38,5 @@ public class AccountRepository implements IAccountRepository {
         }
     }
 
-//    private boolean isTeacher()
+
 }

@@ -25,6 +25,9 @@ public class ProjectEntity {
     @Column(name = "Id_profesor")
     private UUID teacherId;
 
+    @Column(name = "Id_group")
+    private UUID groupId;
+
     @Column(name = "Finalizat")
     private String isFinal;
 
@@ -36,12 +39,13 @@ public class ProjectEntity {
 
     public ProjectEntity(){}
 
-    public ProjectEntity(UUID id, String name, UUID studentId, UUID materieId, UUID teacherId, String isFinal, String compilationStatus, String plagiaryStatus){
+    public ProjectEntity(UUID id, String name, UUID studentId, UUID materieId, UUID teacherId, UUID groupId, String isFinal, String compilationStatus, String plagiaryStatus){
         this.id = id;
         this.name = name;
         this.studentId = studentId;
         this.materieId = materieId;
         this.teacherId = teacherId;
+        this.groupId = groupId;
         this.isFinal = isFinal;
         this.compilationStatus = compilationStatus;
         this.plagiaryStatus = plagiaryStatus;
@@ -101,6 +105,14 @@ public class ProjectEntity {
 
     public void setIsFinal(String isFinal) {
         this.isFinal = isFinal;
+    }
+
+    public UUID getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(UUID groupId){
+        this.groupId = groupId;
     }
 
     public String getName() {

@@ -23,9 +23,6 @@ public class StudentEntity implements Serializable {
     @Column(name = "An")
     private int year;
 
-    @Column(name = "Grupa")
-    private String grupa;
-
     @Column(name = "Id_cont")
     private UUID accountId;
 
@@ -35,7 +32,6 @@ public class StudentEntity implements Serializable {
                 "Id=" + Id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", grupa='" + grupa + '\'' +
                 ", year=" + year +
                 ", accountId=" + accountId +
                 '}';
@@ -79,13 +75,5 @@ public class StudentEntity implements Serializable {
 
     public void setAccountId(UUID accountId) {
         this.accountId = accountId;
-    }
-
-    public String getGrupa() {
-        return grupa;
-    }
-
-    public void setGrupa(String grupa) {
-        this.grupa = grupa;
     }
 }
