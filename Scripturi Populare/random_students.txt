@@ -84,7 +84,6 @@ INSERT INTO public.conturi( id, password, username) VALUES ('c23f51a0-66a6-450e-
 INSERT INTO public.conturi( id, password, username) VALUES ('372d1595-76d7-4fc7-a43d-c888c15e61ad', 'eQVf5fhT69', 'paraschiv.caius');
 INSERT INTO public.conturi( id, password, username) VALUES ('238c204f-29f4-4558-8845-5334d322e930', 'z0fcEd6g', 'vlad.sanda');
 
-
 INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('0330b000-7e7e-445b-a72b-eb306c87147e', '2044b0eb-7619-48b0-b1bc-e39f224a6dd3', 'Rusu', 'Stefana', '2');
 INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('021a9064-035a-42fe-adb2-ed518a0055ee', '238c204f-29f4-4558-8845-5334d322e930', 'Vlad', 'Sanda', '3');
 INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES ('5b4283da-6c05-44d8-a700-e4228f2f4b7d', 'ac6be3ef-aaaa-4deb-b0fa-b515fc0da8de', 'Bota', 'Radu', '3');

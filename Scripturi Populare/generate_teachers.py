@@ -1,3 +1,4 @@
+import random
 import time
 import uuid
 import json
@@ -98,9 +99,24 @@ def generate_groups():
     creator_id = ['3f742159-144b-4b4e-8632-66f7a3f53edb', 'b2e07fd0-163e-4ee7-b9f1-074761e6908f', '8073c200-5e6f-46e1-9640-f523f21d590b', '1f212a24-8c47-4a2e-96f4-dbe0aac8bbcd', '0c9be54c-3c38-48f8-b213-a4138aa149b4', '770df657-e4d4-49f1-b9b9-fee3eea58978', '8277ccfc-bf9a-488f-b3d0-f6966b967096', 'ff4dd902-eb9e-4c12-aa48-5eea7866776b', 'f12f5cf9-0345-4cd6-b811-3e0565a3ae75', '40c12c42-5929-4c50-be0c-9594174338c3', '9d22852f-afe8-4cfe-9899-3282cf445a5b', 'b76a16c5-c6a6-4d5c-ab0f-ac4336c1724d',]
     with open("initial_groups.txt", "w+") as data:
         for i in range(0, 12):
-            querry = "INSERT INTO public.grupuri( id, id_creator, nume) VALUES (\'%s\', \'%s\', \'%s\');" % (str(uuid.uuid4()), str(creator_id[i]), str(nume[i]))
+            querry = "INSERT INTO public.grupuri( id, id_creator, nume) VALUES (\'%s\', \'%s\', \'%s\');" % (str(uuid.uuid4()), str(creator_id[i]), '1' + str(nume[i]))
             data.write(querry + '\n')
+            querry = "INSERT INTO public.grupuri( id, id_creator, nume) VALUES (\'%s\', \'%s\', \'%s\');" % ( str(uuid.uuid4()), str(creator_id[i]), '2' + str(nume[i]))
+            data.write(querry + '\n')
+            querry = "INSERT INTO public.grupuri( id, id_creator, nume) VALUES (\'%s\', \'%s\', \'%s\');" % ( str(uuid.uuid4()), str(creator_id[i]), '3' + str(nume[i]))
+            data.write(querry + '\n')
+
+
+def generate_group_member():
+    with open("students_id.txt", 'r') as std_id, open("group_id.txt", 'r') as group, open("random_member.txt", 'w+') as member:
+        sudents = std_id.read().split('\n')
+        groups = group.read().split('\n')
+        for i in sudents:
+            querry = "INSERT INTO public.membri_grup( id, id_grup, id_membru) VALUES (\'%s\', %s, %s);" % (str(uuid.uuid4()), random.choice(groups), i)
+            member.write(querry + '\n')
+
 
 # generate_teachers()
 # generate_studs()
-generate_groups()
+# generate_groups()
+# generate_group_member()

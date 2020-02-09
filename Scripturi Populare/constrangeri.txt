@@ -1,0 +1,15 @@
+ALTER TABLE public.grupuri
+    ADD CONSTRAINT fk_creator FOREIGN KEY (id_creator)
+    REFERENCES public.profesori (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+
+ALTER TABLE public.proiect
+    ADD CONSTRAINT fk_std FOREIGN KEY (id_student)
+    REFERENCES public.studenti (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
