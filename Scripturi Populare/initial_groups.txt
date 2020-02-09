@@ -1,0 +1,12 @@
+INSERT INTO public.grupuri( id, id_creator, nume) VALUES ('67a1c392-c5f9-4a6b-8325-bb396880dcb0', '3f742159-144b-4b4e-8632-66f7a3f53edb', 'A1');
+INSERT INTO public.grupuri( id, id_creator, nume) VALUES ('234faa80-1d91-4fda-bece-da3b7a8ebca3', 'b2e07fd0-163e-4ee7-b9f1-074761e6908f', 'A2');
+INSERT INTO public.grupuri( id, id_creator, nume) VALUES ('fb50840e-d6ff-44bf-881b-8d54e30bb05b', '8073c200-5e6f-46e1-9640-f523f21d590b', 'A3');
+INSERT INTO public.grupuri( id, id_creator, nume) VALUES ('7f4d7b17-a506-493f-8f40-5b4498d409ac', '1f212a24-8c47-4a2e-96f4-dbe0aac8bbcd', 'A4');
+INSERT INTO public.grupuri( id, id_creator, nume) VALUES ('df807072-b2ac-4ed6-9b10-c31d97a373e7', '0c9be54c-3c38-48f8-b213-a4138aa149b4', 'A5');
+INSERT INTO public.grupuri( id, id_creator, nume) VALUES ('08e62594-621b-4053-918f-32c2f638498b', '770df657-e4d4-49f1-b9b9-fee3eea58978', 'A6');
+INSERT INTO public.grupuri( id, id_creator, nume) VALUES ('a194bf13-2415-4951-9920-1ff87c1332fa', '8277ccfc-bf9a-488f-b3d0-f6966b967096', 'B1');
+INSERT INTO public.grupuri( id, id_creator, nume) VALUES ('93653d11-d857-4ca4-a17f-0876fa73cd53', 'ff4dd902-eb9e-4c12-aa48-5eea7866776b', 'B2');
+INSERT INTO public.grupuri( id, id_creator, nume) VALUES ('07c782b9-fa51-4541-a127-5292df0af2f0', 'f12f5cf9-0345-4cd6-b811-3e0565a3ae75', 'B3');
+INSERT INTO public.grupuri( id, id_creator, nume) VALUES ('b0605537-b03e-4bd9-bd5e-45bf7b4acb26', '40c12c42-5929-4c50-be0c-9594174338c3', 'B4');
+INSERT INTO public.grupuri( id, id_creator, nume) VALUES ('60c2efaa-481e-4933-915e-b7e113cd36b7', '9d22852f-afe8-4cfe-9899-3282cf445a5b', 'B5');
+INSERT INTO public.grupuri( id, id_creator, nume) VALUES ('9414b928-d518-4741-b5a3-8346131b9bb8', 'b76a16c5-c6a6-4d5c-ab0f-ac4336c1724d', 'B6');

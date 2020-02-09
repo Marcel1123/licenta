@@ -1,30 +1,51 @@
 INSERT INTO public.conturi( id, password, username) VALUES ('47b4938d-0960-4b67-a56b-8c46621ad145', '5i8uK8b579jktu', 'danciu.george');
-INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('3f742159-144b-4b4e-8632-66f7a3f53edb', '47b4938d-0960-4b67-a56b-8c46621ad145', 'danciu.george@profs.info.uaic.ro', 'Danciu', 'George');
-
 INSERT INTO public.conturi( id, password, username) VALUES ('28744d14-699c-4025-8be1-4b7e080a94e8', '1ZFIWa4Fr68', 'trif.eusebiu');
-INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('b2e07fd0-163e-4ee7-b9f1-074761e6908f', '28744d14-699c-4025-8be1-4b7e080a94e8', 'trif.eusebiu@profs.info.uaic.ro', 'Trif', 'Eusebiu');
-
 INSERT INTO public.conturi( id, password, username) VALUES ('875882c5-dcd4-4881-838a-d9bb686ff269', 'gwAL5B5LW0mA', 'moldovan.monalisa');
-INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('8073c200-5e6f-46e1-9640-f523f21d590b', '875882c5-dcd4-4881-838a-d9bb686ff269', 'moldovan.monalisa@profs.info.uaic.ro', 'Moldovan', 'Monalisa');
-
 INSERT INTO public.conturi( id, password, username) VALUES ('960e6c01-3a47-426e-a3ac-86eb11f33207', 'Lo2dpWhnn', 'sabau.angela');
-INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('1f212a24-8c47-4a2e-96f4-dbe0aac8bbcd', '960e6c01-3a47-426e-a3ac-86eb11f33207', 'sabau.angela@profs.info.uaic.ro', 'Sabau', 'Angela');
-
 INSERT INTO public.conturi( id, password, username) VALUES ('8609ea44-f576-4073-90e9-faa8bac947d3', 'Au7oJW8Hp3MED', 'dima.dumitra');
-INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('0c9be54c-3c38-48f8-b213-a4138aa149b4', '8609ea44-f576-4073-90e9-faa8bac947d3', 'dima.dumitra@profs.info.uaic.ro', 'Dima', 'Dumitra');
-
 INSERT INTO public.conturi( id, password, username) VALUES ('1bd5748a-91b9-4898-a3e8-2c1e5161bcbb', 'hFsh2nyIs0oOqp', 'miron.mona');
-INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('770df657-e4d4-49f1-b9b9-fee3eea58978', '1bd5748a-91b9-4898-a3e8-2c1e5161bcbb', 'miron.mona@profs.info.uaic.ro', 'Miron', 'Mona');
-
 INSERT INTO public.conturi( id, password, username) VALUES ('89c0873e-ff61-4f23-b34d-1a89bab5bf03', 'yPmN1l07', 'szabo.petrica');
-INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('8277ccfc-bf9a-488f-b3d0-f6966b967096', '89c0873e-ff61-4f23-b34d-1a89bab5bf03', 'szabo.petrica@profs.info.uaic.ro', 'Szabo', 'Petrica');
-
 INSERT INTO public.conturi( id, password, username) VALUES ('b20fbd99-e751-425a-bb39-20cb13fba339', 'ukA5iuxEV3Ev9W', 'mihalache.cristian');
-INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('ff4dd902-eb9e-4c12-aa48-5eea7866776b', 'b20fbd99-e751-425a-bb39-20cb13fba339', 'mihalache.cristian@profs.info.uaic.ro', 'Mihalache', 'Cristian');
-
 INSERT INTO public.conturi( id, password, username) VALUES ('59602a01-adc0-4a67-84da-81f565a2969d', 'n16Js6X7B2MpJ', 'radulescu.catrinel');
-INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('f12f5cf9-0345-4cd6-b811-3e0565a3ae75', '59602a01-adc0-4a67-84da-81f565a2969d', 'radulescu.catrinel@profs.info.uaic.ro', 'Radulescu', 'Catrinel');
-
 INSERT INTO public.conturi( id, password, username) VALUES ('6e701e85-1db9-4fa9-ae44-6d20e1afa73f', 'I10vZVMl0', 'man.tania');
+INSERT INTO public.conturi( id, password, username) VALUES ('e652cab2-2e72-49d0-9034-3207163be57b', '9E0E577W5L8', 'cristescu.ofelia');
+INSERT INTO public.conturi( id, password, username) VALUES ('61d82d98-a8cc-4d97-90e2-5ed02819f494', 'pV2Lsb1nE069iAt', 'neamtu.gicu');
+
+
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('3f742159-144b-4b4e-8632-66f7a3f53edb', '47b4938d-0960-4b67-a56b-8c46621ad145', 'danciu.george@profs.info.uaic.ro', 'Danciu', 'George');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('b2e07fd0-163e-4ee7-b9f1-074761e6908f', '28744d14-699c-4025-8be1-4b7e080a94e8', 'trif.eusebiu@profs.info.uaic.ro', 'Trif', 'Eusebiu');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('8073c200-5e6f-46e1-9640-f523f21d590b', '875882c5-dcd4-4881-838a-d9bb686ff269', 'moldovan.monalisa@profs.info.uaic.ro', 'Moldovan', 'Monalisa');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('1f212a24-8c47-4a2e-96f4-dbe0aac8bbcd', '960e6c01-3a47-426e-a3ac-86eb11f33207', 'sabau.angela@profs.info.uaic.ro', 'Sabau', 'Angela');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('0c9be54c-3c38-48f8-b213-a4138aa149b4', '8609ea44-f576-4073-90e9-faa8bac947d3', 'dima.dumitra@profs.info.uaic.ro', 'Dima', 'Dumitra');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('770df657-e4d4-49f1-b9b9-fee3eea58978', '1bd5748a-91b9-4898-a3e8-2c1e5161bcbb', 'miron.mona@profs.info.uaic.ro', 'Miron', 'Mona');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('8277ccfc-bf9a-488f-b3d0-f6966b967096', '89c0873e-ff61-4f23-b34d-1a89bab5bf03', 'szabo.petrica@profs.info.uaic.ro', 'Szabo', 'Petrica');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('ff4dd902-eb9e-4c12-aa48-5eea7866776b', 'b20fbd99-e751-425a-bb39-20cb13fba339', 'mihalache.cristian@profs.info.uaic.ro', 'Mihalache', 'Cristian');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('f12f5cf9-0345-4cd6-b811-3e0565a3ae75', '59602a01-adc0-4a67-84da-81f565a2969d', 'radulescu.catrinel@profs.info.uaic.ro', 'Radulescu', 'Catrinel');
 INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('40c12c42-5929-4c50-be0c-9594174338c3', '6e701e85-1db9-4fa9-ae44-6d20e1afa73f', 'man.tania@profs.info.uaic.ro', 'Man', 'Tania');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('9d22852f-afe8-4cfe-9899-3282cf445a5b', 'e652cab2-2e72-49d0-9034-3207163be57b', 'cristescu.ofelia@profs.info.uaic.ro', 'Cristescu', 'Ofelia');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('b76a16c5-c6a6-4d5c-ab0f-ac4336c1724d', '61d82d98-a8cc-4d97-90e2-5ed02819f494', 'neamtu.gicu@profs.info.uaic.ro', 'Neamtu', 'Gicu');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('841a9757-2688-43c3-b844-7f879a1c8b93', 'GrWeNq31', 'cozma.emilia');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('2dbb3806-8b3f-4485-8c71-ae92d4d49137', '841a9757-2688-43c3-b844-7f879a1c8b93', 'cozma.emilia@profs.info.uaic.ro', 'Cozma', 'Emilia');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('cb465d1c-1f48-4294-b308-f97e4a2de190', '9lP61YmENXiy', 'popovici.iulian');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('f9ed2cb3-47d9-4ae7-b578-64b9b9703a98', 'cb465d1c-1f48-4294-b308-f97e4a2de190', 'popovici.iulian@profs.info.uaic.ro', 'Popovici', 'Iulian');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('d7d8824f-44ed-4bcf-91d3-2f2df5db3b14', 'k8Yk526IXu9', 'oancea.mitrut');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('052b2af3-d94d-41eb-b5b0-f065e2da7628', 'd7d8824f-44ed-4bcf-91d3-2f2df5db3b14', 'oancea.mitrut@profs.info.uaic.ro', 'Oancea', 'Mitrut');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('34df4561-066a-440a-9460-027e943b6a4b', '445khNox', 'marcu.marilena');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('164e4951-fb7c-4362-862b-d2e4f653f5f5', '34df4561-066a-440a-9460-027e943b6a4b', 'marcu.marilena@profs.info.uaic.ro', 'Marcu', 'Marilena');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('981ecdf7-1970-4c24-8959-56ef3ae3291d', '7FOvznK4Nul3', 'bota.nechifor');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('18dc7af4-0734-4549-8960-b15e73879a8e', '981ecdf7-1970-4c24-8959-56ef3ae3291d', 'bota.nechifor@profs.info.uaic.ro', 'Bota', 'Nechifor');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('360f3e1c-a729-4b05-a59d-6a18c63c4048', 'xuiWaqRlk8Pt', 'trifan.casian');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('3b5347eb-7ff9-4200-8daf-7acd65b6c54d', '360f3e1c-a729-4b05-a59d-6a18c63c4048', 'trifan.casian@profs.info.uaic.ro', 'Trifan', 'Casian');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('2a915f1b-16b8-41b6-8cb9-d622c854e093', '6NRG9Rb166G0C', 'niculae.nicoleta');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('18e27e2c-ef8a-484b-8cd0-f654d8e6c79d', '2a915f1b-16b8-41b6-8cb9-d622c854e093', 'niculae.nicoleta@profs.info.uaic.ro', 'Niculae', 'Nicoleta');
+
+INSERT INTO public.conturi( id, password, username) VALUES ('ab0d7990-9954-4862-a9f5-c720aa9fc252', '8uZes9zd', 'manole.ariadna');
+INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES ('55836d82-138e-4697-8e0b-c1fd945dc0ef', 'ab0d7990-9954-4862-a9f5-c720aa9fc252', 'manole.ariadna@profs.info.uaic.ro', 'Manole', 'Ariadna');
 
