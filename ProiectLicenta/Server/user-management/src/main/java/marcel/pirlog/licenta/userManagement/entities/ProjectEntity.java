@@ -22,9 +22,6 @@ public class ProjectEntity {
     @Column(name = "Id_materie")
     private UUID materieId;
 
-    @Column(name = "Id_profesor")
-    private UUID teacherId;
-
     @Column(name = "Id_group")
     private UUID groupId;
 
@@ -39,12 +36,11 @@ public class ProjectEntity {
 
     public ProjectEntity(){}
 
-    public ProjectEntity(UUID id, String name, UUID studentId, UUID materieId, UUID teacherId, UUID groupId, String isFinal, String compilationStatus, String plagiaryStatus){
+    public ProjectEntity(UUID id, String name, UUID studentId, UUID materieId, UUID groupId, String isFinal, String compilationStatus, String plagiaryStatus){
         this.id = id;
         this.name = name;
         this.studentId = studentId;
         this.materieId = materieId;
-        this.teacherId = teacherId;
         this.groupId = groupId;
         this.isFinal = isFinal;
         this.compilationStatus = compilationStatus;
@@ -73,14 +69,6 @@ public class ProjectEntity {
 
     public void setMaterieId(UUID materieId) {
         this.materieId = materieId;
-    }
-
-    public UUID getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(UUID teacherId) {
-        this.teacherId = teacherId;
     }
 
     public String getCompilationStatus() {
