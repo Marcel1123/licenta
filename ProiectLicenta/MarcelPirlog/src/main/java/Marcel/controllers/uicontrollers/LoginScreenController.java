@@ -39,14 +39,12 @@ public class LoginScreenController {
         if(httpResponse.statusCode() == HttpURLConnection.HTTP_CREATED){
             String response = (String) httpResponse.body();
 
-            String response1 = HttpRequestAPI.GETMethod("http://localhost:9091/student/", response);
-
-            if(response1.isEmpty()){
+            if(response.isEmpty()){
                 errorLabel.setText("Invalid username or password!");
                 errorLabel.setVisible(true);
             } else {
                 Gson g = new Gson();
-                Reader reader = new StringReader(response1);
+                Reader reader = new StringReader(response);
                 App.getAppConfiguration().setStudent(g.fromJson(reader, Student.class));
 
                 FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/ProfilePage"));

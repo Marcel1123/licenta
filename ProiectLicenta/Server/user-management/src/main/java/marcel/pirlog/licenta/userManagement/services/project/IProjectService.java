@@ -1,8 +1,7 @@
 package marcel.pirlog.licenta.userManagement.services.project;
 
-import marcel.pirlog.licenta.userManagement.entities.ProjectEntity;
-import marcel.pirlog.licenta.userManagement.models.ProjectModel;
+import marcel.pirlog.licenta.userManagement.models.CreateProjectModel;
 
 public interface IProjectService {
-//    ProjectEntity addProject(ProjectModel projectModel);
+    void addProject(CreateProjectModel projectModel);
 }

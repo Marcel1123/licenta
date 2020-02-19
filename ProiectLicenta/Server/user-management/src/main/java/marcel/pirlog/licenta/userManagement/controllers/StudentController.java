@@ -1,6 +1,5 @@
 package marcel.pirlog.licenta.userManagement.controllers;
 
-import com.google.gson.Gson;
 import marcel.pirlog.licenta.userManagement.entities.StudentEntity;
 import marcel.pirlog.licenta.userManagement.services.student.IStudentService;
 import marcel.pirlog.licenta.userManagement.utils.RequestPath;

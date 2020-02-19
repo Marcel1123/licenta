@@ -1,6 +1,7 @@
 package marcel.pirlog.licenta.userManagement.repositorys.account;
 
 import marcel.pirlog.licenta.userManagement.entities.AccountEntity;
+import marcel.pirlog.licenta.userManagement.entities.StudentEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -27,12 +28,14 @@ public class AccountRepository implements IAccountRepository {
     }
 
     @Override
-    public AccountEntity findByCredential(String username, String password) {
-        TypedQuery<AccountEntity> accountEntityTypedQuery = entityManager.createQuery(
-                "select c from AccountEntity c where c.username = :username", AccountEntity.class
+    public StudentEntity findByCredential(String username, String password) {
+        TypedQuery<StudentEntity> accountEntityTypedQuery = entityManager.createQuery(
+                "select s from AccountEntity c" +
+                        " join StudentEntity s on s.accountId = c.id where c.username = :username " +
+                        " and c.password = :password", StudentEntity.class
         );
         try{
-            return accountEntityTypedQuery.setParameter("username", username).getSingleResult();
+            return accountEntityTypedQuery.setParameter("username", username).setParameter("password", password).getSingleResult();
         } catch (NoResultException ne) {
             return null;
         }

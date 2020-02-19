@@ -7,7 +7,6 @@ public class Student implements Serializable {
     private String firstName;
     private String lastName;
     private int year;
-    private String grupa;
     private UUID accountId;
     private UUID id;
 
@@ -20,7 +19,6 @@ public class Student implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.year = year;
-        this.grupa = grupa;
         this.accountId = UUID.fromString(accountId);
     }
 
@@ -54,14 +52,6 @@ public class Student implements Serializable {
 
     public void setYear(int year) {
         this.year = year;
-    }
-
-    public String getGrupa() {
-        return grupa;
-    }
-
-    public void setGrupa(String grupa) {
-        this.grupa = grupa;
     }
 
     public UUID getAccountId() {

@@ -29,4 +29,14 @@ public class HttpRequestAPI {
         return client.send(request, HttpResponse.BodyHandlers.ofString())
                 .body();
     }
+
+    public static HttpResponse GETMethodResponse(String url, String argument) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url + argument))
+                .header("Accept", "application/json")
+                .GET()
+                .build();
+        return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
 }

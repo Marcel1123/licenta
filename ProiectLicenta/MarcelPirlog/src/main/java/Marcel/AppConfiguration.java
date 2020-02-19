@@ -1,7 +1,8 @@
 package Marcel;
 
-import Marcel.entities.ProjectFiles;
 import Marcel.entities.Student;
+import Marcel.models.MaterialModel;
+import Marcel.models.StudentGroupModel;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -15,9 +16,19 @@ public final class AppConfiguration {
 
     private HashSet<File> files = null;
 
-//    private ProjectFiles projectFiles = new ProjectFiles();
-
     private String programmingLanguageSelected = ".java";
+
+    private StudentGroupModel[] studentGroupModels = null;
+
+    private MaterialModel[] materialModels = null;
+
+    public MaterialModel[] getMaterialModels() {
+        return materialModels;
+    }
+
+    public void setMaterialModels(MaterialModel[] materialModels) {
+        this.materialModels = materialModels;
+    }
 
     public String getProgrammingLanguageSelected() {
         return programmingLanguageSelected;
@@ -43,18 +54,23 @@ public final class AppConfiguration {
         this.student = student;
     }
 
-//    public ProjectFiles getProjectFiles() {
-//        return projectFiles;
-//    }
-//
-//    public void setProjectFiles(ProjectFiles projectFiles) {
-//        this.projectFiles = projectFiles;
-//    }
     public HashSet<File> getFiles() {
         return files;
     }
 
     public void setFiles(HashSet<File> files) {
         this.files = files;
+    }
+
+    public void setLocalProjectLocation(Path localProjectLocation) {
+        this.localProjectLocation = localProjectLocation;
+    }
+
+    public StudentGroupModel[] getStudentGroupModels() {
+        return studentGroupModels;
+    }
+
+    public void setStudentGroupModels(StudentGroupModel[] studentGroupModels) {
+        this.studentGroupModels = studentGroupModels;
     }
 }

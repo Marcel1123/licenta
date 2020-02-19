@@ -1,6 +1,7 @@
 package marcel.pirlog.licenta.userManagement.repositorys.account;
 
 import marcel.pirlog.licenta.userManagement.entities.AccountEntity;
+import marcel.pirlog.licenta.userManagement.entities.StudentEntity;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -8,5 +9,5 @@ import java.util.List;
 public interface IAccountRepository  {
     void add(AccountEntity entity);
     List<AccountEntity> listAccounts();
-    AccountEntity findByCredential(String username, String password);
+    StudentEntity findByCredential(String username, String password);
 }

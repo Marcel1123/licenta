@@ -11,7 +11,9 @@ module Marcel {
     exports Marcel.controllers.uicontrollers;
     exports Marcel.controllers.entitycontrollers;
     exports Marcel.controllers.fxmlcontroller;
+    exports Marcel.models;
     opens Marcel to javafx.fxml;
     opens Marcel.entities to com.google.gson;
+    opens Marcel.models to com.google.gson;
     exports Marcel.myutil;
 }

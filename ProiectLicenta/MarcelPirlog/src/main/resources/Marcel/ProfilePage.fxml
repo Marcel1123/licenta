@@ -23,16 +23,7 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label layoutX="40.0" layoutY="160.0" maxHeight="40.0" maxWidth="150.0" minHeight="40.0" minWidth="86.0" prefHeight="40.0" prefWidth="86.0" text="Grupa:">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
             <Label fx:id="year" layoutX="92.0" layoutY="100.0" minHeight="40.0" minWidth="150.0">
-               <font>
-                  <Font size="20.0" />
-               </font></Label>
-            <Label fx:id="grupa" layoutX="115.0" layoutY="160.0" minHeight="40.0" minWidth="150.0">
                <font>
                   <Font size="20.0" />
                </font></Label>
@@ -41,6 +32,11 @@
                   <Font size="19.0" />
                </font>
             </Button>
+            <Label fx:id="groupError" alignment="CENTER" layoutX="40.0" layoutY="326.0" prefHeight="42.0" prefWidth="521.0" text="NU SUNTTETI IN NICI UN GRUP" visible="false">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>
