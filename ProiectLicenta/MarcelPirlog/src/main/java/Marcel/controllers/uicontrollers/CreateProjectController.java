@@ -36,8 +36,8 @@ public class CreateProjectController implements Initializable {
     public Button serachButton;
     @FXML
     public Text responseMessage;
-    @FXML
-    public ChoiceBox<String> programmingLanguageOption;
+//    @FXML
+//    public ChoiceBox<String> programmingLanguageOption;
     @FXML
     public AnchorPane rootPane;
     @FXML
@@ -110,9 +110,9 @@ public class CreateProjectController implements Initializable {
             }
         }
 
-        programmingLanguageOption.getItems().add(".java");
-        programmingLanguageOption.getItems().add(".c");
-        programmingLanguageOption.getItems().add(".py");
+//        programmingLanguageOption.getItems().add(".java");
+//        programmingLanguageOption.getItems().add(".c");
+//        programmingLanguageOption.getItems().add(".py");
 
         for(StudentGroupModel studentGroupModel : App.getAppConfiguration().getStudentGroupModels()){
             groupChoiceBox.getItems().add(studentGroupModel.getGroupName());
@@ -120,9 +120,18 @@ public class CreateProjectController implements Initializable {
     }
 
     private void createProjectModelForClass() throws IOException, InterruptedException {
-        List<MaterialModel> materialId = Arrays.stream(App.getAppConfiguration().getMaterialModels()).filter(p -> p.getName().equals(materialName.getValue())).collect(Collectors.toList());
-        List<StudentGroupModel> studentGroupModels = Arrays.stream(App.getAppConfiguration().getStudentGroupModels()).filter(p -> p.getGroupName().equals(groupChoiceBox.getValue())).collect(Collectors.toList());
-        CreateProjectModel createProjectModel = new CreateProjectModel(materialId.get(0).getId(), App.getAppConfiguration().getStudent().getId().toString(), projectName.getText(), studentGroupModels.get(0).getGroupId().toString());
+        List<MaterialModel> materialId = Arrays.stream(App.getAppConfiguration().getMaterialModels())
+                .filter(p -> p.getName().equals(materialName.getValue()))
+                .collect(Collectors.toList());
+
+        List<StudentGroupModel> studentGroupModels = Arrays.stream(App.getAppConfiguration().getStudentGroupModels())
+                .filter(p -> p.getGroupName().equals(groupChoiceBox.getValue()))
+                .collect(Collectors.toList());
+
+        CreateProjectModel createProjectModel = new CreateProjectModel(materialId.get(0).getId(),
+                                                                        App.getAppConfiguration().getStudent().getId().toString(),
+                                                                        projectName.getText(),
+                                                                        studentGroupModels.get(0).getGroupId().toString());
 
         materialId = null;
         studentGroupModels = null;
@@ -132,7 +141,7 @@ public class CreateProjectController implements Initializable {
         if(response.statusCode() == HttpURLConnection.HTTP_CREATED){
             responseMessage.setVisible(false);
             App.getAppConfiguration().setLocalProjectLocation(directoryPath.getText());
-            App.getAppConfiguration().setProgrammingLanguageSelected(programmingLanguageOption.getValue());
+//            App.getAppConfiguration().setProgrammingLanguageSelected(programmingLanguageOption.getValue());
 
             FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/ShowAllCodeFileFromPath"));
             App.stage.setScene(FxmlController.currentScene);
@@ -154,9 +163,9 @@ public class CreateProjectController implements Initializable {
         if(projectName.getText().isEmpty()){
             return false;
         }
-        if(programmingLanguageOption.getValue() == null){
-            return false;
-        }
+//        if(programmingLanguageOption.getValue() == null){
+//            return false;
+//        }
         if(groupChoiceBox.getValue() == null){
             return false;
         }

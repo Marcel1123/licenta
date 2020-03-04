@@ -15,11 +15,14 @@ public class SubVersionEntity {
     @Column(name = "Id")
     private UUID id;
 
+    @Column(name = "Id_versiune")
+    private UUID versionId;
+
     @Column(name = "Id_proiect")
     private UUID projectId;
 
     @Column(name = "Cod_sura")
-    private File file;
+    private String file;
 
     @Column(name = "Data_incarcarii")
     private LocalDateTime uploadDate;
@@ -27,7 +30,7 @@ public class SubVersionEntity {
     public SubVersionEntity(){
     }
 
-    public SubVersionEntity(UUID id, UUID projectId, File file, LocalDateTime uploadDate){
+    public SubVersionEntity(UUID id, UUID projectId, String file, LocalDateTime uploadDate){
         this.id = id;
         this.projectId = projectId;
         this.file = file;
@@ -50,11 +53,11 @@ public class SubVersionEntity {
         this.projectId = projectId;
     }
 
-    public File getFile() {
+    public String getFile() {
         return file;
     }
 
-    public void setFile(File file) {
+    public void setFile(String file) {
         this.file = file;
     }
 

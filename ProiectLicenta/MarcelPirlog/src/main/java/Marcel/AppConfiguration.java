@@ -1,26 +1,32 @@
 package Marcel;
 
+import Marcel.entities.FileCode;
 import Marcel.entities.Student;
 import Marcel.models.MaterialModel;
 import Marcel.models.StudentGroupModel;
 
 import java.io.File;
 import java.nio.file.Path;
-import java.util.HashSet;
+import java.util.List;
 
 public final class AppConfiguration {
 
-    private Path localProjectLocation = null;
+    private static final AppConfiguration appConfig = new AppConfiguration();
 
-    private  Student student = null;
+    private AppConfiguration(){
+        this.localProjectLocation = null;
+        this.student = null;
+        this.studentGroupModels = null;
+        this.materialModels = null;
+    }
 
-    private HashSet<File> files = null;
+    private Path localProjectLocation;
 
-    private String programmingLanguageSelected = ".java";
+    private  Student student;
 
-    private StudentGroupModel[] studentGroupModels = null;
+    private StudentGroupModel[] studentGroupModels;
 
-    private MaterialModel[] materialModels = null;
+    private MaterialModel[] materialModels;
 
     public MaterialModel[] getMaterialModels() {
         return materialModels;
@@ -28,14 +34,6 @@ public final class AppConfiguration {
 
     public void setMaterialModels(MaterialModel[] materialModels) {
         this.materialModels = materialModels;
-    }
-
-    public String getProgrammingLanguageSelected() {
-        return programmingLanguageSelected;
-    }
-
-    public void setProgrammingLanguageSelected(String programmingLanguageSelected) {
-        this.programmingLanguageSelected = programmingLanguageSelected;
     }
 
     public Path getLocalProjectLocation() {
@@ -54,12 +52,8 @@ public final class AppConfiguration {
         this.student = student;
     }
 
-    public HashSet<File> getFiles() {
-        return files;
-    }
-
-    public void setFiles(HashSet<File> files) {
-        this.files = files;
+    public static AppConfiguration getInstance(){
+        return appConfig;
     }
 
     public void setLocalProjectLocation(Path localProjectLocation) {

@@ -1,6 +1,7 @@
 package Marcel.controllers.uicontrollers;
 
 import Marcel.App;
+import Marcel.AppConfiguration;
 import Marcel.controllers.entitycontrollers.FileCodeController;
 import Marcel.controllers.fxmlcontroller.FxmlController;
 import Marcel.entities.FileCode;
@@ -17,9 +18,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ShowAllCodeFileFromPathController  implements Initializable {
@@ -38,14 +41,39 @@ public class ShowAllCodeFileFromPathController  implements Initializable {
     @FXML
     public Button stopThread;
 
-    private long startTime = System.currentTimeMillis();
+    private AppConfiguration appConfiguration = App.getAppConfiguration();
+    private List<File> fileList = new LinkedList<>();
+    private List<FileCode> fileCodes = new LinkedList<>();
+    private long startTime = 0;
+
     private AnimationTimer animationTimer = new AnimationTimer() {
         @Override
         public void handle(long l) {
             if(System.currentTimeMillis() - startTime > 120_000){
-                App.getAppConfiguration().setFiles(SearchInDirectory.searchInDirectoryAndSubDirectory(App.getAppConfiguration().getLocalProjectLocation().toString(), App.getAppConfiguration().getProgrammingLanguageSelected()));
+                fileList = SearchInDirectory.searchInDirectoryAndSubDirectory(appConfiguration.getLocalProjectLocation().toString());
+                fileCodes = FileCodeController.converToFileCode(fileList);
+
+                List<String> contentList = new LinkedList<>();
+                try{
+                    for(File file : fileList){
+                        FileInputStream fileInputStream = new FileInputStream(file);
+                        byte[] data = new byte[(int) file.length()];
+                        fileInputStream.read(data);
+                        fileInputStream.close();
+                        contentList.add(new String(data, "UTF-8"));
+                    }
+                } catch (FileNotFoundException fnfe){
+
+                } catch (UnsupportedEncodingException e) {
+
+                } catch (IOException e) {
+
+                }
+                System.out.println(contentList);
+
                 listWithAllFiles.getItems().clear();
-                listWithAllFiles.setItems(FXCollections.observableList(FileCodeController.converToFileCode(App.getAppConfiguration().getFiles())));
+                listWithAllFiles.setItems(FXCollections.observableList(fileCodes));
+                startTime = System.currentTimeMillis();
             }
         }
     };
@@ -58,9 +86,6 @@ public class ShowAllCodeFileFromPathController  implements Initializable {
         fileCreateDate.setCellValueFactory(new PropertyValueFactory<FileCode, LocalDateTime>("createDate"));
         fileLastUpdate.setCellValueFactory(new PropertyValueFactory<FileCode, LocalDateTime>("lastUpdate"));
         fileSize.setCellValueFactory(new PropertyValueFactory<FileCode, Integer>("size"));
-
-        App.getAppConfiguration().setFiles(SearchInDirectory.searchInDirectoryAndSubDirectory(App.getAppConfiguration().getLocalProjectLocation().toString(), App.getAppConfiguration().getProgrammingLanguageSelected()));
-        listWithAllFiles.setItems(FXCollections.observableList(FileCodeController.converToFileCode(App.getAppConfiguration().getFiles())));
 
         animationTimer.start();
     }

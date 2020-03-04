@@ -31,7 +31,6 @@
         <mapping class="marcel.pirlog.licenta.userManagement.entities.GroupEntity"/>
         <mapping class="marcel.pirlog.licenta.userManagement.entities.GroupMemberEntity"/>
         <mapping class="marcel.pirlog.licenta.userManagement.entities.SubVersionEntity"/>
-        <mapping class="marcel.pirlog.licenta.userManagement.entities.FinalVersionEntity"/>
         <mapping class="marcel.pirlog.licenta.userManagement.entities.ProjectEntity"/>
     </session-factory>
 </hibernate-configuration>

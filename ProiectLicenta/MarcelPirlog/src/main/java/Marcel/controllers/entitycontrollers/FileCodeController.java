@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class FileCodeController {
-    public static List<FileCode> converToFileCode(HashSet<File> source){
+    public static List<FileCode> converToFileCode(List<File> source){
         List<FileCode> destination = new LinkedList<>();
         for (File file : source) {
             try{
