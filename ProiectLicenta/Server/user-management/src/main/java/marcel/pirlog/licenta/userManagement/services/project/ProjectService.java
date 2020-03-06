@@ -14,7 +14,7 @@ public class ProjectService implements IProjectService {
     private IProjectRepository projectRepository;
 
     @Override
-    public void addProject(CreateProjectModel projectModel) {
-        projectRepository.createProject(projectModel);
+    public String addProject(CreateProjectModel projectModel) {
+        return projectRepository.createProject(projectModel);
     }
 }

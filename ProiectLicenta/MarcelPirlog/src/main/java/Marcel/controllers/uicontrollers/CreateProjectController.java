@@ -1,6 +1,7 @@
 package Marcel.controllers.uicontrollers;
 
 import Marcel.App;
+import Marcel.AppConfiguration;
 import Marcel.controllers.entitycontrollers.LocalProjectLocationController;
 import Marcel.controllers.fxmlcontroller.FxmlController;
 import Marcel.models.CreateProjectModel;
@@ -51,6 +52,7 @@ public class CreateProjectController implements Initializable {
 
     private List<String> groups = null;
     private boolean ok = true;
+    private AppConfiguration appConfiguration = AppConfiguration.getInstance();
 
     @FXML
     public void searchForFileInPath(ActionEvent actionEvent) throws IOException, InterruptedException {
@@ -124,12 +126,12 @@ public class CreateProjectController implements Initializable {
                 .filter(p -> p.getName().equals(materialName.getValue()))
                 .collect(Collectors.toList());
 
-        List<StudentGroupModel> studentGroupModels = Arrays.stream(App.getAppConfiguration().getStudentGroupModels())
+        List<StudentGroupModel> studentGroupModels = Arrays.stream(appConfiguration.getStudentGroupModels())
                 .filter(p -> p.getGroupName().equals(groupChoiceBox.getValue()))
                 .collect(Collectors.toList());
 
         CreateProjectModel createProjectModel = new CreateProjectModel(materialId.get(0).getId(),
-                                                                        App.getAppConfiguration().getStudent().getId().toString(),
+                                                                        appConfiguration.getStudent().getId().toString(),
                                                                         projectName.getText(),
                                                                         studentGroupModels.get(0).getGroupId().toString());
 
@@ -140,8 +142,9 @@ public class CreateProjectController implements Initializable {
 
         if(response.statusCode() == HttpURLConnection.HTTP_CREATED){
             responseMessage.setVisible(false);
-            App.getAppConfiguration().setLocalProjectLocation(directoryPath.getText());
-//            App.getAppConfiguration().setProgrammingLanguageSelected(programmingLanguageOption.getValue());
+            appConfiguration.setLocalProjectLocation(directoryPath.getText());
+
+            appConfiguration.setProjectId(response.body().toString());
 
             FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/ShowAllCodeFileFromPath"));
             App.stage.setScene(FxmlController.currentScene);

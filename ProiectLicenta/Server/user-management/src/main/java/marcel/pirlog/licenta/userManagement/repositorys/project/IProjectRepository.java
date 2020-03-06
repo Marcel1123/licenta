@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Component
 public interface IProjectRepository {
-    void createProject(CreateProjectModel createProjectModel);
+    String createProject(CreateProjectModel createProjectModel);
 }

@@ -24,8 +24,10 @@ public class ProjectController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity addProject(@RequestBody CreateProjectModel createProjectModel){
-        projectService.addProject(createProjectModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createProjectModel);
+        String id = projectService.addProject(createProjectModel);
+        if(id == null || id.isEmpty()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("");
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
-
 }

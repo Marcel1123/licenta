@@ -30,11 +30,12 @@ public class SubVersionEntity {
     public SubVersionEntity(){
     }
 
-    public SubVersionEntity(UUID id, UUID projectId, String file, LocalDateTime uploadDate){
+    public SubVersionEntity(UUID id, UUID projectId, UUID versionId, String file, LocalDateTime uploadDate){
         this.id = id;
         this.projectId = projectId;
         this.file = file;
         this.uploadDate = uploadDate;
+        this.versionId = versionId;
     }
 
     public UUID getId() {
@@ -67,5 +68,13 @@ public class SubVersionEntity {
 
     public void setUploadDate(LocalDateTime uploadDate) {
         this.uploadDate = uploadDate;
+    }
+
+    public UUID getVersionId() {
+        return versionId;
+    }
+
+    public void setVersionId(UUID versionId) {
+        this.versionId = versionId;
     }
 }

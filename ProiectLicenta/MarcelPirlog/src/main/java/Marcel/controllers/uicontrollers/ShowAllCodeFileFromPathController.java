@@ -5,7 +5,10 @@ import Marcel.AppConfiguration;
 import Marcel.controllers.entitycontrollers.FileCodeController;
 import Marcel.controllers.fxmlcontroller.FxmlController;
 import Marcel.entities.FileCode;
+import Marcel.models.VersionModel;
+import Marcel.myutil.HttpRequestAPI;
 import Marcel.myutil.SearchInDirectory;
+import com.google.gson.Gson;
 import javafx.animation.AnimationTimer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,11 +22,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ShowAllCodeFileFromPathController  implements Initializable {
     @FXML
@@ -44,32 +47,24 @@ public class ShowAllCodeFileFromPathController  implements Initializable {
     private AppConfiguration appConfiguration = App.getAppConfiguration();
     private List<File> fileList = new LinkedList<>();
     private List<FileCode> fileCodes = new LinkedList<>();
+    private List<String> contentList = new LinkedList<>();
     private long startTime = 0;
+    private VersionModel versionModel = new VersionModel();
 
     private AnimationTimer animationTimer = new AnimationTimer() {
         @Override
         public void handle(long l) {
             if(System.currentTimeMillis() - startTime > 120_000){
+                fileCodes.clear();
+                fileList.clear();
+                contentList.clear();
+
                 fileList = SearchInDirectory.searchInDirectoryAndSubDirectory(appConfiguration.getLocalProjectLocation().toString());
                 fileCodes = FileCodeController.converToFileCode(fileList);
 
-                List<String> contentList = new LinkedList<>();
-                try{
-                    for(File file : fileList){
-                        FileInputStream fileInputStream = new FileInputStream(file);
-                        byte[] data = new byte[(int) file.length()];
-                        fileInputStream.read(data);
-                        fileInputStream.close();
-                        contentList.add(new String(data, "UTF-8"));
-                    }
-                } catch (FileNotFoundException fnfe){
+                updateFileListContent();
 
-                } catch (UnsupportedEncodingException e) {
-
-                } catch (IOException e) {
-
-                }
-                System.out.println(contentList);
+                sendFileToServer("false");
 
                 listWithAllFiles.getItems().clear();
                 listWithAllFiles.setItems(FXCollections.observableList(fileCodes));
@@ -92,7 +87,52 @@ public class ShowAllCodeFileFromPathController  implements Initializable {
 
     public void endThreadAction() throws IOException {
         animationTimer.stop();
+
+        updateFileListContent();
+
+        sendFileToServer("true");
+
         FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/CreateProject"));
         App.stage.setScene(FxmlController.currentScene);
+    }
+
+    private void updateFileListContent(){
+        try{
+            for(File file : fileList){
+                FileInputStream fileInputStream = new FileInputStream(file);
+                byte[] data = new byte[(int) file.length()];
+                fileInputStream.read(data);
+                fileInputStream.close();
+                contentList.add(Base64.getEncoder().encodeToString(new String(data, "UTF-8").getBytes()));
+            }
+        } catch (FileNotFoundException fnfe){
+
+        } catch (UnsupportedEncodingException e) {
+
+        } catch (IOException e) {
+
+        }
+    }
+
+    private void sendFileToServer(String string){
+        if(contentList.size() > 0){
+            String[] strings = new String[contentList.size()];
+            versionModel = new VersionModel(UUID.fromString(appConfiguration.getProjectId()), contentList.toArray(strings), string);
+            Gson gson = new Gson();
+            String bodyForRequest = gson.toJson(versionModel);
+            try {
+                HttpResponse response = HttpRequestAPI.POSTMethod("http://localhost:9091/version/", bodyForRequest);
+
+                if(response.statusCode() != HttpURLConnection.HTTP_CREATED){
+                    Thread.sleep(5000);
+                    sendFileToServer(string);
+                }
+
+            } catch (IOException e) {
+
+            } catch (InterruptedException e) {
+
+            }
+        }
     }
 }

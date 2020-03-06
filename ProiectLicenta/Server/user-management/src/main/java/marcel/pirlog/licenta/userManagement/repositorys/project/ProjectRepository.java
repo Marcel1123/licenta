@@ -20,7 +20,7 @@ public class ProjectRepository implements IProjectRepository {
 
     @Override
     @Transactional
-    public void createProject(CreateProjectModel createProjectModel) {
+    public String createProject(CreateProjectModel createProjectModel) {
         ProjectEntity projectEntity = new ProjectEntity();
         projectEntity.setId(UUID.randomUUID());
         projectEntity.setCompilationStatus("unknown");
@@ -49,7 +49,8 @@ public class ProjectRepository implements IProjectRepository {
                     .setParameter(8, projectEntity.getGroupId())
                     .executeUpdate();
         } catch (TransactionRequiredException e){
-            e.printStackTrace();
+            return null;
         }
+        return projectEntity.getId().toString();
     }
 }

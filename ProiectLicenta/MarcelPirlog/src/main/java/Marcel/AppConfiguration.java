@@ -1,13 +1,10 @@
 package Marcel;
 
-import Marcel.entities.FileCode;
 import Marcel.entities.Student;
 import Marcel.models.MaterialModel;
 import Marcel.models.StudentGroupModel;
 
-import java.io.File;
 import java.nio.file.Path;
-import java.util.List;
 
 public final class AppConfiguration {
 
@@ -18,7 +15,10 @@ public final class AppConfiguration {
         this.student = null;
         this.studentGroupModels = null;
         this.materialModels = null;
+        this.projectId = null;
     }
+
+    private String projectId;
 
     private Path localProjectLocation;
 
@@ -66,5 +66,13 @@ public final class AppConfiguration {
 
     public void setStudentGroupModels(StudentGroupModel[] studentGroupModels) {
         this.studentGroupModels = studentGroupModels;
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
     }
 }

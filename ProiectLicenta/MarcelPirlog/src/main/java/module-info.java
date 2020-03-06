@@ -15,5 +15,6 @@ module Marcel {
     opens Marcel to javafx.fxml;
     opens Marcel.entities to com.google.gson;
     opens Marcel.models to com.google.gson;
+    opens Marcel.controllers.uicontrollers to com.google.gson;
     exports Marcel.myutil;
 }
