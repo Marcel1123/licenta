@@ -1,7 +1,7 @@
 package marcel.pirlog.licenta.userManagement.services.versions;
 
 import marcel.pirlog.licenta.userManagement.entities.SubVersionEntity;
-import marcel.pirlog.licenta.userManagement.models.VersionModel;
+//import marcel.pirlog.licenta.userManagement.models.VersionModel;
 import marcel.pirlog.licenta.userManagement.repositorys.versions.IVersionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ public class VersionService implements IVersionService {
     }
 
     @Override
-    public String addFinalVersion(VersionModel versionModel) {
-        return versionRepository.addFinalVersion(versionModel);
+    public String addFinalVersion(SubVersionEntity subVersionEntity) {
+        return versionRepository.addFinalVersion(subVersionEntity);
     }
 }

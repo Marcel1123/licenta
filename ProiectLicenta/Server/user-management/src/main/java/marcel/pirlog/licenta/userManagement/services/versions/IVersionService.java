@@ -1,7 +1,7 @@
 package marcel.pirlog.licenta.userManagement.services.versions;
 
 import marcel.pirlog.licenta.userManagement.entities.SubVersionEntity;
-import marcel.pirlog.licenta.userManagement.models.VersionModel;
+//import marcel.pirlog.licenta.userManagement.models.VersionModel;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -9,5 +9,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface IVersionService {
     String addVersion(SubVersionEntity versionModel);
-    String addFinalVersion(VersionModel versionModel);
+    String addFinalVersion(SubVersionEntity subVersionEntity);
 }
