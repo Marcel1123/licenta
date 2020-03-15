@@ -3,7 +3,7 @@ module Marcel {
     requires javafx.fxml;
     requires kotlin.stdlib;
     requires java.net.http;
-    requires com.google.gson;
+    requires com.google.gson;	    	
     requires json;
 
     exports Marcel;

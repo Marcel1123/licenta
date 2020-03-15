@@ -34,7 +34,7 @@ public class LoginScreenController {
     public void LoginFunction() throws IOException, InterruptedException {
         String credential = MapFromUserEntityToJson.returnCredentialsInJson(usernameField.getText(), passwordField.getText());
 
-        HttpResponse httpResponse = HttpRequestAPI.POSTMethod("http://localhost:9091/login", credential);
+        HttpResponse httpResponse = HttpRequestAPI.POSTMethod("http://localhost:9091/login/student", credential);
 
         if(httpResponse.statusCode() == HttpURLConnection.HTTP_CREATED){
             String response = (String) httpResponse.body();

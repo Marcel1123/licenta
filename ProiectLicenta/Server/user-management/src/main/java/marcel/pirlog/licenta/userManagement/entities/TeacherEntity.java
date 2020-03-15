@@ -26,6 +26,18 @@ public class TeacherEntity implements Serializable {
     @Column(name = "Id_cont")
     private UUID accountId;
 
+    public TeacherEntity(){
+
+    }
+
+    public TeacherEntity(UUID id, String firstName, String lastName, String email, UUID accountId){
+        this.Id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.accountId = accountId;
+    }
+
     public UUID getId() {
         return Id;
     }
