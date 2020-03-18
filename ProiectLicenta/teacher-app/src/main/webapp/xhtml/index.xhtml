@@ -8,9 +8,12 @@
         <meta charset="utf-8"/>
         <title>Login</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
         <h:outputStylesheet library="css" name="stylesheet.css"/>
+        <h:outputScript library="js" name="functions.js"/>
     </h:head>
     <h:body styleClass="fundal">
         <div class="valign-wrapper" id="first-page">
@@ -39,7 +42,7 @@
                                             <div class="col s12 input-field disable-select">
                                                 <p:password id="password" required="true"
                                                             requiredMessage="Password is required"
-                                                            feedback="true" inline="true"
+                                                            feedback="false" inline="true"
                                                             value="#{login.password}"/>
                                                 <h:outputLabel for="password">
                                                     Passwoord

@@ -32,4 +32,5 @@ public class GroupController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(studentGroupModels.toArray());
     }
+
 }

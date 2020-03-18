@@ -16,3 +16,29 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+.top-margin-10 {
+    margin-top: 10px;
+}
+
+.top-margin-20 {
+    margin-top: 20px;
+}
+
+.top-margin-50 {
+    margin-top: 50px;
+}
+
+.text-overflow-custom {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fundal-panel {
+    background-image: linear-gradient(0deg,#11998e,#38ef7d);
+}
+
+.padding-15 {
+    padding: 15px;
+}

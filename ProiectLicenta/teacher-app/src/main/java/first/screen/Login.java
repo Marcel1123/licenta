@@ -1,7 +1,9 @@
 package first.screen;
 
 import com.google.gson.Gson;
+import entity.TeacherEntity;
 import models.LoginModel;
+import org.primefaces.PrimeFaces;
 import utilitar.HttpRequestAPI;
 
 import javax.faces.bean.ManagedBean;
@@ -54,16 +56,16 @@ public class Login implements Serializable {
 
             if(response.statusCode() == HttpURLConnection.HTTP_CREATED){
                 String string = (String) response.body();
+                TeacherEntity teacherEntity = gson.fromJson(string, TeacherEntity.class);
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("teacher", string);
-                FacesContext.getCurrentInstance().getExternalContext().redirect(request.getContextPath() + "/xhtml/hello.xhtml");
-
+                FacesContext.getCurrentInstance().getExternalContext().redirect(request.getContextPath() + "/xhtml/groups.xhtml");
+                PrimeFaces.current().executeScript("save_session_data(teacher_id," + teacherEntity.getId().toString() +")");
             } else {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(request.getContextPath());
+                PrimeFaces.current().executeScript("alerta_error_user()");
             }
 
         } catch (IOException | InterruptedException e) {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(request.getContextPath());
+            PrimeFaces.current().executeScript("alerta_error_server()");
         }
-
     }
 }

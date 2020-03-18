@@ -3,7 +3,7 @@ package entity;
 import java.util.UUID;
 
 public class TeacherEntity {
-    private UUID Id;
+    private UUID id;
 
     private String firstName;
 
@@ -18,7 +18,7 @@ public class TeacherEntity {
     }
 
     public TeacherEntity(UUID id, String firstName, String lastName, String email, UUID accountId){
-        this.Id = id;
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -26,7 +26,7 @@ public class TeacherEntity {
     }
 
     public UUID getId() {
-        return Id;
+        return id;
     }
 
     public String getFirstName() {

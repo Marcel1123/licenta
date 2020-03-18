@@ -1,8 +1,8 @@
 module teacher.app {
     requires java.net.http;
     requires javax.faces.api;
-    requires com.google.gson;
     requires primefaces;
+    requires com.google.gson;
     requires servlet.api;
 
     exports first.screen;
