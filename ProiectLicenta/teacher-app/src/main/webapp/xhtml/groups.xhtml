@@ -21,16 +21,12 @@
     </h:head>
     <h:body styleClass="fundal">
         <div id="group-page">
-            <div>
-                <ui:insert name="slide-bar">
-                    <ui:include src="/templates/side-bar-menu.xhtml"/>
-                </ui:insert>
-            </div>
-            <div>
-                <ui:insert name="group-pannel">
-                    <ui:include src="/templates/group-pannel.xhtml"/>
-                </ui:insert>
-            </div>
+            <ui:insert name="slide-bar">
+                <ui:include src="/templates/side-bar-menu.xhtml"/>
+            </ui:insert>
+            <ui:insert name="group-pannel">
+                <ui:include src="/templates/group-pannel.xhtml"/>
+            </ui:insert>
         </div>
     </h:body>
     <script>

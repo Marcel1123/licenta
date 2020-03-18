@@ -43,7 +43,7 @@ public class Login implements Serializable {
         this.password = password;
     }
 
-    public void loginListener() throws IOException {
+    public String loginListener() throws IOException {
         Map<String,String> parameterValue = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         this.username = parameterValue.get("formular:username");
         this.password = parameterValue.get("formular:password");
@@ -58,14 +58,17 @@ public class Login implements Serializable {
                 String string = (String) response.body();
                 TeacherEntity teacherEntity = gson.fromJson(string, TeacherEntity.class);
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("teacher", string);
-                FacesContext.getCurrentInstance().getExternalContext().redirect(request.getContextPath() + "/xhtml/groups.xhtml");
+//                FacesContext.getCurrentInstance().getExternalContext().redirect(request.getContextPath() + "/xhtml/groups.xhtml");
                 PrimeFaces.current().executeScript("save_session_data(teacher_id," + teacherEntity.getId().toString() +")");
+                return "success";
             } else {
                 PrimeFaces.current().executeScript("alerta_error_user()");
+                return "failed";
             }
 
         } catch (IOException | InterruptedException e) {
             PrimeFaces.current().executeScript("alerta_error_server()");
+            return "failed";
         }
     }
 }
