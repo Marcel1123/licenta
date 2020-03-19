@@ -19,6 +19,7 @@ function alerta_error_user() {
 }
 
 function save_session_data(key, value) {
-    console.log(key, value);
     sessionStorage.setItem(key, value);
+    localStorage.setItem(key, value);
+    sessionStorage.setItem("it", 1);
 }

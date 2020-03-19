@@ -16,7 +16,7 @@ import java.net.HttpURLConnection;
 import java.net.http.HttpResponse;
 import java.util.Map;
 
-@ManagedBean(name = "login")
+@ManagedBean
 @RequestScoped
 public class Login implements Serializable {
 
@@ -43,7 +43,7 @@ public class Login implements Serializable {
         this.password = password;
     }
 
-    public String loginListener() throws IOException {
+    public String loginListener() {
         Map<String,String> parameterValue = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         this.username = parameterValue.get("formular:username");
         this.password = parameterValue.get("formular:password");
@@ -58,17 +58,22 @@ public class Login implements Serializable {
                 String string = (String) response.body();
                 TeacherEntity teacherEntity = gson.fromJson(string, TeacherEntity.class);
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("teacher", string);
-//                FacesContext.getCurrentInstance().getExternalContext().redirect(request.getContextPath() + "/xhtml/groups.xhtml");
-                PrimeFaces.current().executeScript("save_session_data(teacher_id," + teacherEntity.getId().toString() +")");
-                return "success";
+                PrimeFaces.current().executeScript("save_session_data(\"teacherId\",\"" + teacherEntity.getId().toString() +"\")");
+
+                HttpResponse httpResponse = HttpRequestAPI.GETMethodResponse("http://localhost:9091/group/teacher/", String.valueOf(teacherEntity.getId()));
+
+//                TeacherEntity[] teacherEntities = gson.fromJson(response.body().toString(), TeacherEntity[].class);
+                PrimeFaces.current().executeScript("save_session_data(\"teacherGroups\",\"" + httpResponse.body().toString().replace("\"","\\\"") + "\")");
+
+                return "groups";
             } else {
                 PrimeFaces.current().executeScript("alerta_error_user()");
-                return "failed";
+                return "index";
             }
 
         } catch (IOException | InterruptedException e) {
             PrimeFaces.current().executeScript("alerta_error_server()");
-            return "failed";
+            return "index";
         }
     }
 }

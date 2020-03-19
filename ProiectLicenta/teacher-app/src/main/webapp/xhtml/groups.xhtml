@@ -18,6 +18,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <h:outputStylesheet library="css" name="stylesheet.css"/>
         <h:outputScript library="js" name="functions.js"/>
+        <h:outputScript library="js" name="group_functions.js"/>
     </h:head>
     <h:body styleClass="fundal">
         <div id="group-page">
@@ -30,8 +31,10 @@
         </div>
     </h:body>
     <script>
+
         $(document).on("ready", function () {
             $('#group-page').css({'height' : window.innerHeight + 'px'});
         });
+
     </script>
 </html>

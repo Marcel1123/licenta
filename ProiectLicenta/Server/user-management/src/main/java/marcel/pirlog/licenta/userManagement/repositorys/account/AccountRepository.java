@@ -36,7 +36,9 @@ public class AccountRepository implements IAccountRepository {
                         " and c.password = :password", StudentEntity.class
         );
         try{
-            return accountEntityTypedQuery.setParameter("username", username).setParameter("password", password).getSingleResult();
+            return accountEntityTypedQuery.setParameter("username", username)
+                    .setParameter("password", password)
+                    .getSingleResult();
         } catch (NoResultException ne) {
             return null;
         }

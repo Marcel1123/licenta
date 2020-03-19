@@ -15,17 +15,11 @@
     </application>
 
     <navigation-rule>
-        <from-view-id>/faces/xhtml/index.xhtml</from-view-id>
+        <from-view-id>/faces/</from-view-id>
         <navigation-case>
             <from-action>#{login.loginListener}</from-action>
-            <from-outcome>#{msg.login_success}</from-outcome>
-            <to-view-id>/faces/xhtml/groups.xhtml</to-view-id>
+            <to-view-id>#{login.loginListener}</to-view-id>
         </navigation-case>
-<!--        <navigation-case>-->
-<!--            <from-action>#{login.loginListener}</from-action>-->
-<!--            <from-outcome>#{msg.login_failed}</from-outcome>-->
-<!--            <to-view-id>/faces/xhtml/index.xhtml</to-view-id>-->
-<!--        </navigation-case>-->
     </navigation-rule>
 
 

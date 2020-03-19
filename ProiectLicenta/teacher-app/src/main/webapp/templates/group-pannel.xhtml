@@ -16,10 +16,10 @@
                 <div class="popup-content">
                     <span class="popup-close-button"> &times; </span>
                     <h3>Enter group mame</h3>
-                    <h:inputText id="group-name" class="popup-content-input" required="true"
+                    <h:inputText id="group-name" class="popup-content-input" style="margin-bottom: 20px; font-size: 20px;" required="true"
                                  requiredMessage="Group name required"
                                 value="#{createGroup.groupName}"/>
-                    <h:commandLink value="Create" styleClass="btn btn-large" actionListener="#{createGroup.createGroup()}"/>
+                    <h:commandButton value="Create" styleClass="btn btn-large" action="#{createGroup.createGroup()}"/>
                 </div>
             </div>
             <div class="col-sm-12 disable-select">
@@ -29,12 +29,12 @@
                             Your Groups
                         </div>
                         <div class="panel-body">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="card">
-                                        <div class="card-body padding-15">
+                            <div id="card-row-line" class="row">
+                                <div id="card-row-component0" class="col-sm-3">
+                                    <div id="card0" class="card">
+                                        <div id="card-body0" class="card-body padding-15">
                                             <h5 class="card-title">Create group</h5>
-                                            <h:commandLink id="create-popup-btn" href="#" class="btn btn-primary">New group</h:commandLink>
+                                            <h:commandLink style="margin: 5px;" id="create-popup-btn" class="btn btn-primary">New group</h:commandLink>
                                         </div>
                                     </div>
                                 </div>
