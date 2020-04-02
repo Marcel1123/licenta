@@ -18,6 +18,24 @@ function alerta_error_user() {
     );
 }
 
+function create_error_message(title, detail) {
+    eval(
+        "Swal.fire(\n'" + title + "',\n'" + detail + "'\n, 'error')"
+    );
+}
+
+function create_success_message(title, detail) {
+    eval(
+        "Swal.fire(\n'" + title + "',\n'" + detail + "'\n, 'success')"
+    );
+}
+
+function create_warning_message(title, detail) {
+    eval(
+        "Swal.fire(\n'" + title + "',\n'" + detail + "'\n, 'warning')"
+    );
+}
+
 function save_session_data(key, value) {
     sessionStorage.setItem(key, value);
     localStorage.setItem(key, value);

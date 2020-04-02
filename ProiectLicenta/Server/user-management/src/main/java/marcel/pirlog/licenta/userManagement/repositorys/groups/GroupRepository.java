@@ -1,14 +1,18 @@
 package marcel.pirlog.licenta.userManagement.repositorys.groups;
 
 import marcel.pirlog.licenta.userManagement.entities.GroupEntity;
+import marcel.pirlog.licenta.userManagement.entities.GroupMemberEntity;
 import marcel.pirlog.licenta.userManagement.entities.StudentEntity;
 import marcel.pirlog.licenta.userManagement.entities.TeacherEntity;
+import marcel.pirlog.licenta.userManagement.models.AddMemberModel;
 import marcel.pirlog.licenta.userManagement.models.CreateGroupModel;
+import marcel.pirlog.licenta.userManagement.models.SpecialStudentModel;
 import marcel.pirlog.licenta.userManagement.models.StudentGroupModel;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
+import java.lang.reflect.Type;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -17,7 +21,6 @@ import java.util.UUID;
 public class GroupRepository implements IGroupRepository {
     @PersistenceContext
     private EntityManager entityManager;
-
 
     @Override
     public List<StudentGroupModel> findStudentGroups(UUID studentId) {
@@ -60,15 +63,36 @@ public class GroupRepository implements IGroupRepository {
                 "select t from TeacherEntity t" +
                         " where t.id = :id", TeacherEntity.class
         );
+
         try{
             TeacherEntity a = accountEntityTypedQuery
                     .setParameter("id", createGroupModel.getTeacherId())
                     .getSingleResult();
+            if(a == null){
+                return null;
+            }
         } catch (NoResultException ne) {
             return null;
         }
 
+        TypedQuery<GroupEntity> groupEntityTypedQuery = entityManager.createQuery(
+                "select g from GroupEntity g " +
+                        " where g.name = :name", GroupEntity.class
+        );
+
+        try{
+            GroupEntity groupEntity1 = groupEntityTypedQuery.setParameter("name", createGroupModel.getName())
+                    .getSingleResult();
+
+            if(groupEntity1 != null){
+                return null;
+            }
+        } catch (NoResultException e){
+
+        }
+
         try {
+
             entityManager.createNativeQuery("insert  into grupuri values (?,?,?)")
                     .setParameter(1, groupEntity.getId())
                     .setParameter(2, groupEntity.getCreatorId())
@@ -78,5 +102,144 @@ public class GroupRepository implements IGroupRepository {
             return null;
         }
         return groupEntity;
+    }
+
+    @Override
+    @Transactional
+    public String deleteGroup(String groupId) {
+        try{
+            entityManager.createNativeQuery(
+                    "delete from membri_grup where id_grup = ?")
+                    .setParameter(1, UUID.fromString(groupId))
+                    .executeUpdate();
+
+            entityManager.createNativeQuery(
+                    "delete from grupuri ge where ge.id = :id")
+                    .setParameter("id", UUID.fromString(groupId))
+                    .executeUpdate();
+        } catch (TransactionRequiredException e) {
+            return null;
+        }
+        return groupId;
+    }
+
+    @Override
+    @Transactional
+    public GroupEntity getGroupById(String id){
+        try{
+            TypedQuery<GroupEntity> groupEntityTypedQuery = entityManager.createQuery(
+                    "select gr from GroupEntity gr "+
+                            " where gr.id = :id", GroupEntity.class
+            );
+            return groupEntityTypedQuery.setParameter("id", UUID.fromString(id))
+                    .getSingleResult();
+        } catch (NoResultException e){
+            return null;
+        }
+    }
+
+    @Override
+    @Transactional
+    public GroupEntity getGroupByName(String name){
+        try{
+            TypedQuery<GroupEntity> groupEntityTypedQuery = entityManager.createQuery(
+                    "select gr from GroupEntity gr " +
+                            " where gr.name = :name", GroupEntity.class
+            );
+            return groupEntityTypedQuery.setParameter("name", name).getSingleResult();
+        } catch (NoResultException e){
+            return null;
+        }
+    }
+
+    @Override
+    public List<SpecialStudentModel> getGroupMember(UUID groupId) {
+        List<SpecialStudentModel> result = new LinkedList<>();
+        try {
+            TypedQuery<StudentEntity> groupEntityTypedQuery = entityManager.createQuery(
+                    "select ste from StudentEntity ste " +
+                            " join GroupMemberEntity gme on gme.memberId = ste.id " +
+                            " where gme.groupId = :goupId", StudentEntity.class
+            );
+            List<StudentEntity> studenti = groupEntityTypedQuery.setParameter("goupId", groupId)
+                    .getResultList();
+            for (StudentEntity se: studenti) result.add(mapToSSM(se));
+            return result;
+        } catch (NoResultException e){
+            return result;
+        }
+    }
+
+    @Override
+    public List<SpecialStudentModel> getAllAvailableStudents(UUID groupId) {
+        List<SpecialStudentModel> result = new LinkedList<>();
+        try {
+            TypedQuery<StudentEntity> groupEntityTypedQuery = entityManager.createQuery(
+                    "select ste from StudentEntity ste ", StudentEntity.class
+            );
+            List<StudentEntity> studenti = groupEntityTypedQuery.getResultList();
+
+            groupEntityTypedQuery = entityManager.createQuery(
+                    "select ste from StudentEntity ste join GroupMemberEntity gme on gme.memberId = ste.id where gme.groupId = :groupId", StudentEntity.class
+            );
+            List<StudentEntity> studenti1 = groupEntityTypedQuery.setParameter("groupId", groupId).getResultList();
+            studenti.removeAll(studenti1);
+            for (StudentEntity se: studenti) result.add(mapToSSM(se));
+            return result;
+        } catch (NoResultException e){
+            return result;
+        }
+    }
+
+    @Transactional
+    @Override
+    public AddMemberModel addMemberModel(AddMemberModel addMemberModel){
+        try{
+            TypedQuery<GroupMemberEntity> groupEntityTypedQuery = entityManager.createQuery(
+                    "select gr from GroupMemberEntity gr where gr.memberId = :stdId and gr.groupId = :grId", GroupMemberEntity.class
+            );
+            GroupMemberEntity g = groupEntityTypedQuery.setParameter("stdId", UUID.fromString(addMemberModel.getStudentId()))
+                    .setParameter("grId", UUID.fromString(addMemberModel.getGroupId()))
+                    .getSingleResult();
+            if(g == null){
+                throw new NoResultException();
+            } else {
+                return null;
+            }
+        } catch (NoResultException e){
+            try{
+                entityManager.createNativeQuery(
+                        "insert into membri_grup values (?, ?, ?)")
+                        .setParameter(1, UUID.randomUUID())
+                        .setParameter(2, UUID.fromString(addMemberModel.getGroupId()))
+                        .setParameter(3, UUID.fromString(addMemberModel.getStudentId()))
+                        .executeUpdate();
+                return addMemberModel;
+            } catch (TransactionRequiredException f){
+                return null;
+            }
+        }
+    }
+
+    @Transactional
+    @Override
+    public AddMemberModel removeMemberModel(AddMemberModel addMemberModel){
+        try {
+            entityManager.createNativeQuery(
+                    "delete from membri_grup where id_membru = ? and id_grup = ?")
+                    .setParameter(1, UUID.fromString(addMemberModel.getStudentId()))
+                    .setParameter(2, UUID.fromString(addMemberModel.getGroupId()))
+                    .executeUpdate();
+            return addMemberModel;
+        } catch (TransactionRequiredException e) {
+            return null;
+        }
+    }
+
+    private SpecialStudentModel mapToSSM(StudentEntity studentEntity){
+        return new SpecialStudentModel(studentEntity.getFirstName(),
+                studentEntity.getLastName(),
+                studentEntity.getYear(),
+                studentEntity.getId());
     }
 }

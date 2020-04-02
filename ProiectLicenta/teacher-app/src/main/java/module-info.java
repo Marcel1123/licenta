@@ -4,6 +4,7 @@ module teacher.app {
     requires primefaces;
     requires com.google.gson;
     requires servlet.api;
+    requires java.annotation;
 
     exports first.screen;
     exports entity;

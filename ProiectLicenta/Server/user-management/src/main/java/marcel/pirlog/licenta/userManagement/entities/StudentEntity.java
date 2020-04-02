@@ -2,6 +2,7 @@ package marcel.pirlog.licenta.userManagement.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -75,5 +76,22 @@ public class StudentEntity implements Serializable {
 
     public void setAccountId(UUID accountId) {
         this.accountId = accountId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StudentEntity that = (StudentEntity) o;
+        return year == that.year &&
+                Id.equals(that.Id) &&
+                firstName.equals(that.firstName) &&
+                lastName.equals(that.lastName) &&
+                accountId.equals(that.accountId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Id, firstName, lastName, year, accountId);
     }
 }

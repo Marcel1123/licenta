@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <meta charset="utf-8"/>
+        <title>Goups</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css"/>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <h:outputStylesheet library="css" name="stylesheet.css"/>
+        <h:outputScript library="js" name="functions.js"/>
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{editGroupMembers.build}"/>
+        </f:metadata>
+    </h:head>
+    <h:body styleClass="fundal">
+        <h:form id="formular-group">
+            <p:growl id="mesaje" showDetail="true"/>
+            <div class="col-sm-12 col-sm-offset-0 top-margin-50" style="float: left;">
+                <div class="col-sm-3">
+                    <h:commandButton value="Back to Home" styleClass="btn btn-primary" style="margin: 5px; color: white;" action="#{editGroupMembers.backToHome}"/>
+                </div>
+            </div>
+            <div id="group-manage" class="disable-select col-sm-12">
+                <div class="col-sm-6" style="margin-top: 50px;">
+                    <p:dataTable var="cStudent" value="#{editGroupMembers.groupStudents}" scrollable="true" scrollHeight="500"
+                                emptyMessage="No students found"
+                                 filteredValue="#{editGroupMembers.filteredGroupStudents}" widgetVar="groupStudents"
+                    >
+
+                        <p:column headerText="First Name" style="text-align: center;" styleClass="disable-select text-overflow-custom"
+                                  footerText="First Name"
+                                  filterBy="#{cStudent.firstName}" filterMatchMode="startsWith"
+                                  filterFunction="#{editGroupMembers.newGlobalFilterFirstName}"
+                        >
+                            <h:outputText value="#{cStudent.firstName}"/>
+                        </p:column>
+
+                        <p:column headerText="Last Name" style="text-align: center;" styleClass="disable-select text-overflow-custom"
+                                  footerText="Last Name"
+                                  filterBy="#{cStudent.lastName}" filterMatchMode="startsWith"
+                                  filterFunction="#{editGroupMembers.newGlobalFilterLastName}"
+                        >
+                            <h:outputText value="#{cStudent.lastName}"/>
+                        </p:column>
+
+                        <p:column headerText="Year" style="text-align: center;" styleClass="disable-select text-overflow-custom"
+                                  footerText="Year"
+                                  filterBy="#{cStudent.year}" filterMatchMode="equals"
+                                  filterFunction="#{editGroupMembers.newGlobalFilter}"
+                        >
+                            <f:facet name="filter">
+                                <p:spinner onchange="PF('groupStudents').filter()" styleClass="year-spinner custom-filter">
+                                    <f:converter converterId="javax.faces.Integer" />
+                                </p:spinner>
+                            </f:facet>
+                            <h:outputText value="#{cStudent.year}"/>
+                        </p:column>
+
+                        <p:column headerText="Action" footerText="Acotion">
+                            <h:commandButton value="Remove member" class="btn btn-danger" style="margin: 5px; color: white;" action="#{editGroupMembers.removeMember(cStudent)}"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+
+                <div class="col-sm-6" style="margin-top: 50px;">
+                    <p:dataTable var="student" value="#{editGroupMembers.availableStudents}"
+                                 scrollable="true" scrollHeight="500"
+                                emptyMessage="No students found"
+                                 filteredValue="#{editGroupMembers.filteredAvailableStudents}" widgetVar="availableStudents"
+                    >
+
+                        <p:column headerText="First Name" style="text-align: center;"
+                                  styleClass="disable-select text-overflow-custom" footerText="First Name"
+                                  filterBy="#{student.firstName}" filterMatchMode="startsWith"
+                                  filterFunction="#{editGroupMembers.globalFilterFunctionFirstName}"
+                        >
+                            <h:outputText value="#{student.firstName}"/>
+                        </p:column>
+
+                        <p:column headerText="Last Name" style="text-align: center;"
+                                  styleClass="disable-select text-overflow-custom" footerText="Last Name"
+                                  filterBy="#{student.lastName}" filterMatchMode="startsWith"
+                                  filterFunction="#{editGroupMembers.globalFilterFunctionLastName}"
+                        >
+                            <h:outputText value="#{student.lastName}"/>
+                        </p:column>
+
+                        <p:column headerText="Year" style="text-align: center;"
+                                  styleClass="disable-select text-overflow-custom" footerText="Year"
+                                    filterBy="#{student.year}" filterMatchMode="equals"
+                                  filterFunction="#{editGroupMembers.globalFilterFunctionYear}"
+                        >
+                            <f:facet name="filter">
+                                <p:spinner onchange="PF('availableStudents').filter()" styleClass="year-spinner custom-filter">
+                                    <f:converter converterId="javax.faces.Integer" />
+                                </p:spinner>
+                            </f:facet>
+                            <h:outputText value="#{student.year}"/>
+                        </p:column>
+
+                        <p:column headerText="Action" footerText="Acotion">
+                            <h:commandButton value="Add member" class="btn btn-success" style="margin: 5px; color: white;" action="#{editGroupMembers.addMember(student)}"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+
+</html>

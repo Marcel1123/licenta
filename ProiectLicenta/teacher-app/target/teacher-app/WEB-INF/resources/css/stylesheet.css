@@ -18,7 +18,9 @@
 }
 
 .top-margin-50 {
-    margin-top: 50px;
+    margin-top: 100px;
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
 }
 
 .text-overflow-custom {
@@ -88,3 +90,28 @@
     font-size: 20px;
 }
 
+.ui-datatable {
+    margin-bottom: 25px
+}
+
+.ui-datatable .ui-datatable-header {
+    text-align: right !important;
+}
+
+.ui-button-text-only .ui-button-text {
+    padding: 0.3em 0.4em;
+}
+
+.ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
+    visibility: hidden;
+}
+
+.ui-filter-column .ui-column-customfilter .custom-filter {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.year-spinner input {
+    width: 100%;
+    box-sizing: border-box;
+}

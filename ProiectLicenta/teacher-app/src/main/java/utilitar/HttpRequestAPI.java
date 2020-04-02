@@ -39,4 +39,14 @@ public class HttpRequestAPI {
                 .build();
         return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
+
+    public static HttpResponse DELETEMethod(String url, String argument1, String argument2) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url + argument1 + "/" + argument2))
+                .header("Accept", "application/json")
+                .DELETE()
+                .build();
+        return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
 }

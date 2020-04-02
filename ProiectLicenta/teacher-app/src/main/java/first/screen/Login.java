@@ -1,19 +1,18 @@
 package first.screen;
 
 import com.google.gson.Gson;
-import entity.TeacherEntity;
 import models.LoginModel;
 import org.primefaces.PrimeFaces;
 import utilitar.HttpRequestAPI;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.http.HttpResponse;
+import java.util.Iterator;
 import java.util.Map;
 
 @ManagedBean
@@ -47,8 +46,6 @@ public class Login implements Serializable {
         Map<String,String> parameterValue = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         this.username = parameterValue.get("formular:username");
         this.password = parameterValue.get("formular:password");
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-
         Gson gson = new Gson();
 
         try {
@@ -56,21 +53,12 @@ public class Login implements Serializable {
 
             if(response.statusCode() == HttpURLConnection.HTTP_CREATED){
                 String string = (String) response.body();
-                TeacherEntity teacherEntity = gson.fromJson(string, TeacherEntity.class);
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("teacher", string);
-                PrimeFaces.current().executeScript("save_session_data(\"teacherId\",\"" + teacherEntity.getId().toString() +"\")");
-
-                HttpResponse httpResponse = HttpRequestAPI.GETMethodResponse("http://localhost:9091/group/teacher/", String.valueOf(teacherEntity.getId()));
-
-//                TeacherEntity[] teacherEntities = gson.fromJson(response.body().toString(), TeacherEntity[].class);
-                PrimeFaces.current().executeScript("save_session_data(\"teacherGroups\",\"" + httpResponse.body().toString().replace("\"","\\\"") + "\")");
-
                 return "groups";
             } else {
                 PrimeFaces.current().executeScript("alerta_error_user()");
                 return "index";
             }
-
         } catch (IOException | InterruptedException e) {
             PrimeFaces.current().executeScript("alerta_error_server()");
             return "index";

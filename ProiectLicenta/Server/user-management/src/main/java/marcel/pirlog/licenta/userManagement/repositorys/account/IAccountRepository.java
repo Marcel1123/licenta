@@ -12,4 +12,5 @@ public interface IAccountRepository  {
     List<AccountEntity> listAccounts();
     StudentEntity findByCredential(String username, String password);
     TeacherEntity findTeacher(String username, String password);
+
 }
