@@ -49,11 +49,11 @@
                         </p:column>
 
                         <p:column headerText="Manage Group" style="text-align: center;" styleClass="disable-select text-overflow-custom">
-                            <h:commandButton value="Edit Group" class="btn btn-primary" style="margin: 5px; color: white;"/>
+                            <h:commandButton value="Edit Group" class="btn btn-primary" style="margin: 5px; color: white;" action="#{groupManagement.groupInformation(group)}"/>
                         </p:column>
 
                         <p:column headerText="Group Content" style="text-align: center;" styleClass="disable-select text-overflow-custom">
-                            <h:commandButton value="View projects" class="btn btn-success" style="margin: 5px; color: white;" action="#{groupManagement.groupInformation(group)}"/>
+                            <h:commandButton value="View projects" class="btn btn-success" style="margin: 5px; color: white;" action="#{groupManagement.groupProject(group)}"/>
                         </p:column>
 
                         <p:column headerText="Remove Group" style="text-align: center;" styleClass="disable-select text-overflow-custom">

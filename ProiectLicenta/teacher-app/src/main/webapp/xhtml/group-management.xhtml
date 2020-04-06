@@ -29,35 +29,24 @@
                 <div class="col-sm-6" style="margin-top: 50px;">
                     <p:dataTable var="cStudent" value="#{editGroupMembers.groupStudents}" scrollable="true" scrollHeight="500"
                                 emptyMessage="No students found"
-                                 filteredValue="#{editGroupMembers.filteredGroupStudents}" widgetVar="groupStudents"
                     >
 
                         <p:column headerText="First Name" style="text-align: center;" styleClass="disable-select text-overflow-custom"
                                   footerText="First Name"
-                                  filterBy="#{cStudent.firstName}" filterMatchMode="startsWith"
-                                  filterFunction="#{editGroupMembers.newGlobalFilterFirstName}"
                         >
+
                             <h:outputText value="#{cStudent.firstName}"/>
                         </p:column>
 
                         <p:column headerText="Last Name" style="text-align: center;" styleClass="disable-select text-overflow-custom"
                                   footerText="Last Name"
-                                  filterBy="#{cStudent.lastName}" filterMatchMode="startsWith"
-                                  filterFunction="#{editGroupMembers.newGlobalFilterLastName}"
                         >
                             <h:outputText value="#{cStudent.lastName}"/>
                         </p:column>
 
                         <p:column headerText="Year" style="text-align: center;" styleClass="disable-select text-overflow-custom"
                                   footerText="Year"
-                                  filterBy="#{cStudent.year}" filterMatchMode="equals"
-                                  filterFunction="#{editGroupMembers.newGlobalFilter}"
                         >
-                            <f:facet name="filter">
-                                <p:spinner onchange="PF('groupStudents').filter()" styleClass="year-spinner custom-filter">
-                                    <f:converter converterId="javax.faces.Integer" />
-                                </p:spinner>
-                            </f:facet>
                             <h:outputText value="#{cStudent.year}"/>
                         </p:column>
 
@@ -68,38 +57,25 @@
                 </div>
 
                 <div class="col-sm-6" style="margin-top: 50px;">
-                    <p:dataTable var="student" value="#{editGroupMembers.availableStudents}"
-                                 scrollable="true" scrollHeight="500"
+                    <p:dataTable var="student" value="#{editGroupMembers.availableStudents}" scrollable="true" scrollHeight="500"
                                 emptyMessage="No students found"
-                                 filteredValue="#{editGroupMembers.filteredAvailableStudents}" widgetVar="availableStudents"
                     >
 
                         <p:column headerText="First Name" style="text-align: center;"
                                   styleClass="disable-select text-overflow-custom" footerText="First Name"
-                                  filterBy="#{student.firstName}" filterMatchMode="startsWith"
-                                  filterFunction="#{editGroupMembers.globalFilterFunctionFirstName}"
                         >
                             <h:outputText value="#{student.firstName}"/>
                         </p:column>
 
                         <p:column headerText="Last Name" style="text-align: center;"
                                   styleClass="disable-select text-overflow-custom" footerText="Last Name"
-                                  filterBy="#{student.lastName}" filterMatchMode="startsWith"
-                                  filterFunction="#{editGroupMembers.globalFilterFunctionLastName}"
                         >
                             <h:outputText value="#{student.lastName}"/>
                         </p:column>
 
                         <p:column headerText="Year" style="text-align: center;"
                                   styleClass="disable-select text-overflow-custom" footerText="Year"
-                                    filterBy="#{student.year}" filterMatchMode="equals"
-                                  filterFunction="#{editGroupMembers.globalFilterFunctionYear}"
                         >
-                            <f:facet name="filter">
-                                <p:spinner onchange="PF('availableStudents').filter()" styleClass="year-spinner custom-filter">
-                                    <f:converter converterId="javax.faces.Integer" />
-                                </p:spinner>
-                            </f:facet>
                             <h:outputText value="#{student.year}"/>
                         </p:column>
 

@@ -69,7 +69,7 @@ public class EditGroupMembers {
     public void build(){
     }
 
-    public boolean globalFilterFunctionYear(Object value, Object filter, Locale locale) {
+    /*public boolean globalFilterFunctionYear(Object value, Object filter, Locale locale) {
         String filterText = (filter == null) ? null : filter.toString().trim();
         if (filterText == null || filterText.equals("")) {
             return true;
@@ -115,7 +115,7 @@ public class EditGroupMembers {
             return true;
         }
         return ((String)value.toString()).startsWith(filterText);
-    }
+    }*/
 
 
     public void addMember(SpecialStudentModel specialStudentModel1){
@@ -131,8 +131,8 @@ public class EditGroupMembers {
             }
         } catch (IOException | InterruptedException e){
         }
-//        this.filteredAvailableStudents = this.availableStudents;
-//        this.filteredGroupStudents = this.groupStudents;
+        this.filteredAvailableStudents = this.availableStudents;
+        this.filteredGroupStudents = this.groupStudents;
     }
 
     public void removeMember(SpecialStudentModel specialStudentModel){
@@ -148,8 +148,8 @@ public class EditGroupMembers {
             }
         } catch (IOException | InterruptedException e){
         }
-//        this.filteredAvailableStudents = this.availableStudents;
-//        this.filteredGroupStudents = this.groupStudents;
+        this.filteredAvailableStudents = this.availableStudents;
+        this.filteredGroupStudents = this.groupStudents;
     }
 
     public String backToHome(){

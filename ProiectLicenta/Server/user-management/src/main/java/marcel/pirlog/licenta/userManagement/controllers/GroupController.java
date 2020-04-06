@@ -1,8 +1,10 @@
 package marcel.pirlog.licenta.userManagement.controllers;
 
+import ch.qos.logback.core.pattern.util.RegularEscapeUtil;
 import marcel.pirlog.licenta.userManagement.entities.GroupEntity;
 import marcel.pirlog.licenta.userManagement.models.*;
 import marcel.pirlog.licenta.userManagement.services.groups.IGroupService;
+import marcel.pirlog.licenta.userManagement.services.student.IStudentService;
 import marcel.pirlog.licenta.userManagement.utils.RequestPath;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,12 @@ import java.util.UUID;
 @RequestMapping(RequestPath.GROUP_ROUT)
 public class GroupController {
     IGroupService groupService;
+    IStudentService studentService;
 
     @Autowired
-    public GroupController(IGroupService groupService){
+    public GroupController(IGroupService groupService, IStudentService studentService){
         this.groupService = groupService;
+        this.studentService = studentService;
     }
 
     @RequestMapping(value = RequestPath.GROUP_STUDENT_GET, method = RequestMethod.GET)

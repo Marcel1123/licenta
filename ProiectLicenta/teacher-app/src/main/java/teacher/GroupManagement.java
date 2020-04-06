@@ -43,6 +43,11 @@ public class GroupManagement {
             this.groupEntities.addAll(Arrays.asList(groupEntities));
         } catch (IOException e) {
         } catch (InterruptedException ef) {
+        } catch (NullPointerException nep){
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/teacher-app/faces/xhtml/index.xhtml");
+            } catch (IOException e) {
+            }
         }
     }
 
@@ -95,6 +100,21 @@ public class GroupManagement {
             } else {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("target_group", response.body().toString());
                 return "group-management";
+            }
+        } catch (IOException | InterruptedException e) {
+            return "groups";
+        }
+    }
+
+    public String groupProject(GroupEntity groupEntity){
+        try {
+            HttpResponse response = HttpRequestAPI.GETMethodResponse("http://localhost:9091/group/name/", groupEntity.getName());
+            GroupEntity groupEntity1 = gson.fromJson(response.body().toString(), GroupEntity.class);
+            if(!groupEntity.getId().equals(groupEntity1.getId()) || !this.teacher.getId().toString().equals(groupEntity1.getCreatorId())){
+                return "groups";
+            } else {
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("target_group", response.body().toString());
+                return "projects";
             }
         } catch (IOException | InterruptedException e) {
             return "groups";

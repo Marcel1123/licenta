@@ -1,10 +1,7 @@
 package marcel.pirlog.licenta.userManagement.services.groups;
 
 import marcel.pirlog.licenta.userManagement.entities.GroupEntity;
-import marcel.pirlog.licenta.userManagement.models.AddMemberModel;
-import marcel.pirlog.licenta.userManagement.models.CreateGroupModel;
-import marcel.pirlog.licenta.userManagement.models.SpecialStudentModel;
-import marcel.pirlog.licenta.userManagement.models.StudentGroupModel;
+import marcel.pirlog.licenta.userManagement.models.*;
 import marcel.pirlog.licenta.userManagement.repositorys.groups.IGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -69,4 +66,6 @@ public class GroupService implements IGroupService {
     public AddMemberModel removeMemberModel(AddMemberModel addMemberModel){
         return groupRepository.removeMemberModel(addMemberModel);
     }
+
+
 }

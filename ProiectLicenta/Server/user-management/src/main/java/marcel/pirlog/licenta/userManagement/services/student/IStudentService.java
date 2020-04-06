@@ -8,5 +8,8 @@ import java.util.UUID;
 @Service
 public interface IStudentService {
     StudentEntity findById(UUID id);
+
     StudentEntity findByAccountId(UUID accountId);
+
+
 }

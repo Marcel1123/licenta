@@ -45,7 +45,6 @@ public class VersionRepository implements IVersionRepository {
         return subVersionEntity.getVersionId().toString();
     }
 
-
     @Override
     @Transactional
     public String addFinalVersion(VersionModel versionModel) {
@@ -54,9 +53,9 @@ public class VersionRepository implements IVersionRepository {
             return null;
         }
         try{
-            entityManager.createNativeQuery("update ProjectEntity p set p.isFinal = ? where p.id = ?")
-                    .setParameter(1, id)
-                    .setParameter(2, versionModel.getProjectId());
+            entityManager.createNativeQuery("update proiect set finalizat = 'true' where id = ?")
+                    .setParameter(1, versionModel.getProjectId())
+                    .executeUpdate();
         } catch (TransactionalException e){
             return null;
         }

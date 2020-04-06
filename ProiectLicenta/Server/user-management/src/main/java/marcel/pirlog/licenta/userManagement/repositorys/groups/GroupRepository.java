@@ -1,13 +1,7 @@
 package marcel.pirlog.licenta.userManagement.repositorys.groups;
 
-import marcel.pirlog.licenta.userManagement.entities.GroupEntity;
-import marcel.pirlog.licenta.userManagement.entities.GroupMemberEntity;
-import marcel.pirlog.licenta.userManagement.entities.StudentEntity;
-import marcel.pirlog.licenta.userManagement.entities.TeacherEntity;
-import marcel.pirlog.licenta.userManagement.models.AddMemberModel;
-import marcel.pirlog.licenta.userManagement.models.CreateGroupModel;
-import marcel.pirlog.licenta.userManagement.models.SpecialStudentModel;
-import marcel.pirlog.licenta.userManagement.models.StudentGroupModel;
+import marcel.pirlog.licenta.userManagement.entities.*;
+import marcel.pirlog.licenta.userManagement.models.*;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -16,6 +10,9 @@ import java.lang.reflect.Type;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 @Repository
 public class GroupRepository implements IGroupRepository {
@@ -88,7 +85,6 @@ public class GroupRepository implements IGroupRepository {
                 return null;
             }
         } catch (NoResultException e){
-
         }
 
         try {
@@ -149,24 +145,6 @@ public class GroupRepository implements IGroupRepository {
             return groupEntityTypedQuery.setParameter("name", name).getSingleResult();
         } catch (NoResultException e){
             return null;
-        }
-    }
-
-    @Override
-    public List<SpecialStudentModel> getGroupMember(UUID groupId) {
-        List<SpecialStudentModel> result = new LinkedList<>();
-        try {
-            TypedQuery<StudentEntity> groupEntityTypedQuery = entityManager.createQuery(
-                    "select ste from StudentEntity ste " +
-                            " join GroupMemberEntity gme on gme.memberId = ste.id " +
-                            " where gme.groupId = :goupId", StudentEntity.class
-            );
-            List<StudentEntity> studenti = groupEntityTypedQuery.setParameter("goupId", groupId)
-                    .getResultList();
-            for (StudentEntity se: studenti) result.add(mapToSSM(se));
-            return result;
-        } catch (NoResultException e){
-            return result;
         }
     }
 
@@ -233,6 +211,24 @@ public class GroupRepository implements IGroupRepository {
             return addMemberModel;
         } catch (TransactionRequiredException e) {
             return null;
+        }
+    }
+
+    @Override
+    public List<SpecialStudentModel> getGroupMember(UUID groupId) {
+        List<SpecialStudentModel> result = new LinkedList<>();
+        try {
+            TypedQuery<StudentEntity> groupEntityTypedQuery = entityManager.createQuery(
+                    "select ste from StudentEntity ste " +
+                            " join GroupMemberEntity gme on gme.memberId = ste.id " +
+                            " where gme.groupId = :goupId", StudentEntity.class
+            );
+            List<StudentEntity> studenti = groupEntityTypedQuery.setParameter("goupId", groupId)
+                    .getResultList();
+            for (StudentEntity se: studenti) result.add(mapToSSM(se));
+            return result;
+        } catch (NoResultException e){
+            return result;
         }
     }
 

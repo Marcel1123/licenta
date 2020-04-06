@@ -5,10 +5,10 @@ import marcel.pirlog.licenta.userManagement.models.CreateProjectModel;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TransactionRequiredException;
+import javax.persistence.*;
 import javax.transaction.Transactional;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -52,5 +52,19 @@ public class ProjectRepository implements IProjectRepository {
             return null;
         }
         return projectEntity.getId().toString();
+    }
+
+    @Override
+    public List<ProjectEntity> getAllGroupProject(UUID id) {
+        List<ProjectEntity> result = new LinkedList<>();
+        try {
+            TypedQuery<ProjectEntity> general = entityManager.createQuery(
+                    "select p from ProjectEntity p where p.groupId = :id", ProjectEntity.class
+            );
+            result = general.setParameter("id", id).getResultList();
+            return result;
+        } catch (NoResultException e){
+            return result;
+        }
     }
 }

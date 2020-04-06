@@ -23,14 +23,14 @@ public class VersionController {
     public ResponseEntity addVersion(@RequestBody VersionModel versionModel){
         if(versionModel.getIsFinal().equals("false")){
             String result = iVersionService.addVersion(versionModel);
-            if(result == null || result.isEmpty() || UUID.fromString(result).equals(UUID.fromString(""))){
+            if(result == null || result.isEmpty() || UUID.fromString(result).equals(UUID.fromString("00000000-0000-0000-0000-000000000000"))){
                 return VersionController.BAD_REQUEST_RESPONSE;
             } else {
                 return ResponseEntity.status(HttpStatus.CREATED).body(result);
             }
         } else if(versionModel.getIsFinal().equals("true")) {
             String result = iVersionService.addFinalVersion(versionModel);
-            if(result == null || result.isEmpty() || UUID.fromString(result).equals(UUID.fromString(""))){
+            if(result == null || result.isEmpty() || UUID.fromString(result).equals(UUID.fromString("00000000-0000-0000-0000-000000000000"))){
                 return VersionController.BAD_REQUEST_RESPONSE;
             } else {
                 return ResponseEntity.status(HttpStatus.CREATED).body(result);

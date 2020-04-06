@@ -122,33 +122,38 @@ public class CreateProjectController implements Initializable {
     }
 
     private void createProjectModelForClass() throws IOException, InterruptedException {
-        List<MaterialModel> materialId = Arrays.stream(App.getAppConfiguration().getMaterialModels())
-                .filter(p -> p.getName().equals(materialName.getValue()))
-                .collect(Collectors.toList());
+        try{
+            List<MaterialModel> materialId = Arrays.stream(App.getAppConfiguration().getMaterialModels())
+                    .filter(p -> p.getName().equals(materialName.getValue()))
+                    .collect(Collectors.toList());
 
-        List<StudentGroupModel> studentGroupModels = Arrays.stream(appConfiguration.getStudentGroupModels())
-                .filter(p -> p.getGroupName().equals(groupChoiceBox.getValue()))
-                .collect(Collectors.toList());
+            List<StudentGroupModel> studentGroupModels = Arrays.stream(appConfiguration.getStudentGroupModels())
+                    .filter(p -> p.getGroupName().equals(groupChoiceBox.getValue()))
+                    .collect(Collectors.toList());
 
-        CreateProjectModel createProjectModel = new CreateProjectModel(materialId.get(0).getId(),
-                                                                        appConfiguration.getStudent().getId().toString(),
-                                                                        projectName.getText(),
-                                                                        studentGroupModels.get(0).getGroupId().toString());
+            CreateProjectModel createProjectModel = new CreateProjectModel(materialId.get(0).getId(),
+                    appConfiguration.getStudent().getId().toString(),
+                    projectName.getText(),
+                    studentGroupModels.get(0).getGroupId().toString());
 
-        materialId = null;
-        studentGroupModels = null;
+            materialId = null;
+            studentGroupModels = null;
 
-        HttpResponse response = HttpRequestAPI.POSTMethod("http://localhost:9091/project/", MapFromUserEntityToJson.returnCreateProjectInJson(createProjectModel));
+            HttpResponse response = HttpRequestAPI.POSTMethod("http://localhost:9091/project/", MapFromUserEntityToJson.returnCreateProjectInJson(createProjectModel));
 
-        if(response.statusCode() == HttpURLConnection.HTTP_CREATED){
-            responseMessage.setVisible(false);
-            appConfiguration.setLocalProjectLocation(directoryPath.getText());
+            if(response.statusCode() == HttpURLConnection.HTTP_CREATED){
+                responseMessage.setVisible(false);
+                appConfiguration.setLocalProjectLocation(directoryPath.getText());
 
-            appConfiguration.setProjectId(response.body().toString());
+                appConfiguration.setProjectId(response.body().toString());
 
-            FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/ShowAllCodeFileFromPath"));
-            App.stage.setScene(FxmlController.currentScene);
+                FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/ShowAllCodeFileFromPath"));
+                App.stage.setScene(FxmlController.currentScene);
 
+            }
+        } catch (NullPointerException | IndexOutOfBoundsException npe){
+            createMaterial();
+            materialName.setVisible(true);
         }
     }
 
