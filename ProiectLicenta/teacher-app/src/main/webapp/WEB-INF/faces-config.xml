@@ -22,5 +22,13 @@
         </navigation-case>
     </navigation-rule>
 
+    <navigation-rule>
+        <from-view-id>/faces/</from-view-id>
+        <navigation-case>
+            <from-action>#{projectManagement.goToVersions}</from-action>
+            <to-view-id>#{projectManagement.goToVersions}</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
 
 </faces-config>

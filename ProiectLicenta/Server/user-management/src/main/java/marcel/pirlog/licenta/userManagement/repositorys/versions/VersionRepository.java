@@ -6,10 +6,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.transaction.TransactionalException;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -60,5 +64,21 @@ public class VersionRepository implements IVersionRepository {
             return null;
         }
         return id;
+    }
+
+    @Override
+    public List<SubVersionEntity> getProject(String id){
+        List<SubVersionEntity> result = new LinkedList<>();
+        TypedQuery<SubVersionEntity> query = entityManager.createQuery(
+                "select s from SubVersionEntity s where s.projectId = :id",
+                SubVersionEntity.class
+        );
+        try {
+            result = query.setParameter("id", UUID.fromString(id))
+                        .getResultList();
+        } catch (NoResultException ne){
+            return result;
+        }
+        return result;
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Component
 public class VersionService implements IVersionService {
@@ -22,5 +24,9 @@ public class VersionService implements IVersionService {
     @Override
     public String addFinalVersion(VersionModel subVersionEntity) {
         return versionRepository.addFinalVersion(subVersionEntity);
+    }
+
+    public List<SubVersionEntity> getProject(String id){
+        return versionRepository.getProject(id);
     }
 }

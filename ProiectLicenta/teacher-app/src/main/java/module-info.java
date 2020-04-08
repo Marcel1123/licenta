@@ -6,10 +6,17 @@ module teacher.app {
     requires servlet.api;
     requires java.annotation;
 
-    exports first.screen;
+    exports project;
+    exports screen;
+    exports teacher;
+    exports version;
     exports entity;
     exports session;
     exports utilitar;
 
-    opens first.screen to java.net.http;
+    opens screen to java.net.http;
+    opens project to java.net.http;
+    opens teacher to java.net.http;
+    opens version to java.net.http;
+
 }

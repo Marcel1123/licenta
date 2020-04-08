@@ -13,7 +13,6 @@ import javax.faces.event.ComponentSystemEvent;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.http.HttpResponse;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -36,10 +35,15 @@ public class ProjectManagement {
 
             if (response.statusCode() == HttpURLConnection.HTTP_OK){
                 GeneralProjectInformationModel[] p = this.gson.fromJson(response.body().toString(), GeneralProjectInformationModel[].class);
-                this.projects.addAll(Arrays.asList(p));
+                for ( GeneralProjectInformationModel g : p){
+                    if(g.getIsFinal().equals("false")){
+                        g.setCompilationStatus("impossible");
+                        g.setStatusPlagiere("impossible");
+                    }
+                    this.projects.add(g);
+                }
             }
-        } catch (IOException | InterruptedException e){
-        } catch (NullPointerException npe){
+        } catch (IOException | InterruptedException | NullPointerException npe){
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/teacher-app/faces/xhtml/index.xhtml");
             } catch (IOException e) {

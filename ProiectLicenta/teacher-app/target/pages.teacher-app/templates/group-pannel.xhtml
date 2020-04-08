@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xml:lang="en"
+      lang="en">
+
+    <h:body>
+        <ui:component>
+            <div id="create-popup" class="popup-general">
+                <div class="popup-content">
+                    <span class="popup-close-button"> &times; </span>
+                    <h3>Enter group mame</h3>
+                    <h:inputText id="group-name" class="popup-content-input" style="margin-bottom: 20px; font-size: 20px;" required="true"
+                                 requiredMessage="Group name required"
+                                value="#{createGroup.groupName}"/>
+                    <h:commandButton value="Create" styleClass="btn btn-large" action="#{createGroup.createGroup()}"/>
+                </div>
+            </div>
+            <div class="col-sm-12 disable-select">
+                <div class="panel-group top-margin-50">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading groups-title-custom text-overflow-custom fundal-panel">
+                            Your Groups
+                        </div>
+                        <div class="panel-body">
+                            <div id="card-row-line" class="row">
+                                <div id="card-row-component0" class="col-sm-3">
+                                    <div id="card0" class="card">
+                                        <div id="card-body0" class="card-body padding-15">
+                                            <h5 class="card-title">Create group</h5>
+                                            <h:commandLink style="margin: 5px;" id="create-popup-btn" class="btn btn-primary">New group</h:commandLink>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                var popup = document.getElementById("create-popup");
+                var close = document.getElementById("create-popup-btn");
+                var span = document.getElementsByClassName("popup-close-button")[0];
+
+                close.onclick = function () {
+                    popup.style.display = "block";
+                };
+
+                span.onclick = function () {
+                    popup.style.display = "none";
+                };
+
+                window.onclick = function (event) {
+                    if(event.target == popup) {
+                        popup.style.display = "none";
+                    }
+                }
+            </script>
+        </ui:component>
+    </h:body>
+</html>

@@ -7,13 +7,13 @@ import models.CreateGroupModel;
 import models.DeleteGroupModel;
 import org.primefaces.PrimeFaces;
 import utilitar.HttpRequestAPI;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import java.io.IOException;
-
 import java.net.HttpURLConnection;
 import java.net.http.HttpResponse;
 import java.util.*;

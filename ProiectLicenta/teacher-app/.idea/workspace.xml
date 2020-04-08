@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="teacher-app:war" />
+      <artifact name="teacher-app" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
@@ -26,6 +26,10 @@
     <expand />
     <select />
   </component>
+  <component name="ErrorTreeViewConfiguration">
+    <option name="autoscrollToSource" value="true" />
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="true" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -33,8 +37,8 @@
         <option value="module-info" />
         <option value="JavaScript File" />
         <option value="CSS File" />
-        <option value="Class" />
         <option value="XHTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -44,8 +48,8 @@
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
-    <option name="FILTER_INFO" value="true" />
-    <option name="FILTER_DEBUG" value="true" />
+    <option name="FILTER_INFO" value="false" />
+    <option name="FILTER_DEBUG" value="false" />
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="MavenImportPreferences">
@@ -69,12 +73,15 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/templates" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\parlo\Documents\GitHub\licenta\ProiectLicenta\teacher-app\src\main\webapp\templates" />
       <recent name="C:\Users\parlo\Documents\GitHub\licenta\ProiectLicenta\teacher-app\src\main\webapp\WEB-INF" />
@@ -84,7 +91,14 @@
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
+      <command value="mvn compile" />
+      <command value="mvn compile install" />
+      <command value="mvn -P jboss clean install" />
       <command value="mvn install" />
+      <command value="mvn -X compile" />
+      <command value="mvn clean" />
+      <command value="mvn --builder" />
+      <command value="mvn deploy" />
     </option>
   </component>
   <component name="RunManager">
@@ -92,7 +106,7 @@
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/teacher-app/" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="teacher-app:war">
+        <artifact name="teacher-app">
           <settings />
         </artifact>
       </deployment>
@@ -156,7 +170,7 @@
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="teacher-app:war" />
+          <artifact name="teacher-app" />
         </option>
       </method>
     </configuration>
@@ -175,7 +189,7 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="GlassFish Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="Finished" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Running" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
             </expand>
             <select />
@@ -219,6 +233,10 @@
       <workItem from="1585889766495" duration="23129000" />
       <workItem from="1586067786468" duration="3995000" />
       <workItem from="1586089535227" duration="10554000" />
+      <workItem from="1586188216597" duration="13167000" />
+      <workItem from="1586274725094" duration="6243000" />
+      <workItem from="1586326186257" duration="592000" />
+      <workItem from="1586327110488" duration="14290000" />
     </task>
     <servers />
   </component>
@@ -242,14 +260,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="179" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1584263238897" />
-    <state x="414" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584264343271">
+    <state x="414" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586341239623">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584264343271" />
-    <state x="765" y="222" key="#com.intellij.ide.util.MemberChooser" timestamp="1586106129076">
+    <state x="414" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586341239623" />
+    <state x="765" y="222" key="#com.intellij.ide.util.MemberChooser" timestamp="1586269303657">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="222" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1586106129076" />
+    <state x="765" y="222" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1586269303657" />
+    <state x="756" y="427" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1586340154237">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="756" y="427" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1920.1040@0.0.1920.1040" timestamp="1586340154237" />
     <state x="338" y="83" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585381308496">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -258,62 +280,66 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="338" y="277" key="#xdebugger.XInspectDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584879712756" />
-    <state width="1082" height="160" key="GridCell.Tab.0.bottom" timestamp="1586112281760">
+    <state width="1666" height="318" key="GridCell.Tab.0.bottom" timestamp="1586350618972">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1082" height="160" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586112281760" />
-    <state width="1082" height="160" key="GridCell.Tab.0.center" timestamp="1586112281760">
+    <state width="1666" height="318" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586350618972" />
+    <state width="1666" height="318" key="GridCell.Tab.0.center" timestamp="1586350618972">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1082" height="160" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586112281760" />
-    <state width="1082" height="160" key="GridCell.Tab.0.left" timestamp="1586112281760">
+    <state width="1666" height="318" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586350618972" />
+    <state width="1666" height="318" key="GridCell.Tab.0.left" timestamp="1586350618972">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1082" height="160" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586112281760" />
-    <state width="1082" height="160" key="GridCell.Tab.0.right" timestamp="1586112281760">
+    <state width="1666" height="318" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586350618972" />
+    <state width="1666" height="318" key="GridCell.Tab.0.right" timestamp="1586350618972">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1082" height="160" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586112281760" />
-    <state width="1082" height="160" key="GridCell.Tab.1.bottom" timestamp="1586112281761">
+    <state width="1666" height="318" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586350618972" />
+    <state width="1666" height="318" key="GridCell.Tab.1.bottom" timestamp="1586350618973">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1082" height="160" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586112281761" />
-    <state width="1082" height="160" key="GridCell.Tab.1.center" timestamp="1586112281761">
+    <state width="1666" height="318" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586350618973" />
+    <state width="1666" height="318" key="GridCell.Tab.1.center" timestamp="1586350618972">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1082" height="160" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586112281761" />
-    <state width="1082" height="160" key="GridCell.Tab.1.left" timestamp="1586112281760">
+    <state width="1666" height="318" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586350618972" />
+    <state width="1666" height="318" key="GridCell.Tab.1.left" timestamp="1586350618972">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1082" height="160" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586112281760" />
-    <state width="1082" height="160" key="GridCell.Tab.1.right" timestamp="1586112281761">
+    <state width="1666" height="318" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586350618972" />
+    <state width="1666" height="318" key="GridCell.Tab.1.right" timestamp="1586350618973">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1082" height="160" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586112281761" />
-    <state width="1076" height="220" key="GridCell.Tab.2.bottom" timestamp="1586089504028">
+    <state width="1666" height="318" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586350618973" />
+    <state width="1666" height="318" key="GridCell.Tab.2.bottom" timestamp="1586350618974">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1076" height="220" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586089504028" />
-    <state width="1076" height="220" key="GridCell.Tab.2.center" timestamp="1586089504027">
+    <state width="1666" height="318" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586350618974" />
+    <state width="1666" height="318" key="GridCell.Tab.2.center" timestamp="1586350618974">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1076" height="220" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586089504027" />
-    <state width="1076" height="220" key="GridCell.Tab.2.left" timestamp="1586089504027">
+    <state width="1666" height="318" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586350618974" />
+    <state width="1666" height="318" key="GridCell.Tab.2.left" timestamp="1586350618974">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1076" height="220" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586089504027" />
-    <state width="1076" height="220" key="GridCell.Tab.2.right" timestamp="1586089504028">
+    <state width="1666" height="318" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586350618974" />
+    <state width="1666" height="318" key="GridCell.Tab.2.right" timestamp="1586350618974">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1076" height="220" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586089504028" />
+    <state width="1666" height="318" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586350618974" />
     <state x="490" y="176" key="Maven.ArtifactSearchDialog" timestamp="1584882274499">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="490" y="176" key="Maven.ArtifactSearchDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584882274499" />
-    <state x="101" y="115" width="1040" height="835" key="SettingsEditor" timestamp="1585325102920">
+    <state x="101" y="115" width="1040" height="835" key="SettingsEditor" timestamp="1586341190471">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="101" y="115" width="1040" height="835" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585325102920" />
+    <state x="101" y="115" width="1040" height="835" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586341190471" />
+    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1586342504310">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1586342504310" />
     <state x="83" y="216" key="com.intellij.javaee.MapExternalResourceDialog" timestamp="1584911602345">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -322,10 +348,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="601" y="246" width="700" height="530" key="recent.locations.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585393788066" />
-    <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1585496393793">
+    <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1586340495466">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585496393793" />
+    <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586340495466" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1584540975126">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -335,21 +361,20 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/teacher/GroupManagement.java</url>
-          <line>47</line>
-          <option name="timeStamp" value="3" />
+          <url>file://$PROJECT_DIR$/src/main/java/version/VersionManagement.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="GlassfishConfiguration">
-        <watch expression="((String)value).startsWith(filterText)" language="JAVA" />
-        <watch expression="(String)value" language="JAVA" />
-        <watch expression="((String)value.toString()).startsWith(filterText)" language="JAVA" />
-        <watch expression="((EditGroupMembers)this).filteredGroupStudents" custom="teacher.EditGroupMembers" />
-        <watch expression="this.availableStudents.remove(specialStudentModel1)" language="JAVA" />
-        <watch expression="((String)value.toString()).startsWith(filterText)" language="JAVA" />
-        <watch expression="((String)value.toString()).startsWith(filterText)" language="JAVA" />
+        <watch expression="response.body()" language="JAVA" />
+        <watch expression="this.gson.fromJson(response.body().toString(), SubVersionEntity[].class)" language="JAVA" />
+        <watch expression="response.body()[6685]" language="JAVA" />
+        <watch expression="response.body().toString().toCharArray()[6657]" language="JAVA" />
+        <watch expression="response.body().toString().toCharArray()[6656]" language="JAVA" />
+        <watch expression="response.body().toString().toCharArray()[6658]" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

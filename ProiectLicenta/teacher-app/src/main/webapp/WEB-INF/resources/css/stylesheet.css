@@ -47,7 +47,7 @@
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 300px;
+    padding-top: 150px;
     left: 0;
     top: 0;
     width: 100%;
@@ -62,7 +62,7 @@
     margin:auto;
     padding: 20px;
     border: 2px solid black;
-    width: 50%;
+
 }
 
 .popup-close-button {

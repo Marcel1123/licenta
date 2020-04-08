@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta charset="utf-8"/>
+        <title>Versions</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css"/>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <h:outputStylesheet library="css" name="stylesheet.css"/>
+        <h:outputScript library="js" name="functions.js"/>
+    </h:head>
+    <h:body styleClass="fundal">
+        <div id="page">
+            <h:form id="vers-id">
+                <p:growl id="mesaje" showDetail="true"/>
+                <div id="create-popup" class="popup-general">
+                    <div class="popup-content">
+                        <span class="popup-close-button"> &times; </span>
+                        <h3>Enter group mame</h3>
+                        <h:inputText id="group-name" class="popup-content-input" style="margin-bottom: 20px; font-size: 20px;" required="true" requiredMessage="Group name required" value="#"/>
+                        <h:commandButton value="Create" styleClass="btn btn-large" action=""/>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-sm-offset-0 top-margin-50" style="float: left;">
+                    <div class="col-sm-3">
+                        <h:commandButton value="Back to Home" styleClass="btn btn-primary" style="margin: 5px; color: white;" action="#{versionManagement.back()}"/>
+                    </div>
+                    <div id="version-manage" class="col-sm-offset-0 col-sm-6 disable-select" style="margin-top: 50px;">
+                        <p:dataTable var="cVersion" value="#{versionManagement.versionEntities}" scrollable="true" scrollHeight="500" emptyMessage="No students found">
+                            <p:column footerText="Upload date" headerText ="Upload date" style="text-align: center;" styleClass="disable-select text-overflow-custom">
+                                <h:outputText value="#{cVersion.uploadDate}"/>
+                            </p:column>
+
+                            <p:column footerText="Action" headerText="Action" style="text-align: center;" styleClass="disable-select text-overflow-custom">
+                                <h:commandButton id="create-popup-btn" value="Display" class="btn btn-success" style="margin: 5px; color: white;"/>
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+        <script type="text/javascript">
+            $(document).on("ready", function () {
+                $('#page').css({'height' : window.innerHeight + 'px'});
+            });
+
+            var popup = document.getElementById("create-popup");
+            var close = document.getElementById("create-popup-btn");
+            var span = document.getElementsByClassName("popup-close-button")[0];
+
+            close.onclick = function () {
+                popup.style.display = "block";
+            };
+
+            span.onClick = function (){
+                popup.style.display = "none";
+            };
+
+            window.onclick = function (event) {
+                if(event.target == popup) {
+                    popup.style.display = "none";
+                }
+            };
+        </script>
+    </h:body>
+</html>

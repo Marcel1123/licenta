@@ -7,26 +7,16 @@ import models.AddMemberModel;
 import models.SpecialGroupModel;
 import models.SpecialStudentModel;
 import org.primefaces.PrimeFaces;
-import org.primefaces.event.SelectEvent;
-import org.primefaces.event.UnselectEvent;
-import org.primefaces.model.DualListModel;
 import utilitar.HttpRequestAPI;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
-import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @ManagedBean
 @RequestScoped

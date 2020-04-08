@@ -18,74 +18,81 @@
         </f:metadata>
     </h:head>
     <h:body styleClass="fundal">
-        <h:form id="formular-group">
-            <p:growl id="mesaje" showDetail="true"/>
-            <div class="col-sm-12 col-sm-offset-0 top-margin-50" style="float: left;">
-                <div class="col-sm-3">
-                    <h:commandButton value="Back to Home" styleClass="btn btn-primary" style="margin: 5px; color: white;" action="#{editGroupMembers.backToHome}"/>
+        <div id="page">
+            <h:form id="formular-group">
+                <p:growl id="mesaje" showDetail="true"/>
+                <div class="col-sm-12 col-sm-offset-0 top-margin-50" style="float: left;">
+                    <div class="col-sm-3">
+                        <h:commandButton value="Back to Home" styleClass="btn btn-primary" style="margin: 5px; color: white;" action="#{editGroupMembers.backToHome}"/>
+                    </div>
                 </div>
-            </div>
-            <div id="group-manage" class="disable-select col-sm-12">
-                <div class="col-sm-6" style="margin-top: 50px;">
-                    <p:dataTable var="cStudent" value="#{editGroupMembers.groupStudents}" scrollable="true" scrollHeight="500"
-                                emptyMessage="No students found"
-                    >
-
-                        <p:column headerText="First Name" style="text-align: center;" styleClass="disable-select text-overflow-custom"
-                                  footerText="First Name"
+                <div id="group-manage" class="disable-select col-sm-12">
+                    <div class="col-sm-6" style="margin-top: 50px;">
+                        <p:dataTable var="cStudent" value="#{editGroupMembers.groupStudents}" scrollable="true" scrollHeight="500"
+                                     emptyMessage="No students found"
                         >
 
-                            <h:outputText value="#{cStudent.firstName}"/>
-                        </p:column>
+                            <p:column headerText="First Name" style="text-align: center;" styleClass="disable-select text-overflow-custom"
+                                      footerText="First Name"
+                            >
 
-                        <p:column headerText="Last Name" style="text-align: center;" styleClass="disable-select text-overflow-custom"
-                                  footerText="Last Name"
+                                <h:outputText value="#{cStudent.firstName}"/>
+                            </p:column>
+
+                            <p:column headerText="Last Name" style="text-align: center;" styleClass="disable-select text-overflow-custom"
+                                      footerText="Last Name"
+                            >
+                                <h:outputText value="#{cStudent.lastName}"/>
+                            </p:column>
+
+                            <p:column headerText="Year" style="text-align: center;" styleClass="disable-select text-overflow-custom"
+                                      footerText="Year"
+                            >
+                                <h:outputText value="#{cStudent.year}"/>
+                            </p:column>
+
+                            <p:column headerText="Action" footerText="Acotion">
+                                <h:commandButton value="Remove member" class="btn btn-danger" style="margin: 5px; color: white;" action="#{editGroupMembers.removeMember(cStudent)}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+
+                    <div class="col-sm-6" style="margin-top: 50px;">
+                        <p:dataTable var="student" value="#{editGroupMembers.availableStudents}" scrollable="true" scrollHeight="500"
+                                     emptyMessage="No students found"
                         >
-                            <h:outputText value="#{cStudent.lastName}"/>
-                        </p:column>
 
-                        <p:column headerText="Year" style="text-align: center;" styleClass="disable-select text-overflow-custom"
-                                  footerText="Year"
-                        >
-                            <h:outputText value="#{cStudent.year}"/>
-                        </p:column>
+                            <p:column headerText="First Name" style="text-align: center;"
+                                      styleClass="disable-select text-overflow-custom" footerText="First Name"
+                            >
+                                <h:outputText value="#{student.firstName}"/>
+                            </p:column>
 
-                        <p:column headerText="Action" footerText="Acotion">
-                            <h:commandButton value="Remove member" class="btn btn-danger" style="margin: 5px; color: white;" action="#{editGroupMembers.removeMember(cStudent)}"/>
-                        </p:column>
-                    </p:dataTable>
+                            <p:column headerText="Last Name" style="text-align: center;"
+                                      styleClass="disable-select text-overflow-custom" footerText="Last Name"
+                            >
+                                <h:outputText value="#{student.lastName}"/>
+                            </p:column>
+
+                            <p:column headerText="Year" style="text-align: center;"
+                                      styleClass="disable-select text-overflow-custom" footerText="Year"
+                            >
+                                <h:outputText value="#{student.year}"/>
+                            </p:column>
+
+                            <p:column headerText="Action" footerText="Acotion">
+                                <h:commandButton value="Add member" class="btn btn-success" style="margin: 5px; color: white;" action="#{editGroupMembers.addMember(student)}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </div>
                 </div>
-
-                <div class="col-sm-6" style="margin-top: 50px;">
-                    <p:dataTable var="student" value="#{editGroupMembers.availableStudents}" scrollable="true" scrollHeight="500"
-                                emptyMessage="No students found"
-                    >
-
-                        <p:column headerText="First Name" style="text-align: center;"
-                                  styleClass="disable-select text-overflow-custom" footerText="First Name"
-                        >
-                            <h:outputText value="#{student.firstName}"/>
-                        </p:column>
-
-                        <p:column headerText="Last Name" style="text-align: center;"
-                                  styleClass="disable-select text-overflow-custom" footerText="Last Name"
-                        >
-                            <h:outputText value="#{student.lastName}"/>
-                        </p:column>
-
-                        <p:column headerText="Year" style="text-align: center;"
-                                  styleClass="disable-select text-overflow-custom" footerText="Year"
-                        >
-                            <h:outputText value="#{student.year}"/>
-                        </p:column>
-
-                        <p:column headerText="Action" footerText="Acotion">
-                            <h:commandButton value="Add member" class="btn btn-success" style="margin: 5px; color: white;" action="#{editGroupMembers.addMember(student)}"/>
-                        </p:column>
-                    </p:dataTable>
-                </div>
-            </div>
-        </h:form>
+            </h:form>
+        </div>
+        <script type="text/javascript">
+            $(document).on("ready", function () {
+                $('#page').css({'height' : window.innerHeight + 'px'});
+            });
+        </script>
     </h:body>
 
 </html>
