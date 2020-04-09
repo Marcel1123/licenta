@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 public class VersionManagement {
     private final Gson gson = new Gson();
     private List<SubVersionEntity> versionEntities;
+    private List<SubVersionEntity> all;
 
     @PostConstruct
     public void init(){
@@ -39,8 +40,8 @@ public class VersionManagement {
 
             String last = new UUID(0L, 0L).toString();
             for (SubVersionEntity s : list){
-                if(!last.equals(s.getProjectId())){
-                    last = s.getProjectId();
+                if(!last.equals(s.getVersionId())){
+                    last = s.getVersionId();
                     this.versionEntities.add(s);
                 }
             }
