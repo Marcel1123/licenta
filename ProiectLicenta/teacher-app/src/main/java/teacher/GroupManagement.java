@@ -29,15 +29,16 @@ public class GroupManagement {
 
     @PostConstruct
     public void init(){
-        groupEntities = new LinkedList<>();
-        groupEntity = new GroupEntity();
-
-        Map<String, Object> parameterValue = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        String string = parameterValue.get("teacher").toString();
-
-        this.teacher = this.gson.fromJson(string, TeacherEntity.class);
-        HttpResponse httpResponse = null;
         try {
+            groupEntities = new LinkedList<>();
+            groupEntity = new GroupEntity();
+
+            Map<String, Object> parameterValue = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+            String string = parameterValue.get("teacher").toString();
+
+            this.teacher = this.gson.fromJson(string, TeacherEntity.class);
+            HttpResponse httpResponse = null;
+
             httpResponse = HttpRequestAPI.GETMethodResponse("http://localhost:9091/group/teacher/", this.teacher.getId().toString());
             GroupEntity[] groupEntities = this.gson.fromJson(httpResponse.body().toString(), GroupEntity[].class);
             this.groupEntities.addAll(Arrays.asList(groupEntities));

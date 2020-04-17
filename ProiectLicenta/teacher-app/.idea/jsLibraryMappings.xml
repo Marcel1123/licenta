@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$" libraries="{bootstrap, jquery, sweetalert2, sweetalert2.all}" />
+    <file url="file://$PROJECT_DIR$" libraries="{bootstrap, jquery, run_prettify, sweetalert2, sweetalert2.all}" />
   </component>
 </project>

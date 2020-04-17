@@ -5,61 +5,40 @@
     <h:head>
         <meta charset="utf-8"/>
         <title>Versions</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css"/>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?skin=desert"></script>
         <h:outputStylesheet library="css" name="stylesheet.css"/>
         <h:outputScript library="js" name="functions.js"/>
     </h:head>
-    <h:body styleClass="fundal">
+    <h:body styleClass="fundal" onload="PR.prettyPrint()">
         <div id="page">
-            <p:growl id="mesaje" showDetail="true"/>
-            <div id="create-popup" class="popup-general">
-                <div class="col-sm-offset-1 col-sm-10 popup-content">
-                    <span class="popup-close-button"> X </span>
-                    <h3>Version content</h3>
-                    <h:inputText id="group-name" class="popup-content-input" style="margin-bottom: 20px; font-size: 20px;" required="true" requiredMessage="Group name required" value="#"/>
+            <h:form id="v_frm">
+                <p:growl id="mesaje" showDetail="true"/>
+                <div class="col-sm-12 col-sm-offset-0 top-margin-50" style="float: left;">
+                    <div class="col-sm-3">
+                        <h:commandButton value="Back" styleClass="btn btn-primary" style="margin: 5px; color: white;" action="#{versionManagement.back()}"/>
+                    </div>
+                    <div id="version-manage" class="col-sm-offset-0 col-sm-6 disable-select" style="margin-top: 50px;">
+                        <p:dataTable var="cVersion" value="#{versionManagement.versionEntities}" scrollable="true" scrollHeight="700" emptyMessage="No students found">
+                            <p:column footerText="Upload date" headerText ="Upload date" style="text-align: center;" styleClass="disable-select text-overflow-custom">
+                                <h:outputText value="#{cVersion.uploadDate}"/>
+                            </p:column>
+                            <p:column footerText="Action" headerText="Action" style="text-align: center;" styleClass="disable-select text-overflow-custom">
+                                <h:commandButton value="Display" id="create-popup-btn" class="btn btn-success" style="margin: 5px; color: white;" action="#{versionManagement.showVersions(cVersion)}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-12 col-sm-offset-0 top-margin-500" style="float: left;">
-                <div class="col-sm-3">
-                    <h:commandButton value="Back to Home" styleClass="btn btn-primary" style="margin: 5px; color: white;" action="#{versionManagement.back()}"/>
-                </div>
-                <div id="version-manage" class="col-sm-offset-0 col-sm-6 disable-select" style="margin-top: 50px;">
-                    <p:dataTable var="cVersion" value="#{versionManagement.versionEntities}" scrollable="true" scrollHeight="700" emptyMessage="No students found">
-                        <p:column footerText="Upload date" headerText ="Upload date" style="text-align: center;" styleClass="disable-select text-overflow-custom">
-                            <h:outputText value="#{cVersion.uploadDate}"/>
-                        </p:column>
-                        <p:column footerText="Action" headerText="Action" style="text-align: center;" styleClass="disable-select text-overflow-custom">
-                            <button id="create-popup-btn" class="btn btn-success" style="margin: 5px; color: white;">Display</button>
-                        </p:column>
-                    </p:dataTable>
-                </div>
-            </div>
+            </h:form>
         </div>
+    </h:body>
         <script type="text/javascript">
-            var popup = document.getElementById("create-popup");
-            var close = document.getElementById("create-popup-btn");
-            var span = document.getElementsByClassName("popup-close-button")[0];
-
-            close.onclick = function () {
-                popup.style.display = "block";
-            };
-
-            span.onClick = function (){
-                popup.style.display = "none";
-            };
-
-            window.onclick = function (event) {
-                if(event.target == popup) {
-                    popup.style.display = "none";
-                }
-            };
-
             $(document).on("ready", function () {
                 $('#page').css({'height' : window.innerHeight + 'px'});
             });
         </script>
-    </h:body>
 </html>

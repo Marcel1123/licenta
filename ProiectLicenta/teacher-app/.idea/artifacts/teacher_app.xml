@@ -8,6 +8,7 @@
           <element id="library" level="application" name="sweetalert2.all" />
           <element id="library" level="application" name="sweetalert2" />
           <element id="library" level="application" name="bootstrap" />
+          <element id="library" level="application" name="run_prettify" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.primefaces:primefaces:8.0" />

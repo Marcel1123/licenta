@@ -5,6 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Projects</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css"/>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
@@ -50,17 +51,17 @@
                             <h:commandButton value="Display" class="btn btn-success" style="margin: 5px; color: white;" action="#{projectManagement.goToVersions(cProject)}"/>
                         </p:column>
 
-                        <p:column footerText="Delete" headerText="Delete" style="text-align: center;" styleClass="text-overflow-custom">
-                            <h:commandButton value="Delete" class="btn btn-danger" style="margin: 5px; color: white;"/>
-                        </p:column>
+<!--                        <p:column footerText="Delete" headerText="Delete" style="text-align: center;" styleClass="text-overflow-custom">-->
+<!--                            <h:commandButton value="Delete" class="btn btn-danger" style="margin: 5px; color: white;"/>-->
+<!--                        </p:column>-->
                     </p:dataTable>
                 </div>
             </h:form>
         </div>
-        <script type="text/javascript">
-            $(document).on("ready", function () {
-                $('#page').css({'height' : window.innerHeight + 'px'});
-            });
-        </script>
     </h:body>
+    <script type="text/javascript">
+        $(document).on("ready", function () {
+            $('#page').css({'height' : window.innerHeight + 'px'});
+        });
+    </script>
 </html>

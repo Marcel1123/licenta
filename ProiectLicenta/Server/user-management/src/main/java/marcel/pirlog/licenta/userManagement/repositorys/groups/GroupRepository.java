@@ -2,22 +2,26 @@ package marcel.pirlog.licenta.userManagement.repositorys.groups;
 
 import marcel.pirlog.licenta.userManagement.entities.*;
 import marcel.pirlog.licenta.userManagement.models.*;
+import marcel.pirlog.licenta.userManagement.repositorys.project.ProjectRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
-import java.lang.reflect.Type;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 @Repository
 public class GroupRepository implements IGroupRepository {
     @PersistenceContext
     private EntityManager entityManager;
+    private final ProjectRepository repository;
+
+    @Autowired
+    public GroupRepository(ProjectRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public List<StudentGroupModel> findStudentGroups(UUID studentId) {
@@ -104,6 +108,22 @@ public class GroupRepository implements IGroupRepository {
     @Transactional
     public String deleteGroup(String groupId) {
         try{
+            List<ProjectEntity> p = repository.getAllGroupProject(UUID.fromString(groupId));
+
+            if(p != null){
+                for(ProjectEntity p1 : p) {
+                    entityManager.createNativeQuery(
+                            "delete from versiuni where id_proiect = ?")
+                            .setParameter(1, p1.getId())
+                            .executeUpdate();
+                }
+
+                entityManager.createNativeQuery(
+                        "delete from proiect where id_group = ?")
+                        .setParameter(1, UUID.fromString(groupId))
+                        .executeUpdate();
+            }
+
             entityManager.createNativeQuery(
                     "delete from membri_grup where id_grup = ?")
                     .setParameter(1, UUID.fromString(groupId))
@@ -113,7 +133,8 @@ public class GroupRepository implements IGroupRepository {
                     "delete from grupuri ge where ge.id = :id")
                     .setParameter("id", UUID.fromString(groupId))
                     .executeUpdate();
-        } catch (TransactionRequiredException e) {
+
+        } catch (IllegalArgumentException | TransactionRequiredException e) {
             return null;
         }
         return groupId;

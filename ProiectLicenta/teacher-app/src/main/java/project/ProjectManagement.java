@@ -27,10 +27,10 @@ public class ProjectManagement {
 
     @PostConstruct
     public void init(){
-        this.projects = new LinkedList<>();
-        this.sessionVar = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        this.groupEntity = this.gson.fromJson(this.sessionVar.get("target_group").toString(), GroupEntity.class);
         try{
+            this.projects = new LinkedList<>();
+            this.sessionVar = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+            this.groupEntity = this.gson.fromJson(this.sessionVar.get("target_group").toString(), GroupEntity.class);
             HttpResponse response = HttpRequestAPI.GETMethodResponse("http://localhost:9091/project/projects/", this.groupEntity.getId());
 
             if (response.statusCode() == HttpURLConnection.HTTP_OK){
