@@ -23,6 +23,8 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- Annotated entity classes -->
+        <mapping class="marcel.compiling.entity.SubVersionEntity"/>
+        <mapping class="marcel.compiling.entity.TeacherEntity"/>
         <!--<mapping class="marcel.pirlog.licenta.userManagement.entities.StudentEntity"/>-->
     </session-factory>
 </hibernate-configuration>
