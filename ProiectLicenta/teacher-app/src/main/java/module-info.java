@@ -11,6 +11,8 @@ module teacher.app {
     exports teacher;
     exports version;
     exports entity;
+    exports entity.person;
+    exports models;
     exports session;
     exports utilitar;
 

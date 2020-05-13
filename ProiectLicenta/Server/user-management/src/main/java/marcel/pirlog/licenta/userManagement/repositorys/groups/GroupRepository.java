@@ -1,7 +1,13 @@
 package marcel.pirlog.licenta.userManagement.repositorys.groups;
 
 import marcel.pirlog.licenta.userManagement.entities.*;
+import marcel.pirlog.licenta.userManagement.entities.person.PersonEntity;
+import marcel.pirlog.licenta.userManagement.entities.person.StudentEntity;
+import marcel.pirlog.licenta.userManagement.entities.person.TeacherEntity;
+import marcel.pirlog.licenta.userManagement.exceptions.DuplicateException;
+import marcel.pirlog.licenta.userManagement.exceptions.ObjectNotFoundException;
 import marcel.pirlog.licenta.userManagement.models.*;
+import marcel.pirlog.licenta.userManagement.repositorys.person.PersonRepository;
 import marcel.pirlog.licenta.userManagement.repositorys.project.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,32 +17,36 @@ import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Repository
 public class GroupRepository implements IGroupRepository {
     @PersistenceContext
     private EntityManager entityManager;
     private final ProjectRepository repository;
+    private final PersonRepository personRepository;
 
     @Autowired
-    public GroupRepository(ProjectRepository repository) {
+    public GroupRepository(ProjectRepository repository, PersonRepository personRepository) {
         this.repository = repository;
+        this.personRepository = personRepository;
     }
 
     @Override
-    public List<StudentGroupModel> findStudentGroups(UUID studentId) {
+    public List<GroupEntity> findStudentGroups(UUID studentId) {
         TypedQuery<GroupEntity> groupEntityTypedQuery = entityManager.createQuery(
-                "select gr from GroupMemberEntity g, GroupEntity gr " +
-                        "where gr.id = g.groupId and g.memberId = :studentId",
+                "select gr from GroupEntity gr " +
+                        " join gr.groupMember gm " +
+                        " where gm.id = :studentId",
                 GroupEntity.class
         );
         try {
-            List<GroupEntity> studentGroups = groupEntityTypedQuery.setParameter("studentId", studentId).getResultList();
-            List<StudentGroupModel> studentGroupModels = new LinkedList<>();
-            for(GroupEntity g : studentGroups){
-                studentGroupModels.add(new StudentGroupModel(g.getId(), g.getName()));
+            List<GroupEntity> ge = groupEntityTypedQuery.setParameter("studentId", studentId).getResultList();
+            for(GroupEntity g : ge){
+                g.setGroupMember(new LinkedList<>());
+                g.setCreator(new TeacherEntity());
             }
-            return studentGroupModels;
+            return ge;
         } catch (NoResultException ne){
             return null;
         }
@@ -46,112 +56,54 @@ public class GroupRepository implements IGroupRepository {
     public List<GroupEntity> findTeacherGroups(UUID teacherId) {
         TypedQuery<GroupEntity> groupEntityTypedQuery = entityManager.createQuery(
                 "select gr from GroupEntity gr "+
-                        " where gr.creatorId = :creator", GroupEntity.class
+                        " where gr.creator.id = :creator",
+                GroupEntity.class
         );
-        return groupEntityTypedQuery.setParameter("creator", teacherId)
-                                                .getResultList();
+        List<GroupEntity> ge = groupEntityTypedQuery.setParameter("creator", teacherId)
+                .getResultList();
+        for(GroupEntity g : ge){
+            for(PersonEntity p:g.getGroupMember()){
+                hideAccount(p);
+            }
+        }
+        return ge;
     }
 
     @Override
-    @Transactional
-    public GroupEntity addGroup(CreateGroupModel createGroupModel) {
-        GroupEntity groupEntity = new GroupEntity();
-        groupEntity.setId(UUID.randomUUID());
-        groupEntity.setCreatorId(createGroupModel.getTeacherId());
-        groupEntity.setName(createGroupModel.getName());
-
-        TypedQuery<TeacherEntity> accountEntityTypedQuery = entityManager.createQuery(
-                "select t from TeacherEntity t" +
-                        " where t.id = :id", TeacherEntity.class
-        );
-
-        try{
-            TeacherEntity a = accountEntityTypedQuery
-                    .setParameter("id", createGroupModel.getTeacherId())
-                    .getSingleResult();
-            if(a == null){
-                return null;
-            }
-        } catch (NoResultException ne) {
-            return null;
-        }
-
-        TypedQuery<GroupEntity> groupEntityTypedQuery = entityManager.createQuery(
-                "select g from GroupEntity g " +
-                        " where g.name = :name", GroupEntity.class
-        );
-
-        try{
-            GroupEntity groupEntity1 = groupEntityTypedQuery.setParameter("name", createGroupModel.getName())
-                    .getSingleResult();
-
-            if(groupEntity1 != null){
-                return null;
-            }
-        } catch (NoResultException e){
-        }
-
+    public List<PersonEntity> getGroupMember(UUID groupId) {
+        List<PersonEntity> result = new LinkedList<>();
         try {
-
-            entityManager.createNativeQuery("insert  into grupuri values (?,?,?)")
-                    .setParameter(1, groupEntity.getId())
-                    .setParameter(2, groupEntity.getCreatorId())
-                    .setParameter(3, groupEntity.getName())
-                    .executeUpdate();
-        } catch (TransactionRequiredException e){
-            return null;
-        }
-        return groupEntity;
-    }
-
-    @Override
-    @Transactional
-    public String deleteGroup(String groupId) {
-        try{
-            List<ProjectEntity> p = repository.getAllGroupProject(UUID.fromString(groupId));
-
-            if(p != null){
-                for(ProjectEntity p1 : p) {
-                    entityManager.createNativeQuery(
-                            "delete from versiuni where id_proiect = ?")
-                            .setParameter(1, p1.getId())
-                            .executeUpdate();
-                }
-
-                entityManager.createNativeQuery(
-                        "delete from proiect where id_group = ?")
-                        .setParameter(1, UUID.fromString(groupId))
-                        .executeUpdate();
-            }
-
-            entityManager.createNativeQuery(
-                    "delete from membri_grup where id_grup = ?")
-                    .setParameter(1, UUID.fromString(groupId))
-                    .executeUpdate();
-
-            entityManager.createNativeQuery(
-                    "delete from grupuri ge where ge.id = :id")
-                    .setParameter("id", UUID.fromString(groupId))
-                    .executeUpdate();
-
-        } catch (IllegalArgumentException | TransactionRequiredException e) {
-            return null;
-        }
-        return groupId;
-    }
-
-    @Override
-    @Transactional
-    public GroupEntity getGroupById(String id){
-        try{
-            TypedQuery<GroupEntity> groupEntityTypedQuery = entityManager.createQuery(
-                    "select gr from GroupEntity gr "+
-                            " where gr.id = :id", GroupEntity.class
+            TypedQuery<GroupEntity> groupEntityTypedQuery1 = entityManager.createQuery(
+                    "select gr from GroupEntity gr" +
+                            " where gr.id = :groupId",
+                    GroupEntity.class
             );
-            return groupEntityTypedQuery.setParameter("id", UUID.fromString(id))
-                    .getSingleResult();
+            List<PersonEntity> p = groupEntityTypedQuery1.setParameter("groupId", groupId)
+                    .getSingleResult()
+                    .getGroupMember();
+            for(PersonEntity p1 : p){
+                hideAccount(p1);
+            }
+            return p;
         } catch (NoResultException e){
-            return null;
+            return result;
+        }
+    }
+
+    @Override
+    public List<PersonEntity> getAllAvailableStudents(UUID groupId) {
+        List<PersonEntity> result = new LinkedList<>();
+        try {
+            TypedQuery<PersonEntity> groupEntityTypedQuery = entityManager.createQuery(
+                    "select pe from PersonEntity pe " +
+                            "join StudentEntity se on se.person = pe.id",
+                    PersonEntity.class
+            );
+            List<PersonEntity> studenti = groupEntityTypedQuery.getResultList();
+            for (PersonEntity se: studenti) hideAccount(se);
+            return result;
+        } catch (NoResultException e){
+            return result;
         }
     }
 
@@ -163,30 +115,33 @@ public class GroupRepository implements IGroupRepository {
                     "select gr from GroupEntity gr " +
                             " where gr.name = :name", GroupEntity.class
             );
-            return groupEntityTypedQuery.setParameter("name", name).getSingleResult();
+            GroupEntity g = groupEntityTypedQuery.setParameter("name", name)
+                    .getSingleResult();
+            for(PersonEntity e: g.getGroupMember()){
+                hideAccount(e);
+            }
+            return g;
         } catch (NoResultException e){
             return null;
         }
     }
 
     @Override
-    public List<SpecialStudentModel> getAllAvailableStudents(UUID groupId) {
-        List<SpecialStudentModel> result = new LinkedList<>();
-        try {
-            TypedQuery<StudentEntity> groupEntityTypedQuery = entityManager.createQuery(
-                    "select ste from StudentEntity ste ", StudentEntity.class
+    @Transactional
+    public GroupEntity getGroupById(String id){
+        try{
+            TypedQuery<GroupEntity> groupEntityTypedQuery = entityManager.createQuery(
+                    "select gr from GroupEntity gr "+
+                            " where gr.id = :id", GroupEntity.class
             );
-            List<StudentEntity> studenti = groupEntityTypedQuery.getResultList();
-
-            groupEntityTypedQuery = entityManager.createQuery(
-                    "select ste from StudentEntity ste join GroupMemberEntity gme on gme.memberId = ste.id where gme.groupId = :groupId", StudentEntity.class
-            );
-            List<StudentEntity> studenti1 = groupEntityTypedQuery.setParameter("groupId", groupId).getResultList();
-            studenti.removeAll(studenti1);
-            for (StudentEntity se: studenti) result.add(mapToSSM(se));
-            return result;
+            GroupEntity g = groupEntityTypedQuery.setParameter("id", UUID.fromString(id))
+                    .getSingleResult();
+            for(PersonEntity e: g.getGroupMember()){
+                hideAccount(e);
+            }
+            return g;
         } catch (NoResultException e){
-            return result;
+            return null;
         }
     }
 
@@ -194,30 +149,68 @@ public class GroupRepository implements IGroupRepository {
     @Override
     public AddMemberModel addMemberModel(AddMemberModel addMemberModel){
         try{
-            TypedQuery<GroupMemberEntity> groupEntityTypedQuery = entityManager.createQuery(
-                    "select gr from GroupMemberEntity gr where gr.memberId = :stdId and gr.groupId = :grId", GroupMemberEntity.class
+            TypedQuery<GroupEntity> groupEntityTypedQuery = entityManager.createQuery(
+                    "select gr from GroupEntity gr " +
+                            "where gr.id = :grId", GroupEntity.class
             );
-            GroupMemberEntity g = groupEntityTypedQuery.setParameter("stdId", UUID.fromString(addMemberModel.getStudentId()))
+            GroupEntity g = groupEntityTypedQuery
                     .setParameter("grId", UUID.fromString(addMemberModel.getGroupId()))
                     .getSingleResult();
-            if(g == null){
-                throw new NoResultException();
-            } else {
-                return null;
+
+            List<PersonEntity> pe = g.getGroupMember().stream()
+                    .filter(a -> a.getId().equals(UUID.fromString(addMemberModel.getStudentId())))
+                    .collect(Collectors.toList());
+
+            if(pe.size() > 0){
+                throw new DuplicateException("This student already exist");
             }
-        } catch (NoResultException e){
+
             try{
                 entityManager.createNativeQuery(
-                        "insert into membri_grup values (?, ?, ?)")
-                        .setParameter(1, UUID.randomUUID())
-                        .setParameter(2, UUID.fromString(addMemberModel.getGroupId()))
-                        .setParameter(3, UUID.fromString(addMemberModel.getStudentId()))
+                        "insert into group_memger values (?, ?)")
+                        .setParameter(1, UUID.fromString(addMemberModel.getGroupId()))
+                        .setParameter(2, UUID.fromString(addMemberModel.getStudentId()))
                         .executeUpdate();
                 return addMemberModel;
             } catch (TransactionRequiredException f){
                 return null;
             }
+        } catch (NoResultException | DuplicateException e){
+            return null;
         }
+    }
+
+    @Override
+    @Transactional
+    public GroupEntity addGroup(CreateGroupModel createGroupModel) {
+        GroupEntity groupEntity = getGroupByName(createGroupModel.getName());
+        TeacherEntity teacherEntity = personRepository.getTeacherById(createGroupModel.getTeacherId());
+        try{
+            if(groupEntity != null){
+                throw new DuplicateException("This group already exists");
+            }
+
+            if(teacherEntity == null){
+                throw new ObjectNotFoundException("This teacher not exist");
+            }
+
+            groupEntity = new GroupEntity();
+
+            groupEntity.setId(UUID.randomUUID());
+            groupEntity.setName(createGroupModel.getName());
+
+            entityManager.createNativeQuery(
+                    "insert into grupuri values (?, ?, ?)")
+                    .setParameter(1, groupEntity.getId())
+                    .setParameter(2, groupEntity.getName())
+                    .setParameter(3, createGroupModel.getTeacherId())
+                    .executeUpdate();
+
+        } catch (DuplicateException | ObjectNotFoundException e){
+            return null;
+        }
+
+        return getGroupById(groupEntity.getId().toString());
     }
 
     @Transactional
@@ -225,7 +218,7 @@ public class GroupRepository implements IGroupRepository {
     public AddMemberModel removeMemberModel(AddMemberModel addMemberModel){
         try {
             entityManager.createNativeQuery(
-                    "delete from membri_grup where id_membru = ? and id_grup = ?")
+                    "delete from group_memger where memgru_id = ? and group_id = ?")
                     .setParameter(1, UUID.fromString(addMemberModel.getStudentId()))
                     .setParameter(2, UUID.fromString(addMemberModel.getGroupId()))
                     .executeUpdate();
@@ -235,28 +228,53 @@ public class GroupRepository implements IGroupRepository {
         }
     }
 
+
     @Override
-    public List<SpecialStudentModel> getGroupMember(UUID groupId) {
-        List<SpecialStudentModel> result = new LinkedList<>();
-        try {
-            TypedQuery<StudentEntity> groupEntityTypedQuery = entityManager.createQuery(
-                    "select ste from StudentEntity ste " +
-                            " join GroupMemberEntity gme on gme.memberId = ste.id " +
-                            " where gme.groupId = :goupId", StudentEntity.class
-            );
-            List<StudentEntity> studenti = groupEntityTypedQuery.setParameter("goupId", groupId)
-                    .getResultList();
-            for (StudentEntity se: studenti) result.add(mapToSSM(se));
-            return result;
-        } catch (NoResultException e){
-            return result;
+    @Transactional
+    public String deleteGroup(String groupId) {
+        try{
+            List<ProjectEntity> p = repository.getAllGroupProject(UUID.fromString(groupId));
+
+            if(p != null){
+                for(ProjectEntity ps : p){
+                    entityManager.createNativeQuery("delete from projet_version where proj_id = ?")
+                            .setParameter(1, ps.getId())
+                            .executeUpdate();
+
+                    for(SubVersionEntity s : ps.getVersionEntities()){
+                        entityManager.createNativeQuery("delete from vers_content where vers_id = ?")
+                                .setParameter(1, s.getId())
+                                .executeUpdate();
+                        for(SubVersionContentEntity sc : s.getContent()){
+                            entityManager.createNativeQuery("delete from content where id = ?")
+                                    .setParameter(1, sc.getId())
+                                    .executeUpdate();
+                        }
+                        entityManager.createNativeQuery("delete from versiuni where id = ?")
+                                .setParameter(1, s.getId())
+                                .executeUpdate();
+                    }
+                }
+            }
+            entityManager.createNativeQuery("delete from group_memger where group_id = ?")
+                    .setParameter(1, UUID.fromString(groupId))
+                    .executeUpdate();
+
+            entityManager.createNativeQuery("delete from grupuri where id = ?")
+                    .setParameter(1, UUID.fromString(groupId))
+                    .executeUpdate();
+
+        } catch (IllegalArgumentException | TransactionRequiredException e) {
+            return null;
         }
+        return groupId;
     }
 
-    private SpecialStudentModel mapToSSM(StudentEntity studentEntity){
-        return new SpecialStudentModel(studentEntity.getFirstName(),
-                studentEntity.getLastName(),
-                studentEntity.getYear(),
-                studentEntity.getId());
+
+    private void hideAccount(PersonEntity pe){
+        pe.setAccountId(new AccountEntity());
     }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
 }

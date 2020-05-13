@@ -1,7 +1,13 @@
 package marcel.pirlog.licenta.userManagement.entities;
 
+import marcel.pirlog.licenta.userManagement.entities.person.PersonEntity;
+import marcel.pirlog.licenta.userManagement.entities.person.TeacherEntity;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "GroupEntity")
@@ -10,32 +16,55 @@ public class GroupEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genname")
-    @SequenceGenerator(name = "genname", sequenceName = "seqname", allocationSize = 1)
-    @Column(name = "Id")
+//    @SequenceGenerator(name = "genname", sequenceName = "seqname", allocationSize = 1)
+    @Column(name = "id")
+    @NotNull
+    @NotEmpty
     private UUID id;
 
-    @Column(name = "Id_creator")
-    private UUID creatorId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @NotNull
+    @NotEmpty
+    private TeacherEntity creator;
 
     @Column(name = "Nume")
+    @NotNull
+    @NotEmpty
     private String name;
+
+//    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "group_memger",
+            joinColumns = @JoinColumn(
+                    name = "group_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "memgru_id",
+                    referencedColumnName = "id"
+            )
+    )
+    @NotNull
+    @NotEmpty
+    private List<PersonEntity> groupMember;
 
     public GroupEntity(){
     }
 
-    public GroupEntity(UUID id, UUID creatorId, String name) {
+    public GroupEntity(UUID id, TeacherEntity creator, String name, List<PersonEntity> groupMember) {
         this.id = id;
-        this.creatorId = creatorId;
+        this.creator = creator;
         this.name = name;
+        this.groupMember = groupMember;
     }
 
-    @Override
-    public String toString() {
-        return "GroupEntity{" +
-                "id=" + id +
-                ", creatorId=" + creatorId +
-                ", name='" + name + '\'' +
-                '}';
+    public TeacherEntity getCreator() {
+        return creator;
+    }
+
+    public void setCreator(TeacherEntity creator) {
+        this.creator = creator;
     }
 
     public UUID getId() {
@@ -46,19 +75,19 @@ public class GroupEntity implements Serializable {
         this.id = id;
     }
 
-    public UUID getCreatorId() {
-        return creatorId;
-    }
-
-    public void setCreatorId(UUID creatorId) {
-        this.creatorId = creatorId;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<PersonEntity> getGroupMember() {
+        return groupMember;
+    }
+
+    public void setGroupMember(List<PersonEntity> groupMember) {
+        this.groupMember = groupMember;
     }
 }

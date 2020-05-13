@@ -21,10 +21,10 @@
                 <p:growl id="mesaje" showDetail="true"/>
                 <div class="col-sm-12 col-sm-offset-0 top-margin-50" style="float: left;">
                     <div class="col-sm-3">
-                        <h:commandButton value="Back" styleClass="btn btn-primary" style="margin: 5px; color: white;" action="#{versionManagement.back()}"/>
+                        <h:commandButton value="Back" styleClass="btn btn-primary" style="margin: 5px; color: white;" action="#{contentManagement.back()}"/>
                     </div>
                     <div id="version-manage" class="col-sm-offset-0 col-sm-12 disable-select" style="margin-top: 50px;">
-                        <p:repeat id="repeat" style="" value="#{versionManagement.text}" var="cVersion">
+                        <p:repeat id="repeat" style="" value="#{contentManagement.text}" var="cVersion">
                             <pre class="prettyprint">#{cVersion}</pre>
                             <hr/>
                         </p:repeat>

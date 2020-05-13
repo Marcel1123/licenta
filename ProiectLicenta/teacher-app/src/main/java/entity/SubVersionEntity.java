@@ -1,47 +1,30 @@
 package entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
 
 public class SubVersionEntity {
-    private String id;
-    private String versionId;
-    private String projectId;
-    private String file;
+
+    private UUID id;
+
+    private List<SubVersionContentEntity> content;
+
+    private ProjectEntity project;
+
     private LocalDateTime uploadDate;
 
-    public SubVersionEntity(){
+    private String compiling;
+
+    public SubVersionEntity() {
     }
 
-    public SubVersionEntity(String id, String projectId, String versionId, String file, LocalDateTime uploadDate){
-        this.id = id;
-        this.projectId = projectId;
-        this.file = file;
-        this.uploadDate = uploadDate;
-        this.versionId = versionId;
+    public ProjectEntity getProject() {
+        return project;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(String projectId) {
-        this.projectId = projectId;
-    }
-
-    public String getFile() {
-        return file;
-    }
-
-    public void setFile(String file) {
-        this.file = file;
+    public void setProject(ProjectEntity project) {
+        this.project = project;
     }
 
     public LocalDateTime getUploadDate() {
@@ -52,11 +35,27 @@ public class SubVersionEntity {
         this.uploadDate = uploadDate;
     }
 
-    public String getVersionId() {
-        return versionId;
+    public UUID getId() {
+        return id;
     }
 
-    public void setVersionId(String versionId) {
-        this.versionId = versionId;
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public List<SubVersionContentEntity> getContent() {
+        return content;
+    }
+
+    public void setContent(List<SubVersionContentEntity> content) {
+        this.content = content;
+    }
+
+    public String getCompiling() {
+        return compiling;
+    }
+
+    public void setCompiling(String compiling) {
+        this.compiling = compiling;
     }
 }

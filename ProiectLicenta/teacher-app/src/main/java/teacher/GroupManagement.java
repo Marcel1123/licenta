@@ -2,9 +2,8 @@ package teacher;
 
 import com.google.gson.Gson;
 import entity.GroupEntity;
-import entity.TeacherEntity;
+import entity.person.TeacherEntity;
 import models.CreateGroupModel;
-import models.DeleteGroupModel;
 import org.primefaces.PrimeFaces;
 import utilitar.HttpRequestAPI;
 
@@ -17,6 +16,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.http.HttpResponse;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @ManagedBean
 @RequestScoped
@@ -56,16 +56,15 @@ public class GroupManagement {
     }
 
     public void removeGroup(GroupEntity groupEntity){
-        DeleteGroupModel deleteGroupModel = new DeleteGroupModel(groupEntity.getId(), this.teacher.getId().toString());
         try {
-            HttpResponse response = HttpRequestAPI.DELETEMethod("http://localhost:9091/group/", groupEntity.getId(), this.teacher.getId().toString());
+            HttpResponse response = HttpRequestAPI.DELETEMethod("http://localhost:9091/group/", groupEntity.getId().toString(), this.teacher.getId().toString());
 
             if(response.statusCode() == HttpURLConnection.HTTP_NO_CONTENT){
                 this.groupEntities.removeIf(g -> groupEntity.getId().equals(g.getId()));
-                PrimeFaces.current().executeScript("create_success_message(\"Create group\", \"Group successful deleted\")");
+                PrimeFaces.current().executeScript("create_success_message(\"Remove group\", \"Group successful deleted\")");
             }
         } catch (IOException | InterruptedException e) {
-            PrimeFaces.current().executeScript("create_warning_message(\"Create group\", \"Server error\")");
+            PrimeFaces.current().executeScript("create_warning_message(\"Remove group\", \"Server error\")");
         }
     }
 
@@ -93,33 +92,18 @@ public class GroupManagement {
     }
 
     public String groupInformation(GroupEntity groupEntity){
-        try {
-            HttpResponse response = HttpRequestAPI.GETMethodResponse("http://localhost:9091/group/name/", groupEntity.getName());
-            GroupEntity groupEntity1 = gson.fromJson(response.body().toString(), GroupEntity.class);
-            if(!groupEntity.getId().equals(groupEntity1.getId()) || !this.teacher.getId().toString().equals(groupEntity1.getCreatorId())){
-                return "groups";
-            } else {
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("target_group", response.body().toString());
-                return "group-management";
-            }
-        } catch (IOException | InterruptedException e) {
-            return "groups";
-        }
+        GroupEntity g = groupEntities.stream()
+                            .filter(a -> a.getName().equals(groupEntity.getName()))
+                            .collect(Collectors.toList())
+                            .get(0);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("target_group", gson.toJson(g));
+        return "group-management";
     }
 
     public String groupProject(GroupEntity groupEntity){
-        try {
-            HttpResponse response = HttpRequestAPI.GETMethodResponse("http://localhost:9091/group/name/", groupEntity.getName());
-            GroupEntity groupEntity1 = gson.fromJson(response.body().toString(), GroupEntity.class);
-            if(!groupEntity.getId().equals(groupEntity1.getId()) || !this.teacher.getId().toString().equals(groupEntity1.getCreatorId())){
-                return "groups";
-            } else {
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("target_group", response.body().toString());
-                return "projects";
-            }
-        } catch (IOException | InterruptedException e) {
-            return "groups";
-        }
+
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("target_group", gson.toJson(groupEntity));
+        return "projects";
     }
 
     public GroupEntity getGroupEntity() {
@@ -129,4 +113,6 @@ public class GroupManagement {
     public List<GroupEntity> getGroupEntities() {
         return groupEntities;
     }
+
+
 }

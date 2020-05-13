@@ -121,17 +121,14 @@ public class ShowAllCodeFileFromPathController  implements Initializable {
             Gson gson = new Gson();
             String bodyForRequest = gson.toJson(versionModel);
             try {
-                HttpResponse response = HttpRequestAPI.POSTMethod("http://localhost:9091/version/", bodyForRequest);
+                HttpResponse response = HttpRequestAPI.POSTMethod("http://localhost:9093/version/", bodyForRequest);
 
                 if(response.statusCode() != HttpURLConnection.HTTP_CREATED){
                     Thread.sleep(5000);
                     sendFileToServer(string);
                 }
-
             } catch (IOException e) {
-
             } catch (InterruptedException e) {
-
             }
         }
     }

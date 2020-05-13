@@ -8,12 +8,14 @@ module Marcel {
 
     exports Marcel;
     exports Marcel.entities;
+    exports Marcel.entities.person;
     exports Marcel.controllers.uicontrollers;
     exports Marcel.controllers.entitycontrollers;
     exports Marcel.controllers.fxmlcontroller;
     exports Marcel.models;
     opens Marcel to javafx.fxml;
     opens Marcel.entities to com.google.gson;
+    opens Marcel.entities.person to com.google.gson;
     opens Marcel.models to com.google.gson;
     opens Marcel.controllers.uicontrollers to com.google.gson;
     exports Marcel.myutil;

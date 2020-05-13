@@ -4,18 +4,16 @@ public class GeneralProjectInformationModel {
     private String projectId;
     private String projectName;
     private String student;
-    private String compilationStatus;
     private String statusPlagiere;
     private String isFinal;
 
     public GeneralProjectInformationModel(){
     }
 
-    public GeneralProjectInformationModel(String projectId, String projectName, String student, String compilationStatus, String statusPlagiere, String isFinal) {
+    public GeneralProjectInformationModel(String projectId, String projectName, String student, String statusPlagiere, String isFinal) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.student = student;
-        this.compilationStatus = compilationStatus;
         this.statusPlagiere = statusPlagiere;
         this.isFinal = isFinal;
     }
@@ -34,14 +32,6 @@ public class GeneralProjectInformationModel {
 
     public void setStudent(String student) {
         this.student = student;
-    }
-
-    public String getCompilationStatus() {
-        return compilationStatus;
-    }
-
-    public void setCompilationStatus(String compilationStatus) {
-        this.compilationStatus = compilationStatus;
     }
 
     public String getStatusPlagiere() {

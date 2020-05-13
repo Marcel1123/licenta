@@ -1,0 +1,13 @@
+package marcel.versionmanagement;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class VersionManagementApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(VersionManagementApplication.class, args);
+    }
+
+}

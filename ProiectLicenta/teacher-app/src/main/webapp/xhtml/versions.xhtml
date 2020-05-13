@@ -27,6 +27,11 @@
                             <p:column footerText="Upload date" headerText ="Upload date" style="text-align: center;" styleClass="disable-select text-overflow-custom">
                                 <h:outputText value="#{cVersion.uploadDate}"/>
                             </p:column>
+
+                            <p:column footerText="Compile Status" headerText="Compile Status" styleClass="text-overflow-custom" style="text-align: center;">
+                                <h:outputText value="#{cVersion.compiling}"/>
+                            </p:column>
+
                             <p:column footerText="Action" headerText="Action" style="text-align: center;" styleClass="disable-select text-overflow-custom">
                                 <h:commandButton value="Display" id="create-popup-btn" class="btn btn-success" style="margin: 5px; color: white;" action="#{versionManagement.showVersions(cVersion)}"/>
                             </p:column>

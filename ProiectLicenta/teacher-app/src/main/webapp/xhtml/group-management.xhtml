@@ -33,21 +33,17 @@
                         >
 
                             <p:column headerText="First Name" style="text-align: center;" styleClass="disable-select text-overflow-custom"
-                                      footerText="First Name"
-                            >
-
-                                <h:outputText value="#{cStudent.firstName}"/>
+                                      footerText="First Name">
+                                <h:outputText value="#{cStudent.person.firstName}"/>
                             </p:column>
 
                             <p:column headerText="Last Name" style="text-align: center;" styleClass="disable-select text-overflow-custom"
-                                      footerText="Last Name"
-                            >
-                                <h:outputText value="#{cStudent.lastName}"/>
+                                      footerText="Last Name">
+                                <h:outputText value="#{cStudent.person.lastName}"/>
                             </p:column>
 
                             <p:column headerText="Year" style="text-align: center;" styleClass="disable-select text-overflow-custom"
-                                      footerText="Year"
-                            >
+                                      footerText="Year">
                                 <h:outputText value="#{cStudent.year}"/>
                             </p:column>
 
@@ -59,19 +55,16 @@
 
                     <div class="col-sm-6" style="margin-top: 50px;">
                         <p:dataTable var="student" value="#{editGroupMembers.availableStudents}" scrollable="true" scrollHeight="500"
-                                     emptyMessage="No students found"
-                        >
+                                     emptyMessage="No students found">
 
                             <p:column headerText="First Name" style="text-align: center;"
-                                      styleClass="disable-select text-overflow-custom" footerText="First Name"
-                            >
-                                <h:outputText value="#{student.firstName}"/>
+                                      styleClass="disable-select text-overflow-custom" footerText="First Name">
+                                <h:outputText value="#{student.person.firstName}"/>
                             </p:column>
 
                             <p:column headerText="Last Name" style="text-align: center;"
-                                      styleClass="disable-select text-overflow-custom" footerText="Last Name"
-                            >
-                                <h:outputText value="#{student.lastName}"/>
+                                      styleClass="disable-select text-overflow-custom" footerText="Last Name">
+                                <h:outputText value="#{student.person.lastName}"/>
                             </p:column>
 
                             <p:column headerText="Year" style="text-align: center;"

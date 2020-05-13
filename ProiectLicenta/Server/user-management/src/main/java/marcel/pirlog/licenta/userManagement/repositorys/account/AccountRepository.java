@@ -1,14 +1,12 @@
 package marcel.pirlog.licenta.userManagement.repositorys.account;
 
 import marcel.pirlog.licenta.userManagement.entities.AccountEntity;
-import marcel.pirlog.licenta.userManagement.entities.StudentEntity;
-import marcel.pirlog.licenta.userManagement.entities.TeacherEntity;
+import marcel.pirlog.licenta.userManagement.entities.person.StudentEntity;
+import marcel.pirlog.licenta.userManagement.entities.person.TeacherEntity;
+import marcel.pirlog.licenta.userManagement.utils.Hash;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import java.util.List;
 
 @Repository
 public class AccountRepository implements IAccountRepository {
@@ -22,22 +20,16 @@ public class AccountRepository implements IAccountRepository {
     }
 
     @Override
-    public List<AccountEntity> listAccounts() {
-        CriteriaQuery<AccountEntity> criteriaQuery = entityManager.getCriteriaBuilder().createQuery(AccountEntity.class);
-        Root<AccountEntity> root = criteriaQuery.from(AccountEntity.class);
-        return entityManager.createQuery(criteriaQuery).getResultList();
-    }
-
-    @Override
     public StudentEntity findByCredential(String username, String password) {
         TypedQuery<StudentEntity> accountEntityTypedQuery = entityManager.createQuery(
                 "select s from AccountEntity c" +
-                        " join StudentEntity s on s.accountId = c.id where c.username = :username " +
+                        " join PersonEntity p on p.accountId = c.id " +
+                        " join StudentEntity s on s.person = p.id where c.username = :username " +
                         " and c.password = :password", StudentEntity.class
         );
         try{
             return accountEntityTypedQuery.setParameter("username", username)
-                    .setParameter("password", password)
+                    .setParameter("password", Hash.toHexString(Hash.getSHA(password)))
                     .getSingleResult();
         } catch (NoResultException ne) {
             return null;
@@ -47,12 +39,14 @@ public class AccountRepository implements IAccountRepository {
     @Override
     public TeacherEntity findTeacher(String username, String password) {
         TypedQuery<TeacherEntity> teacherAccount = entityManager.createQuery(
-                "select t from AccountEntity c " +
-                        "join TeacherEntity t on t.accountId = c.id where c.username = :username " +
+                "select s from AccountEntity c" +
+                        " join PersonEntity p on p.accountId = c.id " +
+                        " join TeacherEntity s on s.person = p.id where c.username = :username " +
                         " and c.password = :password", TeacherEntity.class
         );
         try{
-            return teacherAccount.setParameter("username", username).setParameter("password", password)
+            return teacherAccount.setParameter("username", username)
+                    .setParameter("password",  Hash.toHexString(Hash.getSHA(password)))
                     .getSingleResult();
         } catch (NoResultException ne){
             return null;

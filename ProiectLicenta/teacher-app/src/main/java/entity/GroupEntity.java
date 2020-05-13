@@ -1,21 +1,46 @@
 package entity;
 
+import entity.person.PersonEntity;
+import entity.person.TeacherEntity;
+
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.List;
+import java.util.UUID;
 
 public class GroupEntity implements Serializable {
+
+    private UUID id;
+
+    private TeacherEntity creator;
+
     private String name;
-    private String creatorId;
-    private String id;
+
+    private List<PersonEntity> groupMember;
 
     public GroupEntity(){
-
     }
 
-    public GroupEntity(String name, String creatorId, String id){
+    public GroupEntity(UUID id, TeacherEntity creator, String name, List<PersonEntity> groupMember) {
         this.id = id;
-        this.creatorId = creatorId;
+        this.creator = creator;
         this.name = name;
+        this.groupMember = groupMember;
+    }
+
+    public TeacherEntity getCreator() {
+        return creator;
+    }
+
+    public void setCreator(TeacherEntity creator) {
+        this.creator = creator;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -26,34 +51,11 @@ public class GroupEntity implements Serializable {
         this.name = name;
     }
 
-    public String getId() {
-        return id;
+    public List<PersonEntity> getGroupMember() {
+        return groupMember;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getCreatorId() {
-        return creatorId;
-    }
-
-    public void setCreatorId(String creatorId) {
-        this.creatorId = creatorId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        GroupEntity that = (GroupEntity) o;
-        return name.equals(that.name) &&
-                creatorId.equals(that.creatorId) &&
-                id.equals(that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, creatorId, id);
+    public void setGroupMember(List<PersonEntity> groupMember) {
+        this.groupMember = groupMember;
     }
 }

@@ -25,21 +25,16 @@
                 <div id="project-manage" class="col-sm-12 disable-select" style="margin-top: 50px;">
                     <p:dataTable var="cProject" value="#{projectManagement.projects}" scrollable="true" scrollHeight="500" emptyMessage="No students found">
                         <p:column footerText="Project Name" headerText ="Project Name" style="text-align: center;" styleClass="disable-select text-overflow-custom">
-                            <h:outputText value="#{cProject.projectName}"/>
+                            <h:outputText value="#{cProject.name}"/>
                         </p:column>
 
                         <p:column footerText="Stundent Information" headerText="Student Information" style="text-align: center;" styleClass="text-overflow-custom">
-                            <h:outputText value="#{cProject.student}"/>
-                        </p:column>
-
-                        <p:column footerText="Compile Status" headerText="Compile Status" styleClass="text-overflow-custom" style="text-align: center;">
-                            <h:outputText value="#{cProject.compilationStatus}"
-                                          style="#{cProject.compilationStatus == 'impossible' ? 'color:red;' : cProject.compilationStatus == 'success' ? 'color:green;' : 'color:gray;'}"/>
+                            <h:outputText value="#{cProject.studentId.person.lastName} + #{cProject.studentId.person.firstName} + #{cProject.studentId.year}"/>
                         </p:column>
 
                         <p:column footerText="Status Plagiator" headerText="Status Plagiator" styleClass="text-overflow-custom" style="text-align: center;">
-                            <h:outputText value="#{cProject.statusPlagiere}"
-                                          style="#{cProject.statusPlagiere == 'impossible' ? 'color:red;' : cProject.statusPlagiere == 'unknown' ? 'color:gray;' : 'color:black;'}"/>
+                            <h:outputText value="#{cProject.plagiaryStatus}"
+                                          style="#{cProject.plagiaryStatus == 'impossible' ? 'color:red;' : cProject.plagiaryStatus == 'unknown' ? 'color:gray;' : 'color:black;'}"/>
                         </p:column>
 
                         <p:column footerText="Is ended" headerText="Is ended" styleClass="text-overflow-custom" style="text-align: center;">

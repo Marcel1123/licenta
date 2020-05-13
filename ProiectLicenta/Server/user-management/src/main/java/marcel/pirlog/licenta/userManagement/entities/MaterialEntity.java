@@ -1,6 +1,8 @@
 package marcel.pirlog.licenta.userManagement.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -9,17 +11,24 @@ import java.util.UUID;
 public class MaterialEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genname")
-    @SequenceGenerator(name = "genname", sequenceName = "seqname", allocationSize = 1)
+//    @SequenceGenerator(name = "genname", sequenceName = "seqname", allocationSize = 1)
     @Column(name = "Id")
+    @NotNull
+    @NotEmpty
     private UUID id;
 
     @Column(name = "Nume")
+    @NotNull
+    @NotEmpty
     private String name;
 
     @Column(name = "An")
+    @NotNull
     private int year;
 
     @Column(name = "Semestru")
+    @NotNull
+    @NotEmpty
     private String semester;
 
     public MaterialEntity(){

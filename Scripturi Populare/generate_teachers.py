@@ -4,12 +4,16 @@ import uuid
 import json
 import string
 import secrets
+import hashlib
 import urllib.parse
 import urllib.request
 from pprint import pprint
 from random import randint
 
 username_list = []
+students_id = []
+teacher_id = []
+group_id = []
 
 
 def generate_name():
@@ -22,7 +26,8 @@ def generate_name():
     table = text.maketrans(d, l)
     the_page = text.translate(table)
     text1['name'] = the_page
-    pprint(text1)
+    # pprint(text1)
+    # time.sleep(2)
     return text1
 
 
@@ -35,88 +40,126 @@ def generate_password():
 
 
 def generate_teachers():
-    with open("random_teachers.txt", "w+") as teachers:
+    with open("random_teachers.txt", "w+") as teachers, open("conturi_profi.txt", "w+") as conturi:
         global username_list
         cont = ""
-        for i in range(0, 10):
-            teacher = generate_name()
-            name = teacher['name'].split(' ')
-            f_name = ""
-            l_name = ""
-            usr = ""
-            if len(name) == 3:
-                l_name = name[2]
-                f_name = name[1]
-            elif len(name) == 2:
-                l_name = name[1]
-                f_name = name[0]
-            usr = l_name.lower() + '.' + f_name.lower()
-            if usr in username_list:
-                usr = usr + str(username_list.count(usr) + 1)
-            username_list.append(usr)
-            cont = str(uuid.uuid4())
-            query_teacher_account = "INSERT INTO public.conturi( id, password, username) VALUES (\'%s\', \'%s\', \'%s\');" % (
-                            cont, generate_password(), usr)
-            query_teacher = "INSERT INTO public.profesori( id, id_cont, email, nume, prenume) VALUES (\'%s\', \'%s\', \'%s\', \'%s\', \'%s\');" % (
-                            str(uuid.uuid4()), cont, usr + "@profs.info.uaic.ro", l_name, f_name)
-            teachers.write(query_teacher_account + '\n')
-            teachers.write(query_teacher + '\n\n')
-            time.sleep(1)
+        for i in range(0, 20):
+            try:
+                teacher = generate_name()
+                name = teacher['name'].split(' ')
+                f_name = ""
+                l_name = ""
+                usr = ""
+                if len(name) == 3:
+                    l_name = name[2]
+                    f_name = name[1]
+                elif len(name) == 2:
+                    l_name = name[1]
+                    f_name = name[0]
+                usr = l_name.lower() + '.' + f_name.lower()
+                if usr in username_list:
+                    usr = usr + str(username_list.count(usr) + 1)
+                cont = str(uuid.uuid4())
+                username_list.append(usr)
+                pwd = generate_password()
+                query_teacher_account = "INSERT INTO public.conturi( id, password, username) VALUES (\'%s\', \'%s\', \'%s\');" % (
+                cont, hashlib.sha256(pwd.encode()).hexdigest(), usr)
+
+                pers_id = str(uuid.uuid4())
+                query_teacher_person = "INSERT INTO public.person( id, nume, prenume, id_cont) VALUES (\'%s\', \'%s\', \'%s\', \'%s\');" % (
+                pers_id, l_name, f_name, cont)
+
+                th_id = str(uuid.uuid4())
+                # teacher_id.append(th_id)
+                query_teacher = "INSERT INTO public.profesori( id, email, person_id) VALUES (\'%s\', \'%s\', \'%s\');" % (
+                th_id, usr + "@profs.info.uaic.ro", pers_id)
+
+                teachers.write(query_teacher_account + '\n')
+                teachers.write(query_teacher_person + '\n')
+                teachers.write(query_teacher + '\n\n')
+                teacher_id.append(th_id)
+                conturi.write(usr + " " + pwd + '\n')
+                time.sleep(1)
+            except Exception:
+                time.sleep(10)
 
 
 def generate_studs():
-    with open("random_students.txt", "w+") as teachers:
+    with open("random_students.txt", "w+") as teachers, open("conturi.txt", "w+") as conturi:
         global username_list
         cont = ""
-        for i in range(0, 100):
-            teacher = generate_name()
-            name = teacher['name'].split(' ')
-            f_name = ""
-            l_name = ""
-            usr = ""
-            if len(name) == 3:
-                l_name = name[2]
-                f_name = name[1]
-            elif len(name) == 2:
-                l_name = name[1]
-                f_name = name[0]
-            usr = l_name.lower() + '.' + f_name.lower()
-            if usr in username_list:
-                usr = usr + str(username_list.count(usr) + 1)
-            username_list.append(usr)
-            cont = str(uuid.uuid4())
-            query_teacher_account = "INSERT INTO public.conturi( id, password, username) VALUES (\'%s\', \'%s\', \'%s\');" % (
-                            cont, generate_password(), usr)
-            query_teacher = "INSERT INTO public.studenti(id, id_cont, nume, prenume, an, grupa) VALUES (\'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\');" % (
-                            str(uuid.uuid4()), cont, l_name, f_name, str(randint(1, 3)), "")
-            teachers.write(query_teacher_account + '\n')
-            teachers.write(query_teacher + '\n\n')
-            time.sleep(1)
+        for j in range(0, 10):
+            try:
+                for i in range(0, 10):
+                    teacher = generate_name()
+                    name = teacher['name'].split(' ')
+                    f_name = ""
+                    l_name = ""
+                    usr = ""
+                    if len(name) == 3:
+                        l_name = name[2]
+                        f_name = name[1]
+                    elif len(name) == 2:
+                        l_name = name[1]
+                        f_name = name[0]
+                    usr = l_name.lower() + '.' + f_name.lower()
+                    if usr in username_list:
+                        usr = usr + str(username_list.count(usr) + 1)
+                    username_list.append(usr)
+
+                    cont = str(uuid.uuid4())
+
+                    pwd = generate_password()
+                    query_teacher_account = "INSERT INTO public.conturi( id, password, username) VALUES (\'%s\', \'%s\', \'%s\');" % (cont, hashlib.sha256(pwd.encode()).hexdigest(), usr)
+
+                    pers_id = str(uuid.uuid4())
+                    query_teacher_person = "INSERT INTO public.person( id, nume, prenume, id_cont) VALUES (\'%s\', \'%s\', \'%s\', \'%s\');" % (pers_id, l_name, f_name, cont)
+
+                    th_id = str(uuid.uuid4())
+                    students_id.append(pers_id)
+                    query_teacher = "INSERT INTO public.studenti(id, an, person_id) VALUES (\'%s\', \'%s\', \'%s\');" % (th_id, str(randint(1, 3)), pers_id)
+
+                    teachers.write(query_teacher_account + '\n')
+                    teachers.write(query_teacher_person + '\n')
+                    teachers.write(query_teacher + '\n\n')
+
+                    conturi.write(usr + " " + pwd + '\n')
+
+                    time.sleep(1)
+            except Exception:
+                pass
+            time.sleep(10)
 
 
 def generate_groups():
     nume = ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6']
-    creator_id = ['3f742159-144b-4b4e-8632-66f7a3f53edb', 'b2e07fd0-163e-4ee7-b9f1-074761e6908f', '8073c200-5e6f-46e1-9640-f523f21d590b', '1f212a24-8c47-4a2e-96f4-dbe0aac8bbcd', '0c9be54c-3c38-48f8-b213-a4138aa149b4', '770df657-e4d4-49f1-b9b9-fee3eea58978', '8277ccfc-bf9a-488f-b3d0-f6966b967096', 'ff4dd902-eb9e-4c12-aa48-5eea7866776b', 'f12f5cf9-0345-4cd6-b811-3e0565a3ae75', '40c12c42-5929-4c50-be0c-9594174338c3', '9d22852f-afe8-4cfe-9899-3282cf445a5b', 'b76a16c5-c6a6-4d5c-ab0f-ac4336c1724d',]
+
     with open("initial_groups.txt", "w+") as data:
         for i in range(0, 12):
-            querry = "INSERT INTO public.grupuri( id, id_creator, nume) VALUES (\'%s\', \'%s\', \'%s\');" % (str(uuid.uuid4()), str(creator_id[i]), '1' + str(nume[i]))
+            g_id = str(uuid.uuid4())
+            group_id.append(g_id)
+            querry = "INSERT INTO public.grupuri( id, nume, creator_id) VALUES (\'%s\', \'%s\', \'%s\');" % (g_id, '1' + str(nume[i]), str(random.choice(teacher_id)))
             data.write(querry + '\n')
-            querry = "INSERT INTO public.grupuri( id, id_creator, nume) VALUES (\'%s\', \'%s\', \'%s\');" % ( str(uuid.uuid4()), str(creator_id[i]), '2' + str(nume[i]))
+
+            g_id = str(uuid.uuid4())
+            group_id.append(g_id)
+            querry = "INSERT INTO public.grupuri( id, nume, creator_id) VALUES (\'%s\', \'%s\', \'%s\');" % (g_id, '2' + str(nume[i]), str(random.choice(teacher_id)))
             data.write(querry + '\n')
-            querry = "INSERT INTO public.grupuri( id, id_creator, nume) VALUES (\'%s\', \'%s\', \'%s\');" % ( str(uuid.uuid4()), str(creator_id[i]), '3' + str(nume[i]))
+
+            g_id = str(uuid.uuid4())
+            group_id.append(g_id)
+            querry = "INSERT INTO public.grupuri( id, nume, creator_id) VALUES (\'%s\', \'%s\', \'%s\');" % (g_id, '3' + str(nume[i]), str(random.choice(teacher_id)))
             data.write(querry + '\n')
 
 
 def generate_group_member():
-    with open("students_id.txt", 'r') as std_id, open("group_id.txt", 'r') as group, open("random_member.txt", 'w+') as member:
-        sudents = std_id.read().split('\n')
-        groups = group.read().split('\n')
-        for i in sudents:
-            querry = "INSERT INTO public.membri_grup( id, id_grup, id_membru) VALUES (\'%s\', %s, %s);" % (str(uuid.uuid4()), random.choice(groups), i)
+    with open("random_member.txt", 'w+') as member:
+        for i in students_id:
+            querry = "INSERT INTO public.group_memger( group_id, memgru_id) VALUES  (\'%s\', \'%s\');" % (random.choice(group_id), i)
             member.write(querry + '\n')
 
 
-# generate_teachers()
-# generate_studs()
-# generate_groups()
-# generate_group_member()
+generate_teachers()
+generate_studs()
+generate_groups()
+generate_group_member()

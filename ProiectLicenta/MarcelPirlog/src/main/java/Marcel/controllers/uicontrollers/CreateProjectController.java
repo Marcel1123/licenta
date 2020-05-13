@@ -4,6 +4,7 @@ import Marcel.App;
 import Marcel.AppConfiguration;
 import Marcel.controllers.entitycontrollers.LocalProjectLocationController;
 import Marcel.controllers.fxmlcontroller.FxmlController;
+import Marcel.entities.GroupEntity;
 import Marcel.models.CreateProjectModel;
 import Marcel.models.MaterialModel;
 import Marcel.models.StudentGroupModel;
@@ -59,9 +60,9 @@ public class CreateProjectController implements Initializable {
         if(verifyProjectInformation()){
             responseMessage.setVisible(false);
             if(groups.contains(groupChoiceBox.getValue())){
-                createProjectModelForClass();
+                createProjectModelForClass(true);
             } else {
-                createProjectModelForGroup();
+                createProjectModelForClass(false);
             }
         } else {
             responseMessage.setText("All fields are mandatory");
@@ -116,30 +117,39 @@ public class CreateProjectController implements Initializable {
 //        programmingLanguageOption.getItems().add(".c");
 //        programmingLanguageOption.getItems().add(".py");
 
-        for(StudentGroupModel studentGroupModel : App.getAppConfiguration().getStudentGroupModels()){
-            groupChoiceBox.getItems().add(studentGroupModel.getGroupName());
+        for(GroupEntity studentGroupModel : App.getAppConfiguration().getStudentGroupModels()){
+            groupChoiceBox.getItems().add(studentGroupModel.getName());
         }
     }
 
-    private void createProjectModelForClass() throws IOException, InterruptedException {
+    private void createProjectModelForClass(boolean flag) throws IOException, InterruptedException {
         try{
-            List<MaterialModel> materialId = Arrays.stream(App.getAppConfiguration().getMaterialModels())
-                    .filter(p -> p.getName().equals(materialName.getValue()))
+
+            List<GroupEntity> studentGroupModels = Arrays.stream(appConfiguration.getStudentGroupModels())
+                    .filter(p -> p.getName().equals(groupChoiceBox.getValue()))
                     .collect(Collectors.toList());
 
-            List<StudentGroupModel> studentGroupModels = Arrays.stream(appConfiguration.getStudentGroupModels())
-                    .filter(p -> p.getGroupName().equals(groupChoiceBox.getValue()))
-                    .collect(Collectors.toList());
+            List<MaterialModel> materialId = new ArrayList<>();
+
+            if(flag){
+                materialId = Arrays.stream(App.getAppConfiguration().getMaterialModels())
+                        .filter(p -> p.getName().equals(materialName.getValue()))
+                        .collect(Collectors.toList());
+            } else {
+                MaterialModel m = new MaterialModel();
+                m.setId(new UUID(0L, 0L).toString());
+                materialId.add(m);
+            }
 
             CreateProjectModel createProjectModel = new CreateProjectModel(materialId.get(0).getId(),
                     appConfiguration.getStudent().getId().toString(),
                     projectName.getText(),
-                    studentGroupModels.get(0).getGroupId().toString());
+                    studentGroupModels.get(0).getId().toString());
 
             materialId = null;
             studentGroupModels = null;
 
-            HttpResponse response = HttpRequestAPI.POSTMethod("http://localhost:9091/project/", MapFromUserEntityToJson.returnCreateProjectInJson(createProjectModel));
+            HttpResponse response = HttpRequestAPI.POSTMethod("http://localhost:9093/project/", MapFromUserEntityToJson.returnCreateProjectInJson(createProjectModel));
 
             if(response.statusCode() == HttpURLConnection.HTTP_CREATED){
                 responseMessage.setVisible(false);
@@ -155,10 +165,6 @@ public class CreateProjectController implements Initializable {
             createMaterial();
             materialName.setVisible(true);
         }
-    }
-
-    private void createProjectModelForGroup(){
-
     }
 
     private boolean verifyProjectInformation(){

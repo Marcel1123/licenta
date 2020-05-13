@@ -2,10 +2,10 @@ package teacher;
 
 import com.google.gson.Gson;
 import entity.GroupEntity;
-import entity.TeacherEntity;
+import entity.person.StudentEntity;
+import entity.person.TeacherEntity;
 import models.AddMemberModel;
 import models.SpecialGroupModel;
-import models.SpecialStudentModel;
 import org.primefaces.PrimeFaces;
 import utilitar.HttpRequestAPI;
 
@@ -16,7 +16,9 @@ import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.http.HttpResponse;
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Map;
 
 @ManagedBean
 @RequestScoped
@@ -26,11 +28,11 @@ public class EditGroupMembers {
     private TeacherEntity teacher;
     private final Gson gson = new Gson();
 
-    private LinkedList<SpecialStudentModel> availableStudents;
-    private LinkedList<SpecialStudentModel> groupStudents;
+    private LinkedList<StudentEntity> availableStudents;
+    private LinkedList<StudentEntity> groupStudents;
 
-    private LinkedList<SpecialStudentModel> filteredAvailableStudents;
-    private LinkedList<SpecialStudentModel> filteredGroupStudents;
+    private LinkedList<StudentEntity> filteredAvailableStudents;
+    private LinkedList<StudentEntity> filteredGroupStudents;
 
     @PostConstruct
     public  void init(){
@@ -46,12 +48,10 @@ public class EditGroupMembers {
         this.subject = this.gson.fromJson(string, GroupEntity.class);
 
         try {
-            HttpResponse response = HttpRequestAPI.GETMethodResponse("http://localhost:9091/group/members/", subject.getId());
-            this.specialGroupModel = this.gson.fromJson(response.body().toString(), SpecialGroupModel.class);
-            this.availableStudents = new LinkedList<SpecialStudentModel>(Arrays.asList(this.specialGroupModel.getAvailableStudents()));
-            this.groupStudents = new LinkedList<SpecialStudentModel>(Arrays.asList(this.specialGroupModel.getGroupStudents()));
-            this.filteredAvailableStudents = this.availableStudents;
-            this.filteredGroupStudents = this.groupStudents;
+                HttpResponse response = HttpRequestAPI.GETMethodResponse("http://localhost:9091/group/members/", subject.getId().toString());
+                this.specialGroupModel = this.gson.fromJson(response.body().toString(), SpecialGroupModel.class);
+                this.availableStudents = new LinkedList<StudentEntity>(Arrays.asList(this.specialGroupModel.getAvailableStudents()));
+                this.groupStudents = new LinkedList<StudentEntity>(Arrays.asList(this.specialGroupModel.getGroupStudents()));
             } catch (IOException | InterruptedException e) {
         }
     }
@@ -59,58 +59,12 @@ public class EditGroupMembers {
     public void build(){
     }
 
-    /*public boolean globalFilterFunctionYear(Object value, Object filter, Locale locale) {
-        String filterText = (filter == null) ? null : filter.toString().trim();
-        if (filterText == null || filterText.equals("")) {
-            return true;
-        }
-        return ((String)value.toString()).startsWith(filterText);
-    }
-
-    public boolean globalFilterFunctionFirstName(Object value, Object filter, Locale locale) {
-        String filterText = (filter == null) ? null : filter.toString().trim();
-        if (filterText == null || filterText.equals("")) {
-            return true;
-        }
-        return ((String)value.toString()).startsWith(filterText);
-    }
-
-    public boolean globalFilterFunctionLastName(Object value, Object filter, Locale locale) {
-        String filterText = (filter == null) ? null : filter.toString().trim();
-        if (filterText == null || filterText.equals("")) {
-            return true;
-        }
-        return ((String)value.toString()).startsWith(filterText);
-    }
-
-    public boolean newGlobalFilter(Object value, Object filter, Locale locale) {
-        String filterText = (filter == null) ? null : filter.toString().trim();
-        if (filterText == null || filterText.equals("")) {
-            return true;
-        }
-        return ((String)value.toString()).startsWith(filterText);
-    }
-
-    public boolean newGlobalFilterFirstName(Object value, Object filter, Locale locale) {
-        String filterText = (filter == null) ? null : filter.toString().trim();
-        if (filterText == null || filterText.equals("")) {
-            return true;
-        }
-        return ((String)value.toString()).startsWith(filterText);
-    }
-
-    public boolean newGlobalFilterLastName(Object value, Object filter, Locale locale) {
-        String filterText = (filter == null) ? null : filter.toString().trim();
-        if (filterText == null || filterText.equals("")) {
-            return true;
-        }
-        return ((String)value.toString()).startsWith(filterText);
-    }*/
-
-
-    public void addMember(SpecialStudentModel specialStudentModel1){
+    public String addMember(StudentEntity specialStudentModel1){
         try{
-            AddMemberModel addMemberModel = new AddMemberModel(this.teacher.getId().toString(), this.subject.getId(), specialStudentModel1.getId().toString());
+            AddMemberModel addMemberModel = new AddMemberModel(this.teacher.getId().toString(),
+                    this.subject.getId().toString(),
+                    specialStudentModel1.getPerson().getId().toString());
+
             HttpResponse response = HttpRequestAPI.POSTMethod("http://localhost:9091/group/members/add/", this.gson.toJson(addMemberModel));
 
             if(response.statusCode() == HttpURLConnection.HTTP_CREATED){
@@ -121,13 +75,16 @@ public class EditGroupMembers {
             }
         } catch (IOException | InterruptedException e){
         }
-        this.filteredAvailableStudents = this.availableStudents;
-        this.filteredGroupStudents = this.groupStudents;
+        specialStudentModel1 = null;;
+        return "group-management";
     }
 
-    public void removeMember(SpecialStudentModel specialStudentModel){
+    public String removeMember(StudentEntity specialStudentModel){
         try{
-            AddMemberModel addMemberModel = new AddMemberModel(this.teacher.getId().toString(), this.subject.getId(), specialStudentModel.getId().toString());
+            AddMemberModel addMemberModel = new AddMemberModel(this.teacher.getId().toString(),
+                    this.subject.getId().toString(),
+                    specialStudentModel.getPerson().getId().toString());
+
             HttpResponse response = HttpRequestAPI.POSTMethod("http://localhost:9091/group/members/remove/", this.gson.toJson(addMemberModel));
 
             if(response.statusCode() == HttpURLConnection.HTTP_NO_CONTENT){
@@ -138,8 +95,8 @@ public class EditGroupMembers {
             }
         } catch (IOException | InterruptedException e){
         }
-        this.filteredAvailableStudents = this.availableStudents;
-        this.filteredGroupStudents = this.groupStudents;
+        specialStudentModel = null;
+        return "group-management";
     }
 
     public String backToHome(){
@@ -174,35 +131,35 @@ public class EditGroupMembers {
         this.specialGroupModel = specialGroupModel;
     }
 
-    public LinkedList<SpecialStudentModel> getAvailableStudents() {
+    public LinkedList<StudentEntity> getAvailableStudents() {
         return availableStudents;
     }
 
-    public void setAvailableStudents(LinkedList<SpecialStudentModel> availableStudents) {
+    public void setAvailableStudents(LinkedList<StudentEntity> availableStudents) {
         this.availableStudents = availableStudents;
     }
 
-    public LinkedList<SpecialStudentModel> getGroupStudents() {
+    public LinkedList<StudentEntity> getGroupStudents() {
         return groupStudents;
     }
 
-    public void setGroupStudents(LinkedList<SpecialStudentModel> groupStudents) {
+    public void setGroupStudents(LinkedList<StudentEntity> groupStudents) {
         this.groupStudents = groupStudents;
     }
 
-    public LinkedList<SpecialStudentModel> getFilteredAvailableStudents() {
+    public LinkedList<StudentEntity> getFilteredAvailableStudents() {
         return filteredAvailableStudents;
     }
 
-    public void setFilteredAvailableStudents(LinkedList<SpecialStudentModel> filteredAvailableStudents) {
+    public void setFilteredAvailableStudents(LinkedList<StudentEntity> filteredAvailableStudents) {
         this.filteredAvailableStudents = filteredAvailableStudents;
     }
 
-    public LinkedList<SpecialStudentModel> getFilteredGroupStudents() {
+    public LinkedList<StudentEntity> getFilteredGroupStudents() {
         return filteredGroupStudents;
     }
 
-    public void setFilteredGroupStudents(LinkedList<SpecialStudentModel> filteredGroupStudents) {
+    public void setFilteredGroupStudents(LinkedList<StudentEntity> filteredGroupStudents) {
         this.filteredGroupStudents = filteredGroupStudents;
     }
 }

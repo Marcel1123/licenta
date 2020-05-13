@@ -1,6 +1,11 @@
 package marcel.pirlog.licenta.userManagement.entities;
 
+import marcel.pirlog.licenta.userManagement.entities.person.StudentEntity;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "ProjectEntity")
@@ -9,41 +14,69 @@ public class ProjectEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genname")
-    @SequenceGenerator(name = "genname", sequenceName = "seqname", allocationSize = 1)
+//    @SequenceGenerator(name = "genname", sequenceName = "seqname", allocationSize = 1)
     @Column(name = "Id")
+    @NotNull
+    @NotEmpty
     private UUID id;
 
     @Column(name = "nume")
+    @NotNull
+    @NotEmpty
     private String name;
 
-    @Column(name = "Id_student")
-    private UUID studentId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Id_student")
+    @NotNull
+    @NotEmpty
+    private StudentEntity studentId;
 
-    @Column(name = "Id_materie")
-    private UUID materieId;
+    @OneToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "Id_materie")
+    @NotNull
+    @NotEmpty
+    private MaterialEntity materieId;
 
-    @Column(name = "Id_group")
-    private UUID groupId;
+    @OneToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "Id_group")
+    @NotNull
+    @NotEmpty
+    private GroupEntity groupId;
 
     @Column(name = "Finalizat")
+    @NotNull
+    @NotEmpty
     private String isFinal;
-
-    @Column(name = "Status_compilare")
-    private String compilationStatus;
 
     @Column(name = "Status_plagiere")
     private String plagiaryStatus;
 
-    public ProjectEntity(){}
+//    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.DETACH)
+    @NotNull
+    @NotEmpty
+    @JoinTable(name = "projet_version",
+        joinColumns = @JoinColumn(
+            name = "proj_id",
+            referencedColumnName = "id"
+        ),
+        inverseJoinColumns = @JoinColumn(
+            name = "vers_id",
+            referencedColumnName = "id"
+        )
+    )
+    private List<SubVersionEntity> versionEntities;
 
-    public ProjectEntity(UUID id, String name, UUID studentId, UUID materieId, UUID groupId, String isFinal, String compilationStatus, String plagiaryStatus){
+    public ProjectEntity(){
+    }
+
+    public ProjectEntity(UUID id, String name, StudentEntity studentId, MaterialEntity materieId, GroupEntity groupId, String isFinal, String plagiaryStatus){
         this.id = id;
         this.name = name;
         this.studentId = studentId;
         this.materieId = materieId;
         this.groupId = groupId;
         this.isFinal = isFinal;
-        this.compilationStatus = compilationStatus;
         this.plagiaryStatus = plagiaryStatus;
     }
 
@@ -55,36 +88,36 @@ public class ProjectEntity {
         this.id = id;
     }
 
-    public UUID getStudentId() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public StudentEntity getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(UUID studentId) {
+    public void setStudentId(StudentEntity studentId) {
         this.studentId = studentId;
     }
 
-    public UUID getMaterieId() {
+    public MaterialEntity getMaterieId() {
         return materieId;
     }
 
-    public void setMaterieId(UUID materieId) {
+    public void setMaterieId(MaterialEntity materieId) {
         this.materieId = materieId;
     }
 
-    public String getCompilationStatus() {
-        return compilationStatus;
+    public GroupEntity getGroupId() {
+        return groupId;
     }
 
-    public void setCompilationStatus(String compilationStatus) {
-        this.compilationStatus = compilationStatus;
-    }
-
-    public String getPlagiaryStatus() {
-        return plagiaryStatus;
-    }
-
-    public void setPlagiaryStatus(String plagiaryStatus) {
-        this.plagiaryStatus = plagiaryStatus;
+    public void setGroupId(GroupEntity groupId) {
+        this.groupId = groupId;
     }
 
     public String getIsFinal() {
@@ -95,19 +128,21 @@ public class ProjectEntity {
         this.isFinal = isFinal;
     }
 
-    public UUID getGroupId() {
-        return groupId;
+    public String getPlagiaryStatus() {
+        return plagiaryStatus;
     }
 
-    public void setGroupId(UUID groupId){
-        this.groupId = groupId;
+    public void setPlagiaryStatus(String plagiaryStatus) {
+        this.plagiaryStatus = plagiaryStatus;
     }
 
-    public String getName() {
-        return name;
+    public List<SubVersionEntity> getVersionEntities() {
+        return versionEntities;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setVersionEntities(List<SubVersionEntity> versionEntities) {
+        this.versionEntities = versionEntities;
     }
+
+
 }

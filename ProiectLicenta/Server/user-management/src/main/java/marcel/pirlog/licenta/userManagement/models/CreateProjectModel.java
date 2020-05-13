@@ -1,6 +1,6 @@
 package marcel.pirlog.licenta.userManagement.models;
 
-public final class CreateProjectModel {
+public class CreateProjectModel {
     private String materialId;
     private String studentId;
     private String name;

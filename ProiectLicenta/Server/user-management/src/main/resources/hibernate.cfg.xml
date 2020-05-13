@@ -23,15 +23,15 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- Annotated entity classes -->
-        <mapping class="marcel.pirlog.licenta.userManagement.entities.StudentEntity"/>
+        <mapping class="marcel.pirlog.licenta.userManagement.entities.person.StudentEntity"/>
+        <mapping class="marcel.pirlog.licenta.userManagement.entities.person.TeacherEntity"/>
+        <mapping class="marcel.pirlog.licenta.userManagement.entities.person.PersonEntity"/>
         <mapping class="marcel.pirlog.licenta.userManagement.entities.AccountEntity"/>
-        <mapping class="marcel.pirlog.licenta.userManagement.entities.TeacherEntity"/>
-        <mapping class="marcel.pirlog.licenta.userManagement.entities.DidacticEntity"/>
+<!--        <mapping class="marcel.pirlog.licenta.userManagement.entities.DidacticEntity"/>-->
         <mapping class="marcel.pirlog.licenta.userManagement.entities.MaterialEntity"/>
         <mapping class="marcel.pirlog.licenta.userManagement.entities.GroupEntity"/>
-        <mapping class="marcel.pirlog.licenta.userManagement.entities.GroupMemberEntity"/>
         <mapping class="marcel.pirlog.licenta.userManagement.entities.SubVersionEntity"/>
         <mapping class="marcel.pirlog.licenta.userManagement.entities.ProjectEntity"/>
-        <mapping class="marcel.pirlog.licenta.userManagement.models.GeneralProjectInformationModel"/>
+        <mapping class="marcel.pirlog.licenta.userManagement.entities.SubVersionContentEntity"/>
     </session-factory>
 </hibernate-configuration>

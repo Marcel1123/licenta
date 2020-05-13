@@ -2,19 +2,17 @@ package project;
 
 import com.google.gson.Gson;
 import entity.GroupEntity;
-import models.GeneralProjectInformationModel;
+import entity.ProjectEntity;
 import utilitar.HttpRequestAPI;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.http.HttpResponse;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 @ManagedBean
@@ -22,26 +20,20 @@ import java.util.Map;
 public class ProjectManagement {
     private final Gson gson = new Gson();
     private Map<String, Object> sessionVar;
-    private List<GeneralProjectInformationModel> projects;
+    private ProjectEntity[] projects;
     private GroupEntity groupEntity;
 
     @PostConstruct
     public void init(){
         try{
-            this.projects = new LinkedList<>();
+            this.projects = new ProjectEntity[0];
             this.sessionVar = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
             this.groupEntity = this.gson.fromJson(this.sessionVar.get("target_group").toString(), GroupEntity.class);
-            HttpResponse response = HttpRequestAPI.GETMethodResponse("http://localhost:9091/project/projects/", this.groupEntity.getId());
+            HttpResponse response = HttpRequestAPI.GETMethodResponse("http://localhost:9093/project/projects/", this.groupEntity.getId().toString());
 
             if (response.statusCode() == HttpURLConnection.HTTP_OK){
-                GeneralProjectInformationModel[] p = this.gson.fromJson(response.body().toString(), GeneralProjectInformationModel[].class);
-                for ( GeneralProjectInformationModel g : p){
-                    if(g.getIsFinal().equals("false")){
-                        g.setCompilationStatus("impossible");
-                        g.setStatusPlagiere("impossible");
-                    }
-                    this.projects.add(g);
-                }
+                projects = gson.fromJson(response.body().toString(), ProjectEntity[].class);
+
             }
         } catch (IOException | InterruptedException | NullPointerException npe){
             try {
@@ -54,11 +46,11 @@ public class ProjectManagement {
     public void build(ComponentSystemEvent event){
     }
 
-    public List<GeneralProjectInformationModel> getProjects() {
+    public ProjectEntity[] getProjects() {
         return projects;
     }
 
-    public void setProjects(List<GeneralProjectInformationModel> projects) {
+    public void setProjects(ProjectEntity[] projects) {
         this.projects = projects;
     }
 
@@ -70,8 +62,8 @@ public class ProjectManagement {
         this.groupEntity = groupEntity;
     }
 
-    public String goToVersions(GeneralProjectInformationModel generalProjectInformationModel){
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("projectId", generalProjectInformationModel.getProjectId());
+    public String goToVersions(ProjectEntity projectEntity){
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("projectId", projectEntity.getId());
         return "versions";
     }
 }

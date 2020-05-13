@@ -1,7 +1,7 @@
 package marcel.pirlog.licenta.userManagement.controllers;
 
-import marcel.pirlog.licenta.userManagement.entities.StudentEntity;
-import marcel.pirlog.licenta.userManagement.entities.TeacherEntity;
+import marcel.pirlog.licenta.userManagement.entities.person.StudentEntity;
+import marcel.pirlog.licenta.userManagement.entities.person.TeacherEntity;
 import marcel.pirlog.licenta.userManagement.models.LoginModel;
 import marcel.pirlog.licenta.userManagement.services.account.IAccountService;
 import marcel.pirlog.licenta.userManagement.utils.RequestPath;
