@@ -5,6 +5,7 @@ import Marcel.AppConfiguration;
 import Marcel.controllers.entitycontrollers.FileCodeController;
 import Marcel.controllers.fxmlcontroller.FxmlController;
 import Marcel.entities.FileCode;
+import Marcel.models.ContentModel;
 import Marcel.models.VersionModel;
 import Marcel.myutil.HttpRequestAPI;
 import Marcel.myutil.SearchInDirectory;
@@ -47,9 +48,10 @@ public class ShowAllCodeFileFromPathController  implements Initializable {
     private AppConfiguration appConfiguration = App.getAppConfiguration();
     private List<File> fileList = new LinkedList<>();
     private List<FileCode> fileCodes = new LinkedList<>();
-    private List<String> contentList = new LinkedList<>();
+    private List<ContentModel> contentList = new LinkedList<>();
     private long startTime = 0;
     private VersionModel versionModel = new VersionModel();
+    private final Base64.Encoder encoder = Base64.getEncoder();
 
     private AnimationTimer animationTimer = new AnimationTimer() {
         @Override
@@ -103,7 +105,7 @@ public class ShowAllCodeFileFromPathController  implements Initializable {
                 byte[] data = new byte[(int) file.length()];
                 fileInputStream.read(data);
                 fileInputStream.close();
-                contentList.add(Base64.getEncoder().encodeToString(new String(data, "UTF-8").getBytes()));
+                contentList.add(new ContentModel(encoder.encodeToString(new String(data, "UTF-8").getBytes()), file.getName()));
             }
         } catch (FileNotFoundException fnfe){
 
@@ -117,7 +119,7 @@ public class ShowAllCodeFileFromPathController  implements Initializable {
     private void sendFileToServer(String string){
         if(contentList.size() > 0){
             String[] strings = new String[contentList.size()];
-            versionModel = new VersionModel(UUID.fromString(appConfiguration.getProjectId()), contentList.toArray(strings), string);
+            versionModel = new VersionModel(UUID.fromString(appConfiguration.getProjectId()), contentList.toArray(new ContentModel[0]), string);
             Gson gson = new Gson();
             String bodyForRequest = gson.toJson(versionModel);
             try {

@@ -24,6 +24,10 @@ public class SubVersionContentEntity {
     @NotNull
     private String file;
 
+    @Column(name = "file_name")
+    @NotNull
+    private String fName;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(
             name = "vers_content",
@@ -68,5 +72,13 @@ public class SubVersionContentEntity {
 
     public void setSubVersionEntities(SubVersionEntity subVersionEntities) {
         this.subVersionEntities = subVersionEntities;
+    }
+
+    public String getfName() {
+        return fName;
+    }
+
+    public void setfName(String fName) {
+        this.fName = fName;
     }
 }

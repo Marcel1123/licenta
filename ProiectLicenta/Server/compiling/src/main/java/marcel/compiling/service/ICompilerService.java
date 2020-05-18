@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ICompilerService {
-    List<SubVersionEntity> getVersionForCompile(UUID subversionID);
+    void compile(UUID id);
 }

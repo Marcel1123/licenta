@@ -16,6 +16,8 @@ public class SubVersionEntity {
 
     private String compiling;
 
+    private String fName;
+
     public SubVersionEntity() {
     }
 
@@ -57,5 +59,13 @@ public class SubVersionEntity {
 
     public void setCompiling(String compiling) {
         this.compiling = compiling;
+    }
+
+    public String getfName() {
+        return fName;
+    }
+
+    public void setfName(String fName) {
+        this.fName = fName;
     }
 }

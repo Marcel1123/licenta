@@ -5,9 +5,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.util.List;
+import javax.tools.JavaCompiler;
+import javax.tools.StandardJavaFileManager;
+import javax.tools.ToolProvider;
 import java.util.UUID;
 
 @Component
@@ -17,10 +20,24 @@ public class CompilerRepository implements ICompilerRepository {
     private EntityManager entityManager;
 
     @Override
-    public List<SubVersionEntity> getVersionForCompile(UUID subversionID) {
-        TypedQuery<SubVersionEntity> versionEntity = entityManager.createQuery(
-                "select sve from SubVersionEntity sve where sve.versionId = :id", SubVersionEntity.class
+    public void compile(UUID id) {
+        SubVersionEntity subVersionEntity = getVersion(id);
+        if(subVersionEntity != null){
+            JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+            StandardJavaFileManager manager = compiler.getStandardFileManager(null, null, null);
+            
+        }
+    }
+
+    private SubVersionEntity getVersion(UUID id){
+        TypedQuery<SubVersionEntity> query = entityManager.createQuery(
+                "select s from SubVersionEntity s where s.id = :id",
+                SubVersionEntity.class
         );
-        return versionEntity.setParameter("id", subversionID).getResultList();
+        try{
+            return query.setParameter("id", id).getSingleResult();
+        } catch (NoResultException e){
+            return null;
+        }
     }
 }

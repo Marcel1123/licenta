@@ -15,8 +15,9 @@ public class CompilerService implements ICompilerService {
     @Autowired
     private CompilerRepository compilerRepository;
 
+
     @Override
-    public List<SubVersionEntity> getVersionForCompile(UUID subversionID) {
-        return compilerRepository.getVersionForCompile(subversionID);
+    public void compile(UUID id) {
+        compilerRepository.compile(id);
     }
 }

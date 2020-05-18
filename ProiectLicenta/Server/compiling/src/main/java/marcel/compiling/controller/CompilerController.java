@@ -22,7 +22,6 @@ public class CompilerController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public ResponseEntity requestCompile(@PathVariable UUID id){
-//        return DefaultResponse.BAD_REQUEST_RESPONSE;
-        return ResponseEntity.status(HttpStatus.OK).body(compilerService.getVersionForCompile(id).toArray());
+        return DefaultResponse.BAD_REQUEST_RESPONSE;
     }
 }

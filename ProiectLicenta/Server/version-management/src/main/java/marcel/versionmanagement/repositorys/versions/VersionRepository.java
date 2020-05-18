@@ -2,6 +2,7 @@ package marcel.versionmanagement.repositorys.versions;
 
 import marcel.versionmanagement.entities.SubVersionContentEntity;
 import marcel.versionmanagement.entities.SubVersionEntity;
+import marcel.versionmanagement.models.ContentModel;
 import marcel.versionmanagement.models.VersionModel;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -42,11 +43,12 @@ public class VersionRepository implements IVersionRepository {
                     .setParameter(1, versionModel.getProjectId())
                     .setParameter(2, subVersionEntity.getId())
                     .executeUpdate();
-            for(String s : versionModel.getCodeFile()){
+            for(ContentModel s : versionModel.getCodeFile()){
                 UUID id = UUID.randomUUID();
-                entityManager.createNativeQuery("insert into content values (?,?)")
+                entityManager.createNativeQuery("insert into content values (?,?,?)")
                         .setParameter(1, id)
-                        .setParameter(2, s)
+                        .setParameter(2, s.getfName())
+                        .setParameter(3, s.getCode())
                         .executeUpdate();
                 entityManager.createNativeQuery("insert into vers_content values (?,?)")
                         .setParameter(1, subVersionEntity.getId())

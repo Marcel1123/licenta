@@ -4,10 +4,10 @@ import java.util.UUID;
 
 public class VersionModel {
     private UUID projectId;
-    private String[] codeFile;
+    private ContentModel[] codeFile;
     private String isFinal;
 
-    public VersionModel(UUID projectId, String[] codeFile, String isFinal){
+    public VersionModel(UUID projectId, ContentModel[] codeFile, String isFinal) {
         this.projectId = projectId;
         this.codeFile = codeFile;
         this.isFinal = isFinal;
@@ -21,11 +21,23 @@ public class VersionModel {
         return projectId;
     }
 
-    public String[] getCodeFile() {
-        return codeFile;
+    public void setProjectId(UUID projectId) {
+        this.projectId = projectId;
     }
 
     public String getIsFinal() {
         return isFinal;
+    }
+
+    public void setIsFinal(String isFinal) {
+        this.isFinal = isFinal;
+    }
+
+    public ContentModel[] getCodeFile() {
+        return codeFile;
+    }
+
+    public void setCodeFile(ContentModel[] codeFile) {
+        this.codeFile = codeFile;
     }
 }

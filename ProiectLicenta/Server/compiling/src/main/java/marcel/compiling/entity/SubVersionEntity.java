@@ -1,64 +1,74 @@
 package marcel.compiling.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
-@Table(name = "Versiuni")
 @Entity(name = "SubVersionEntity")
+@Table(name = "Versiuni")
 public class SubVersionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genname")
-    @SequenceGenerator(name = "genname", sequenceName = "seqname", allocationSize = 1)
+//    @SequenceGenerator(name = "genname", sequenceName = "seqname", allocationSize = 1)
     @Column(name = "Id")
+    @NotNull
+    @NotEmpty
     private UUID id;
 
-    @Column(name = "Id_versiune")
-    private UUID versionId;
+    @OneToMany(cascade = CascadeType.ALL)
+    @NotNull
+    @NotEmpty
+    @JoinTable(
+            name = "vers_content",
+            joinColumns = @JoinColumn(
+                    name = "vers_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "content_id",
+                    referencedColumnName = "id"
+            )
+    )
+    private List<SubVersionContentEntity> content;
 
-    @Column(name = "Id_proiect")
-    private UUID projectId;
-
-    @Column(name = "Cod_sura")
-    private String file;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "projet_version",
+            joinColumns = @JoinColumn(
+                    name = "vers_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "proj_id",
+                    referencedColumnName = "id"
+            )
+    )
+    @NotNull
+    @NotEmpty
+    private ProjectEntity project;
 
     @Column(name = "Data_incarcarii")
+    @NotNull
+    @NotEmpty
     private LocalDateTime uploadDate;
 
-    public SubVersionEntity(){
+    @Column(name = "compiling")
+    @NotNull
+    @NotEmpty
+    private String compiling;
+
+    public SubVersionEntity() {
     }
 
-    public SubVersionEntity(UUID id, UUID projectId, UUID versionId, String file, LocalDateTime uploadDate){
-        this.id = id;
-        this.projectId = projectId;
-        this.file = file;
-        this.uploadDate = uploadDate;
-        this.versionId = versionId;
+    public ProjectEntity getProject() {
+        return project;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public UUID getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(UUID projectId) {
-        this.projectId = projectId;
-    }
-
-    public String getFile() {
-        return file;
-    }
-
-    public void setFile(String file) {
-        this.file = file;
+    public void setProject(ProjectEntity project) {
+        this.project = project;
     }
 
     public LocalDateTime getUploadDate() {
@@ -69,11 +79,27 @@ public class SubVersionEntity {
         this.uploadDate = uploadDate;
     }
 
-    public UUID getVersionId() {
-        return versionId;
+    public UUID getId() {
+        return id;
     }
 
-    public void setVersionId(UUID versionId) {
-        this.versionId = versionId;
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public List<SubVersionContentEntity> getContent() {
+        return content;
+    }
+
+    public void setContent(List<SubVersionContentEntity> content) {
+        this.content = content;
+    }
+
+    public String getCompiling() {
+        return compiling;
+    }
+
+    public void setCompiling(String compiling) {
+        this.compiling = compiling;
     }
 }
