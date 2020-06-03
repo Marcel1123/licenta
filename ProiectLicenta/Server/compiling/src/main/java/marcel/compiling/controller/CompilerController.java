@@ -22,6 +22,7 @@ public class CompilerController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public ResponseEntity requestCompile(@PathVariable UUID id){
+        compilerService.compile(id);
         return DefaultResponse.BAD_REQUEST_RESPONSE;
     }
 }

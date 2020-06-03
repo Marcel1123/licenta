@@ -2,9 +2,9 @@ package marcel.compiling.controller;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestController
+@RestControllerAdvice
 public class ErrorHandlingController implements ErrorController {
 
     private static final String PATH = "/error";
