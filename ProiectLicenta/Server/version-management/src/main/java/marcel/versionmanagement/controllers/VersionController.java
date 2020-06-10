@@ -1,4 +1,4 @@
-package marcel.versionmanagement.controller;
+package marcel.versionmanagement.controllers;
 
 import com.google.gson.Gson;
 import marcel.versionmanagement.entities.SubVersionContentEntity;

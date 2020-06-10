@@ -13,22 +13,15 @@ public class MaterialEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genname")
 //    @SequenceGenerator(name = "genname", sequenceName = "seqname", allocationSize = 1)
     @Column(name = "Id")
-    @NotNull
-    @NotEmpty
     private UUID id;
 
     @Column(name = "Nume")
-    @NotNull
-    @NotEmpty
     private String name;
 
     @Column(name = "An")
-    @NotNull
     private int year;
 
     @Column(name = "Semestru")
-    @NotNull
-    @NotEmpty
     private String semester;
 
     public MaterialEntity(){

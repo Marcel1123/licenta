@@ -91,10 +91,10 @@ public class GroupController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(removeMember1);
     }
 
-//    @RequestMapping(value = "/gr/{id}", method = RequestMethod.GET)
-//    public ResponseEntity getById(@PathVariable UUID id){
-//        return ResponseEntity.status(HttpStatus.OK).body(groupService.getGroupById(id.toString()));
-//    }
+    @RequestMapping(value = "/gr/{id}", method = RequestMethod.GET)
+    public ResponseEntity getById(@PathVariable UUID id){
+        return ResponseEntity.status(HttpStatus.OK).body(groupService.getGroupById(id.toString()));
+    }
 
     @RequestMapping(value = "/{id}/{teacherId}", method = RequestMethod.DELETE)
     public ResponseEntity deleteGroup(@PathVariable String id, @PathVariable String teacherId) throws ForbiddenException {

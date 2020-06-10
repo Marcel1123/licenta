@@ -18,12 +18,9 @@ public class StudentEntity implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
-    @NotNull
-    @NotEmpty
     private PersonEntity person;
 
     @Column(name = "An")
-    @NotNull
     private int year;
 
     public StudentEntity() {

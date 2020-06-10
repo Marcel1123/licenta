@@ -2,11 +2,11 @@ package marcel.pirlog.licenta.userManagement.repositorys.groups;
 
 import marcel.pirlog.licenta.userManagement.entities.*;
 import marcel.pirlog.licenta.userManagement.entities.person.PersonEntity;
-import marcel.pirlog.licenta.userManagement.entities.person.StudentEntity;
 import marcel.pirlog.licenta.userManagement.entities.person.TeacherEntity;
 import marcel.pirlog.licenta.userManagement.exceptions.DuplicateException;
 import marcel.pirlog.licenta.userManagement.exceptions.ObjectNotFoundException;
-import marcel.pirlog.licenta.userManagement.models.*;
+import marcel.pirlog.licenta.userManagement.models.AddMemberModel;
+import marcel.pirlog.licenta.userManagement.models.CreateGroupModel;
 import marcel.pirlog.licenta.userManagement.repositorys.person.PersonRepository;
 import marcel.pirlog.licenta.userManagement.repositorys.project.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;

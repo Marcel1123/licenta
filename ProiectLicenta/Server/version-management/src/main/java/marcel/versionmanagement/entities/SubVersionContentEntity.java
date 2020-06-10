@@ -16,16 +16,12 @@ public class SubVersionContentEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genname")
 //    @SequenceGenerator(name = "genname", sequenceName = "seqname", allocationSize = 1)
     @Column(name = "id")
-    @NotNull
-    @NotEmpty
     private UUID id;
 
     @Column(name = "Cod_sura")
-    @NotNull
     private String file;
 
     @Column(name = "file_name")
-    @NotNull
     private String fName;
 
     @ManyToOne(cascade = CascadeType.ALL)

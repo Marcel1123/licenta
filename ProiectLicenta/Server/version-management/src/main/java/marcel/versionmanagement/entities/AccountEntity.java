@@ -14,18 +14,12 @@ public class AccountEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genname")
 //    @SequenceGenerator(name = "genname", sequenceName = "seqname", allocationSize = 1)
     @Column(name = "Id")
-    @NotNull
-    @NotEmpty
     private UUID id;
 
     @Column(name = "Username")
-    @NotNull
-    @NotEmpty
     private String username;
 
     @Column(name = "Password")
-    @NotNull
-    @NotEmpty
     private String password;
 
     @Override

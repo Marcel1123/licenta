@@ -16,24 +16,16 @@ public class PersonEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genname")
 //    @SequenceGenerator(name = "genname", sequenceName = "seqname", allocationSize = 1)
     @Column(name = "Id")
-    @NotNull
-    @NotEmpty
     private UUID Id;
 
     @Column(name = "Nume")
-    @NotNull
-    @NotEmpty
     private String firstName;
 
     @Column(name = "Prenume")
-    @NotNull
-    @NotEmpty
     private String lastName;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Id_cont")
-    @NotNull
-    @NotEmpty
     private AccountEntity accountId;
 
     public PersonEntity() {
