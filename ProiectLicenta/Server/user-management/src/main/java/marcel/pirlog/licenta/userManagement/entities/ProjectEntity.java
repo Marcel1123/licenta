@@ -16,36 +16,24 @@ public class ProjectEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genname")
 //    @SequenceGenerator(name = "genname", sequenceName = "seqname", allocationSize = 1)
     @Column(name = "Id")
-    @NotNull
-    @NotEmpty
     private UUID id;
 
     @Column(name = "nume")
-    @NotNull
-    @NotEmpty
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Id_student")
-    @NotNull
-    @NotEmpty
     private StudentEntity studentId;
 
     @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "Id_materie")
-    @NotNull
-    @NotEmpty
     private MaterialEntity materieId;
 
     @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "Id_group")
-    @NotNull
-    @NotEmpty
     private GroupEntity groupId;
 
     @Column(name = "Finalizat")
-    @NotNull
-    @NotEmpty
     private String isFinal;
 
     @Column(name = "Status_plagiere")
@@ -53,8 +41,6 @@ public class ProjectEntity {
 
 //    @OneToMany(fetch = FetchType.LAZY)
     @OneToMany(cascade = CascadeType.DETACH)
-    @NotNull
-    @NotEmpty
     @JoinTable(name = "projet_version",
         joinColumns = @JoinColumn(
             name = "proj_id",

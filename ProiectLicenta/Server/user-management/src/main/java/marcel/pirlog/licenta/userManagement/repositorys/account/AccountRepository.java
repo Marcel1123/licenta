@@ -27,13 +27,9 @@ public class AccountRepository implements IAccountRepository {
                         " join StudentEntity s on s.person = p.id where c.username = :username " +
                         " and c.password = :password", StudentEntity.class
         );
-        try{
-            return accountEntityTypedQuery.setParameter("username", username)
-                    .setParameter("password", Hash.toHexString(Hash.getSHA(password)))
-                    .getSingleResult();
-        } catch (NoResultException ne) {
-            return null;
-        }
+        return accountEntityTypedQuery.setParameter("username", username)
+                .setParameter("password", Hash.toHexString(Hash.getSHA(password)))
+                .getSingleResult();
     }
 
     @Override
@@ -44,13 +40,9 @@ public class AccountRepository implements IAccountRepository {
                         " join TeacherEntity s on s.person = p.id where c.username = :username " +
                         " and c.password = :password", TeacherEntity.class
         );
-        try{
-            return teacherAccount.setParameter("username", username)
-                    .setParameter("password",  Hash.toHexString(Hash.getSHA(password)))
-                    .getSingleResult();
-        } catch (NoResultException ne){
-            return null;
-        }
+        return teacherAccount.setParameter("username", username)
+                .setParameter("password",  Hash.toHexString(Hash.getSHA(password)))
+                .getSingleResult();
     }
 
 

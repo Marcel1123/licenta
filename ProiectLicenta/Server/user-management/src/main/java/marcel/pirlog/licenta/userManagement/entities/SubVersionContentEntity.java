@@ -1,12 +1,9 @@
 package marcel.pirlog.licenta.userManagement.entities;
 
-import org.hibernate.boot.jaxb.hbm.spi.SubEntityInfo;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "SubVersionContentEntity")
@@ -14,18 +11,13 @@ import java.util.UUID;
 public class SubVersionContentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genname")
-//    @SequenceGenerator(name = "genname", sequenceName = "seqname", allocationSize = 1)
     @Column(name = "id")
-    @NotNull
-    @NotEmpty
     private UUID id;
 
     @Column(name = "Cod_sura")
-    @NotNull
     private String file;
 
     @Column(name = "file_name")
-    @NotNull
     private String fName;
 
     @ManyToOne(cascade = CascadeType.ALL)

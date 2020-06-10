@@ -9,4 +9,9 @@ public class LoginModel {
         this.username = username;
         this.password = password;
     }
+
+    public LoginModel(LoginModel loginModel){
+        this.password = loginModel.password;
+        this.username = loginModel.username;
+    }
 }

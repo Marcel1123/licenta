@@ -136,9 +136,7 @@ public class GroupRepository implements IGroupRepository {
             );
             GroupEntity g = groupEntityTypedQuery.setParameter("id", UUID.fromString(id))
                     .getSingleResult();
-            for(PersonEntity e: g.getGroupMember()){
-                hideAccount(e);
-            }
+            g.setGroupMember(null);
             return g;
         } catch (NoResultException e){
             return null;

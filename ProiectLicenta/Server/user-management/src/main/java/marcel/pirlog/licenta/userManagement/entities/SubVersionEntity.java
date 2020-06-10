@@ -15,13 +15,9 @@ public class SubVersionEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genname")
 //    @SequenceGenerator(name = "genname", sequenceName = "seqname", allocationSize = 1)
     @Column(name = "Id")
-    @NotNull
-    @NotEmpty
     private UUID id;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @NotNull
-    @NotEmpty
     @JoinTable(
             name = "vers_content",
             joinColumns = @JoinColumn(
@@ -46,18 +42,12 @@ public class SubVersionEntity {
                     referencedColumnName = "id"
             )
     )
-    @NotNull
-    @NotEmpty
     private ProjectEntity project;
 
     @Column(name = "Data_incarcarii")
-    @NotNull
-    @NotEmpty
     private LocalDateTime uploadDate;
 
     @Column(name = "compiling")
-    @NotNull
-    @NotEmpty
     private String compiling;
 
     public SubVersionEntity() {

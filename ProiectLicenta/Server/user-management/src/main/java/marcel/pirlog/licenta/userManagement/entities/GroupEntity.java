@@ -18,18 +18,12 @@ public class GroupEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genname")
 //    @SequenceGenerator(name = "genname", sequenceName = "seqname", allocationSize = 1)
     @Column(name = "id")
-    @NotNull
-    @NotEmpty
     private UUID id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @NotNull
-    @NotEmpty
     private TeacherEntity creator;
 
     @Column(name = "Nume")
-    @NotNull
-    @NotEmpty
     private String name;
 
 //    @ManyToMany(cascade = CascadeType.ALL)
@@ -45,8 +39,6 @@ public class GroupEntity implements Serializable {
                     referencedColumnName = "id"
             )
     )
-    @NotNull
-    @NotEmpty
     private List<PersonEntity> groupMember;
 
     public GroupEntity(){
