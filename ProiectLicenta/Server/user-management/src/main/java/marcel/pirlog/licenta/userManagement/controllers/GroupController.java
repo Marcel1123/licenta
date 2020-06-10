@@ -1,6 +1,7 @@
 package marcel.pirlog.licenta.userManagement.controllers;
 
 import marcel.pirlog.licenta.userManagement.entities.GroupEntity;
+import marcel.pirlog.licenta.userManagement.exceptions.ForbiddenException;
 import marcel.pirlog.licenta.userManagement.models.AddMemberModel;
 import marcel.pirlog.licenta.userManagement.models.CreateGroupModel;
 import marcel.pirlog.licenta.userManagement.services.groups.IGroupService;
@@ -96,17 +97,16 @@ public class GroupController {
 //    }
 
     @RequestMapping(value = "/{id}/{teacherId}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteGroup(@PathVariable String id, @PathVariable String teacherId){
-//        GroupEntity groupEntity = groupService.getGroupById(id);
-//        if(groupEntity == null){
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("");
-//        }
-//
-//        if(!groupEntity.getCreator().getId().toString().equals(teacherId)){
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("");
-//        }
-        String text = groupService.deleteGroup(id);
+    public ResponseEntity deleteGroup(@PathVariable String id, @PathVariable String teacherId) throws ForbiddenException {
+        GroupEntity groupEntity = groupService.getGroupById(id);
+        if(groupEntity == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("");
+        }
 
+        if(!groupEntity.getCreator().getId().toString().equals(teacherId)){
+            throw new ForbiddenException("This teacher not is group creator");
+        }
+        String text = groupService.deleteGroup(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(text);
     }
 }
