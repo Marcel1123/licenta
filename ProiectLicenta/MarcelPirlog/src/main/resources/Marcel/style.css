@@ -1,0 +1,51 @@
+.list-view {
+    -fx-background-color: #232323;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: #434343;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: #434343;
+}
+
+.list-view .list-cell {
+    -fx-background-color: #232323;
+    -fx-text-fill: white;
+}
+
+.list-view .label {
+    -fx-text-fill: white;
+}
+
+.jfx-rippler {
+    -jfx-rippler-fill: red;
+}
+
+.table-view {
+    -fx-background-color: #232323;
+}
+
+.table-view .table-cell:hover {
+    -fx-background-color: #434343;
+}
+
+.table-view .table-cell:selected {
+    -fx-background-color: #434343;
+}
+
+.table-view .table-cell {
+    -fx-background-color: #232323;
+    -fx-text-fill: white;
+}
+
+.table-view .label {
+    -fx-text-fill: white;
+}
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-background-color: red;
+}

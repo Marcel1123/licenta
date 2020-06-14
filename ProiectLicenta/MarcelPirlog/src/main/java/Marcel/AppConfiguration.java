@@ -1,6 +1,7 @@
 package Marcel;
 
 import Marcel.entities.GroupEntity;
+import Marcel.entities.ProjectEntity;
 import Marcel.entities.person.PersonEntity;
 import Marcel.entities.person.StudentEntity;
 import Marcel.models.MaterialModel;
@@ -18,6 +19,7 @@ public final class AppConfiguration {
         this.studentGroupModels = null;
         this.materialModels = null;
         this.projectId = null;
+        this.projectEntities = null;
     }
 
     private String projectId;
@@ -29,6 +31,8 @@ public final class AppConfiguration {
     private GroupEntity[] studentGroupModels;
 
     private MaterialModel[] materialModels;
+
+    public ProjectEntity[] projectEntities;
 
     public MaterialModel[] getMaterialModels() {
         return materialModels;
@@ -50,6 +54,14 @@ public final class AppConfiguration {
         return student;
     }
 
+    public ProjectEntity[] getProjectEntities() {
+        return projectEntities;
+    }
+
+    public void setProjectEntities(ProjectEntity[] projectEntities) {
+        this.projectEntities = projectEntities;
+    }
+
     public  void setStudent(StudentEntity student) {
         this.student = student;
     }
@@ -57,6 +69,7 @@ public final class AppConfiguration {
     public static AppConfiguration getInstance(){
         return appConfig;
     }
+
 
     public void setLocalProjectLocation(Path localProjectLocation) {
         this.localProjectLocation = localProjectLocation;

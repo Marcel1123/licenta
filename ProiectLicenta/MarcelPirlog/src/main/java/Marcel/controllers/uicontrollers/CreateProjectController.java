@@ -26,6 +26,7 @@ import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.http.HttpResponse;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -103,7 +104,7 @@ public class CreateProjectController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        backToProfileButton.setVisible(true);
         groups = new LinkedList<>();
 
         for(int i = 1; i <= 3; i++){
@@ -175,6 +176,9 @@ public class CreateProjectController implements Initializable {
             return false;
         }
         if(projectName.getText().isEmpty()){
+            return false;
+        }
+        if(!Files.isDirectory(Paths.get(directoryPath.getText()))){
             return false;
         }
 //        if(programmingLanguageOption.getValue() == null){

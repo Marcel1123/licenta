@@ -32,38 +32,40 @@ public class LoginScreenController {
 
     @FXML
     public void LoginFunction() {
-        String credential = MapFromUserEntityToJson.returnCredentialsInJson(usernameField.getText(), passwordField.getText());
+        if(!usernameField.getText().isEmpty() && !passwordField.getText().isEmpty()){
+            String credential = MapFromUserEntityToJson.returnCredentialsInJson(usernameField.getText(), passwordField.getText());
 
-        HttpResponse httpResponse = null;
-        try {
-            httpResponse = HttpRequestAPI.POSTMethod("http://localhost:9091/login/student", credential);
+            HttpResponse httpResponse = null;
+            try {
+                httpResponse = HttpRequestAPI.POSTMethod("http://localhost:9091/login/student", credential);
 
-            if (httpResponse.statusCode() == HttpURLConnection.HTTP_CREATED) {
-                String response = (String) httpResponse.body();
+                if (httpResponse.statusCode() == HttpURLConnection.HTTP_CREATED) {
+                    String response = (String) httpResponse.body();
 
-                if (response.isEmpty()) {
+                    if (response.isEmpty()) {
+                        errorLabel.setText("Invalid username or password!");
+                        errorLabel.setVisible(true);
+                    } else {
+                        Gson g = new Gson();
+                        Reader reader = new StringReader(response);
+                        App.getAppConfiguration().setStudent(g.fromJson(reader, StudentEntity.class));
+
+                        try {
+                            FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/ProfilePage"));
+                        } catch (IOException e) {
+                        }
+                        App.stage.setScene(FxmlController.currentScene);
+
+                        errorLabel.setText("");
+                        errorLabel.setVisible(false);
+                    }
+                } else {
                     errorLabel.setText("Invalid username or password!");
                     errorLabel.setVisible(true);
-                } else {
-                    Gson g = new Gson();
-                    Reader reader = new StringReader(response);
-                    App.getAppConfiguration().setStudent(g.fromJson(reader, StudentEntity.class));
-
-                    try {
-                        FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/ProfilePage"));
-                    } catch (IOException e) {
-                    }
-                    App.stage.setScene(FxmlController.currentScene);
-
-                    errorLabel.setText("");
-                    errorLabel.setVisible(false);
                 }
-            } else {
-                errorLabel.setText("Invalid username or password!");
-                errorLabel.setVisible(true);
+            } catch (IOException | NullPointerException | InterruptedException e){
+                e.printStackTrace();
             }
-        } catch (IOException | NullPointerException | InterruptedException e){
-
         }
     }
 }

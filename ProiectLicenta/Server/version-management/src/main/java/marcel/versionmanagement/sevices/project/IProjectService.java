@@ -9,4 +9,5 @@ import java.util.UUID;
 public interface IProjectService {
     String addProject(CreateProjectModel projectModel);
     List<ProjectEntity> getAllGroupProject(UUID id);
+    List<ProjectEntity> getUnfinishedProject(String studentId);
 }

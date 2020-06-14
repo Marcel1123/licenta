@@ -70,6 +70,27 @@ public class ProjectRepository implements IProjectRepository {
         }
     }
 
+    @Override
+    public List<ProjectEntity> getUnfinishedProject(String studentId){
+        List<ProjectEntity> result = new LinkedList<>();
+        try{
+            TypedQuery<ProjectEntity> projects = entityManager.createQuery(
+                    "select p from ProjectEntity p where p.studentId.id = :id and p.isFinal = 'false'",
+                    ProjectEntity.class
+            );
+            result = projects.setParameter("id", UUID.fromString(studentId)).getResultList();
+            for(ProjectEntity p : result){
+                p.setGroupId(null);
+                p.setVersionEntities(null);
+                p.setStudentId(null);
+                p.setMaterieId(null);
+            }
+            return result;
+        } catch (NoResultException ne){
+            throw new NoResultException("Proiecte negasite");
+        }
+    }
+
     private void hideGroupInformation(GroupEntity e){
         e.setCreator(null);
         e.setGroupMember(null);

@@ -13,5 +13,5 @@ import java.util.UUID;
 public interface IProjectRepository {
     String createProject(CreateProjectModel createProjectModel);
     List<ProjectEntity> getAllGroupProject(UUID id);
-    
+    List<ProjectEntity> getUnfinishedProject(String studentId);
 }

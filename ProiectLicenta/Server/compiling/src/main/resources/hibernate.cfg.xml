@@ -21,7 +21,7 @@
 
         <!-- Update database on startup -->
         <property name="hibernate.hbm2ddl.auto">update</property>
-        <property name="hibernate.allow_update_outside_transaction">true</property>
+<!--        <property name="hibernate.allow_update_outside_transaction">true</property>-->
 
         <!-- Annotated entity classes -->
         <mapping class="marcel.compiling.entity.person.StudentEntity"/>

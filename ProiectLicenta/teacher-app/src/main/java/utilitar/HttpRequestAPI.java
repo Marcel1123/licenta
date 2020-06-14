@@ -1,10 +1,14 @@
 package utilitar;
 
+import com.google.gson.Gson;
+import models.CompilingModel;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.UUID;
 
 public class HttpRequestAPI {
     public static HttpResponse POSTMethod(String url, String body) throws IOException, InterruptedException {
@@ -48,5 +52,17 @@ public class HttpRequestAPI {
                 .DELETE()
                 .build();
         return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    public static HttpResponse POSTMethodPath(String url, CompilingModel compilingModel) throws IOException, InterruptedException {
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(
+                        new Gson().toJson(compilingModel)
+                ))
+                .build();
+        return httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
     }
 }

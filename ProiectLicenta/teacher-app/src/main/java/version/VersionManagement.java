@@ -3,6 +3,8 @@ package version;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import entity.SubVersionEntity;
+import entity.person.TeacherEntity;
+import models.CompilingModel;
 import utilitar.HttpRequestAPI;
 
 import javax.annotation.PostConstruct;
@@ -23,6 +25,7 @@ public class VersionManagement {
     private List<String> text;
     private List<SubVersionEntity> versionEntities;
     private List<SubVersionEntity> all;
+    private TeacherEntity teacher;
 
     @PostConstruct
     public void init(){
@@ -34,7 +37,7 @@ public class VersionManagement {
             Map<String, Object> parameterValue = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
             String string = parameterValue.get("projectId").toString();
-
+            this.teacher = gson.fromJson(parameterValue.get("teacher").toString(), TeacherEntity.class);
             HttpResponse response = HttpRequestAPI.GETMethodResponse("http://localhost:9093/version/project/", string);
 
             SubVersionEntity[] versionEntities = this.gson.fromJson(response.body().toString(), SubVersionEntity[].class);
@@ -48,6 +51,15 @@ public class VersionManagement {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/teacher-app/faces/xhtml/index.xhtml");
             } catch (IOException e) {
             }
+        }
+    }
+
+    public String compileAction(SubVersionEntity entity){
+        try {
+            HttpResponse response = HttpRequestAPI.POSTMethodPath("http://localhost:9092/compiler/", new CompilingModel(this.teacher.getId().toString(), entity.getId().toString()));
+            return "versions";
+        } catch (IOException | InterruptedException e) {
+            return "projects";
         }
     }
 

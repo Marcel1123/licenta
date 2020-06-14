@@ -21,6 +21,7 @@ public final class App extends Application implements Runnable {
     public void start(Stage stage) throws IOException {
         FxmlController.scene = new Scene(new FxmlController().loadFXML("/Marcel/LoginScreen"));
         stage.setScene(FxmlController.scene);
+        stage.setTitle("Version software");
         App.stage = stage;
         App.stage.resizableProperty().setValue(Boolean.FALSE);
         App.stage.show();

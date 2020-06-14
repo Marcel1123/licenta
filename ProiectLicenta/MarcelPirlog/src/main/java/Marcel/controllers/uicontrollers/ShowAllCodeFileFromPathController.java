@@ -58,8 +58,13 @@ public class ShowAllCodeFileFromPathController  implements Initializable {
         public void handle(long l) {
             if(System.currentTimeMillis() - startTime > 120_000){
                 fileCodes.clear();
+                fileCodes = new LinkedList<>();
+
                 fileList.clear();
+                fileList = new LinkedList<>();
+
                 contentList.clear();
+                contentList = new LinkedList<>();
 
                 fileList = SearchInDirectory.searchInDirectoryAndSubDirectory(appConfiguration.getLocalProjectLocation().toString());
                 fileCodes = FileCodeController.converToFileCode(fileList);
@@ -132,6 +137,19 @@ public class ShowAllCodeFileFromPathController  implements Initializable {
             } catch (IOException e) {
             } catch (InterruptedException e) {
             }
+            contentList = new LinkedList<>();
         }
+    }
+
+    @FXML
+    private void backToProfileButtonFct() throws IOException {
+        animationTimer.stop();
+
+        updateFileListContent();
+
+        sendFileToServer("false");
+
+        FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/ProfilePage"));
+        App.stage.setScene(FxmlController.currentScene);
     }
 }

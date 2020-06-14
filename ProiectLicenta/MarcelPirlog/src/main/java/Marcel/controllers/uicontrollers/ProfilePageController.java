@@ -4,7 +4,7 @@ import Marcel.App;
 import Marcel.AppConfiguration;
 import Marcel.controllers.fxmlcontroller.FxmlController;
 import Marcel.entities.GroupEntity;
-import Marcel.models.StudentGroupModel;
+import Marcel.entities.ProjectEntity;
 import Marcel.myutil.HttpRequestAPI;
 import com.google.gson.Gson;
 import javafx.fxml.FXML;
@@ -27,13 +27,18 @@ public class ProfilePageController implements Initializable {
     @FXML
     public Button createProjectForAGroup;
     @FXML
+    public Button continueProject;
+    @FXML
     public Label groupError;
+    @FXML
+    public Label lastName;
 
     private AppConfiguration appConfiguration = App.getAppConfiguration();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.fullName.setText(appConfiguration.getStudent().getPerson().getFirstName() + ' ' + appConfiguration.getStudent().getPerson().getLastName());
+        this.lastName.setText(appConfiguration.getStudent().getPerson().getLastName());
+        this.fullName.setText(appConfiguration.getStudent().getPerson().getFirstName());
         this.year.setText(String.valueOf(App.getAppConfiguration().getStudent().getYear()));
     }
 
@@ -48,6 +53,25 @@ public class ProfilePageController implements Initializable {
             FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/CreateProject"));
             App.stage.setScene(FxmlController.currentScene);
         } else {
+            groupError.setText("NU SUNTTETI IN NICI UN GRUP");
+            groupError.setVisible(true);
+        }
+    }
+
+    @FXML
+    public void setContinueProject() throws IOException, InterruptedException {
+        HttpResponse response = HttpRequestAPI.GETMethodResponse("http://localhost:9093//project/unfinished/", appConfiguration.getStudent().getId().toString());
+
+        if(response.statusCode() == HttpURLConnection.HTTP_OK && !response.body().toString().equals("[]")){
+            groupError.setVisible(false);
+            Gson g = new Gson();
+
+            AppConfiguration.getInstance().setProjectEntities(g.fromJson(response.body().toString(), ProjectEntity[].class));
+
+            FxmlController.currentScene = new Scene(new FxmlController().loadFXML("/Marcel/ContinueProject"));
+            App.stage.setScene(FxmlController.currentScene);
+        } else {
+            groupError.setText("NU AVETI PROIECTE INCEPUTE");
             groupError.setVisible(true);
         }
     }

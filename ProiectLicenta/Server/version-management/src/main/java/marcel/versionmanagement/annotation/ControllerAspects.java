@@ -69,6 +69,11 @@ public class ControllerAspects {
 
     }
 
+    @Pointcut("execution(* marcel.versionmanagement.controllers.ProjectController.getUnfinishedProject(..))")
+    public void getUnfinished(){
+
+    }
+
     @Pointcut("publicMethods()&&controllers()")
     public void publicMethodsWithinControllers() {
     }
@@ -136,6 +141,14 @@ public class ControllerAspects {
 
     @Before("getById()")
     public void beforeGetById(JoinPoint joinPoint) throws InvalidPathVariableException, InvalidObjectsException {
+        Object[] objects = joinPoint.getArgs();
+        verifyOneArgument(objects);
+        String id = String.valueOf(objects[0]);
+        verifyUUIDString(id);
+    }
+
+    @Before("getUnfinished()")
+    public void beforeGetUnfinished(JoinPoint joinPoint) throws InvalidPathVariableException, InvalidObjectsException {
         Object[] objects = joinPoint.getArgs();
         verifyOneArgument(objects);
         String id = String.valueOf(objects[0]);

@@ -26,4 +26,9 @@ public class ProjectService implements IProjectService {
     public List<ProjectEntity> getAllGroupProject(UUID id) {
         return projectRepository.getAllGroupProject(id);
     }
+
+    @Override
+    public List<ProjectEntity> getUnfinishedProject(String studentId) {
+        return projectRepository.getUnfinishedProject(studentId);
+    }
 }
