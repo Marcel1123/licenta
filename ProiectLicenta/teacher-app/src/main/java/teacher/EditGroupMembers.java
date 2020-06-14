@@ -1,6 +1,7 @@
 package teacher;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import entity.GroupEntity;
 import entity.person.StudentEntity;
 import entity.person.TeacherEntity;
@@ -27,6 +28,7 @@ public class EditGroupMembers {
     private GroupEntity subject;
     private TeacherEntity teacher;
     private final Gson gson = new Gson();
+    private int[] years = {1, 2, 3};
 
     private LinkedList<StudentEntity> availableStudents;
     private LinkedList<StudentEntity> groupStudents;
@@ -52,7 +54,11 @@ public class EditGroupMembers {
                 this.specialGroupModel = this.gson.fromJson(response.body().toString(), SpecialGroupModel.class);
                 this.availableStudents = new LinkedList<StudentEntity>(Arrays.asList(this.specialGroupModel.getAvailableStudents()));
                 this.groupStudents = new LinkedList<StudentEntity>(Arrays.asList(this.specialGroupModel.getGroupStudents()));
-            } catch (IOException | InterruptedException e) {
+        } catch (InterruptedException | IOException | NullPointerException | IndexOutOfBoundsException | JsonSyntaxException nep){
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/teacher-app/faces/xhtml/index.xhtml");
+            } catch (IOException e) {
+            }
         }
     }
 
@@ -73,7 +79,11 @@ public class EditGroupMembers {
             } else {
                 PrimeFaces.current().executeScript("create_error_message(\"Add member\", \"\")");
             }
-        } catch (IOException | InterruptedException e){
+        } catch (InterruptedException | IOException | NullPointerException | IndexOutOfBoundsException | JsonSyntaxException nep){
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/teacher-app/faces/xhtml/index.xhtml");
+            } catch (IOException e) {
+            }
         }
         specialStudentModel1 = null;;
         return "group-management";
@@ -93,10 +103,20 @@ public class EditGroupMembers {
             } else {
                 PrimeFaces.current().executeScript("create_error_message(\"Add member\", \"\")");
             }
-        } catch (IOException | InterruptedException e){
+        } catch (IOException | NullPointerException | InterruptedException e){
+            return "index";
         }
         specialStudentModel = null;
         return "group-management";
+    }
+
+    public int getInteger(String string) {
+        try {
+            return Integer.valueOf(string);
+        }
+        catch (NumberFormatException ex) {
+            return 0;
+        }
     }
 
     public String backToHome(){
@@ -161,5 +181,9 @@ public class EditGroupMembers {
 
     public void setFilteredGroupStudents(LinkedList<StudentEntity> filteredGroupStudents) {
         this.filteredGroupStudents = filteredGroupStudents;
+    }
+
+    public int[] getYears() {
+        return years;
     }
 }

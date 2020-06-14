@@ -112,7 +112,12 @@
     visibility: hidden;
 }
 
-.ui-filter-column .ui-column-customfilter .custom-filter {
+.ui-filter-column .ui-column-customfilter {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.custom-filter {
     width: 100%;
     box-sizing: border-box;
 }
