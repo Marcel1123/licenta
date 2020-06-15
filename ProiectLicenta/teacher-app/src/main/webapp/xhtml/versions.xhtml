@@ -22,7 +22,7 @@
                     <div class="col-sm-3">
                         <h:commandButton value="Back" styleClass="btn btn-primary" style="margin: 5px; color: white;" action="#{versionManagement.back()}"/>
                     </div>
-                    <div id="version-manage" class="col-sm-offset-0 col-sm-8 disable-select" style="margin-top: 50px;">
+                    <div id="version-manage" class="col-sm-offset-0 col-sm-12 disable-select" style="margin-top: 100px;">
                         <p:dataTable var="cVersion" value="#{versionManagement.versionEntities}" scrollable="true" scrollHeight="700" emptyMessage="No students found">
                             <p:column footerText="Upload date" headerText ="Upload date" style="text-align: center;" styleClass="disable-select text-overflow-custom">
                                 <h:outputText value="#{cVersion.uploadDate}"/>
