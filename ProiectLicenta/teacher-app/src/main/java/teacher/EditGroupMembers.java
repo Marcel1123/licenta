@@ -42,18 +42,18 @@ public class EditGroupMembers {
         availableStudents = new LinkedList<>();
         groupStudents = new LinkedList<>();
 
-        Map<String, Object> parameterValue = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        String string = parameterValue.get("teacher").toString();
-        this.teacher = this.gson.fromJson(string, TeacherEntity.class);
-
-        string = parameterValue.get("target_group").toString();
-        this.subject = this.gson.fromJson(string, GroupEntity.class);
-
         try {
-                HttpResponse response = HttpRequestAPI.GETMethodResponse("http://localhost:9091/group/members/", subject.getId().toString());
-                this.specialGroupModel = this.gson.fromJson(response.body().toString(), SpecialGroupModel.class);
-                this.availableStudents = new LinkedList<StudentEntity>(Arrays.asList(this.specialGroupModel.getAvailableStudents()));
-                this.groupStudents = new LinkedList<StudentEntity>(Arrays.asList(this.specialGroupModel.getGroupStudents()));
+            Map<String, Object> parameterValue = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+            String string = parameterValue.get("teacher").toString();
+            this.teacher = this.gson.fromJson(string, TeacherEntity.class);
+
+            string = parameterValue.get("target_group").toString();
+            this.subject = this.gson.fromJson(string, GroupEntity.class);
+
+            HttpResponse response = HttpRequestAPI.GETMethodResponse("http://localhost:9091/group/members/", subject.getId().toString());
+            this.specialGroupModel = this.gson.fromJson(response.body().toString(), SpecialGroupModel.class);
+            this.availableStudents = new LinkedList<StudentEntity>(Arrays.asList(this.specialGroupModel.getAvailableStudents()));
+            this.groupStudents = new LinkedList<StudentEntity>(Arrays.asList(this.specialGroupModel.getGroupStudents()));
         } catch (InterruptedException | IOException | NullPointerException | IndexOutOfBoundsException | JsonSyntaxException nep){
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/teacher-app/faces/xhtml/index.xhtml");
@@ -103,7 +103,7 @@ public class EditGroupMembers {
             } else {
                 PrimeFaces.current().executeScript("create_error_message(\"Add member\", \"\")");
             }
-        } catch (IOException | NullPointerException | InterruptedException e){
+        } catch (InterruptedException | IOException | NullPointerException | IndexOutOfBoundsException | JsonSyntaxException nep){
             return "index";
         }
         specialStudentModel = null;
