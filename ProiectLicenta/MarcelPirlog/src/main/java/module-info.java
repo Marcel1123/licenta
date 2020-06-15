@@ -1,13 +1,10 @@
-/**
- *
- */
 module Marcel {
     requires javafx.controls;
     requires javafx.fxml;
-//    requires kotlin.stdlib;
+    requires kotlin.stdlib;
     requires java.net.http;
     requires com.google.gson;
-//    requires json;
+    requires json;
 
     exports Marcel;
     exports Marcel.entities;
