@@ -23,6 +23,12 @@
     /*margin-right: auto;*/
 }
 
+.top-margin-500 {
+    margin-top: 200px;
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+}
+
 .text-overflow-custom {
     white-space: nowrap;
     overflow: hidden;
@@ -47,7 +53,7 @@
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 300px;
+    padding-top: 150px;
     left: 0;
     top: 0;
     width: 100%;
@@ -60,9 +66,9 @@
 .popup-content {
     background-color: white;
     margin:auto;
-    padding: 20px;
+    padding: 10px;
     border: 2px solid black;
-    width: 50%;
+
 }
 
 .popup-close-button {
@@ -78,7 +84,7 @@
     cursor: pointer;
 }
 
-.popup-content h3 {
+.popup-content h3, .popup-content .important {
     width: 90%;
     margin: auto;
     text-align: center;
@@ -106,7 +112,12 @@
     visibility: hidden;
 }
 
-.ui-filter-column .ui-column-customfilter .custom-filter {
+.ui-filter-column .ui-column-customfilter {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.custom-filter {
     width: 100%;
     box-sizing: border-box;
 }

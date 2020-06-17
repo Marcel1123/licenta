@@ -29,25 +29,26 @@
                 <div id="group-manage" class="disable-select col-sm-12">
                     <div class="col-sm-6" style="margin-top: 50px;">
                         <p:dataTable var="cStudent" value="#{editGroupMembers.groupStudents}" scrollable="true" scrollHeight="500"
-                                     emptyMessage="No students found"
-                        >
+                                     emptyMessage="No students found" widgetVar="ccStudent">
 
-                            <p:column headerText="First Name" style="text-align: center;" styleClass="disable-select text-overflow-custom"
-                                      footerText="First Name"
-                            >
-
-                                <h:outputText value="#{cStudent.firstName}"/>
+                            <p:column headerText="First Name" style="text-align: center;" styleClass="disable-select text-overflow-custom" filterBy="#{cStudent.person.firstName}" filterMatchMode="contains"
+                                      footerText="First Name">
+                                <h:outputText value="#{cStudent.person.firstName}"/>
                             </p:column>
 
-                            <p:column headerText="Last Name" style="text-align: center;" styleClass="disable-select text-overflow-custom"
-                                      footerText="Last Name"
-                            >
-                                <h:outputText value="#{cStudent.lastName}"/>
+                            <p:column headerText="Last Name" style="text-align: center;" styleClass="disable-select text-overflow-custom" filterBy="#{cStudent.person.lastName}" filterMatchMode="contains"
+                                      footerText="Last Name">
+                                <h:outputText value="#{cStudent.person.lastName}"/>
                             </p:column>
 
-                            <p:column headerText="Year" style="text-align: center;" styleClass="disable-select text-overflow-custom"
-                                      footerText="Year"
-                            >
+                            <p:column headerText="Year" style="text-align: center;" styleClass="disable-select text-overflow-custom" footerText="Year" filterMatchMode="equals" filterBy="#{cStudent.year}">
+                                <f:facet name="filter">
+                                    <p:selectOneMenu onchange="PF('ccStudent').filter()" styleClass="custom-filter">
+                                        <f:converter converterId="javax.faces.Integer" />
+                                        <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+                                        <f:selectItems value="#{editGroupMembers.years}" />
+                                    </p:selectOneMenu>
+                                </f:facet>
                                 <h:outputText value="#{cStudent.year}"/>
                             </p:column>
 
@@ -58,25 +59,28 @@
                     </div>
 
                     <div class="col-sm-6" style="margin-top: 50px;">
-                        <p:dataTable var="student" value="#{editGroupMembers.availableStudents}" scrollable="true" scrollHeight="500"
-                                     emptyMessage="No students found"
-                        >
+                        <p:dataTable var="student" value="#{editGroupMembers.availableStudents}" scrollable="true" scrollHeight="500" widgetVar="ccStudent1"
+                                     emptyMessage="No students found">
 
-                            <p:column headerText="First Name" style="text-align: center;"
-                                      styleClass="disable-select text-overflow-custom" footerText="First Name"
-                            >
-                                <h:outputText value="#{student.firstName}"/>
+                            <p:column headerText="First Name" style="text-align: center;" filterBy="#{student.person.firstName}" filterMatchMode="contains"
+                                      styleClass="disable-select text-overflow-custom" footerText="First Name">
+                                <h:outputText value="#{student.person.firstName}"/>
                             </p:column>
 
-                            <p:column headerText="Last Name" style="text-align: center;"
-                                      styleClass="disable-select text-overflow-custom" footerText="Last Name"
-                            >
-                                <h:outputText value="#{student.lastName}"/>
+                            <p:column headerText="Last Name" style="text-align: center;"  filterBy="#{student.person.lastName}" filterMatchMode="contains"
+                                      styleClass="disable-select text-overflow-custom" footerText="Last Name">
+                                <h:outputText value="#{student.person.lastName}"/>
                             </p:column>
 
                             <p:column headerText="Year" style="text-align: center;"
-                                      styleClass="disable-select text-overflow-custom" footerText="Year"
-                            >
+                                      styleClass="disable-select text-overflow-custom" footerText="Year"  filterMatchMode="equals" filterBy="#{student.year}">
+                                <f:facet name="filter">
+                                    <p:selectOneMenu onchange="PF('ccStudent1').filter()" styleClass="custom-filter">
+                                        <f:converter converterId="javax.faces.Integer" />
+                                        <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+                                        <f:selectItems value="#{editGroupMembers.years}" />
+                                    </p:selectOneMenu>
+                                </f:facet>
                                 <h:outputText value="#{student.year}"/>
                             </p:column>
 

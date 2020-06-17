@@ -118,6 +118,9 @@ public class EditGroupMembers {
             return 0;
         }
     }
+    public String palgiator(){
+        return "plagiator";
+    }
 
     public String backToHome(){
         return "groups";

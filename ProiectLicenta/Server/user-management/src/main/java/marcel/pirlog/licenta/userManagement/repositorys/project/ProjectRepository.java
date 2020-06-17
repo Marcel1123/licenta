@@ -74,4 +74,24 @@ public class ProjectRepository implements IProjectRepository {
         e.setCreator(null);
         e.setGroupMember(null);
     }
+
+    public List<ProjectEntity> getAllGroupProject1(UUID id) {
+        List<ProjectEntity> result = new LinkedList<>();
+        try {
+            TypedQuery<ProjectEntity> general = entityManager.createQuery(
+                    "select p from ProjectEntity p " +
+                            " join GroupEntity g on p.groupId = g.id " +
+                            " where g.id = :id", ProjectEntity.class
+            );
+            result = general.setParameter("id", id).getResultList();
+//            for(ProjectEntity p : result) {
+//                p.setGroupId(null);
+//                p.setMaterieId(null);
+//                p.setVersionEntities(null);
+//            }
+            return result;
+        } catch (NoResultException e){
+            return result;
+        }
+    }
 }

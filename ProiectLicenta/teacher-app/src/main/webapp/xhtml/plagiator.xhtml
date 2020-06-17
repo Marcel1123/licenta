@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta charset="utf-8"/>
+    <title>Versions</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <h:outputStylesheet library="css" name="stylesheet.css"/>
+    <h:outputScript library="js" name="functions.js"/>
+</h:head>
+<h:body styleClass="fundal" onload="PR.prettyPrint()">
+    <div id="page">
+        <h:form id="v_frm">
+            <p:growl id="mesaje" showDetail="true"/>
+            <div class="col-sm-12 col-sm-offset-0 top-margin-50" style="float: left;">
+                <div class="col-sm-3">
+                    <h:commandButton value="Back" styleClass="btn btn-primary" style="margin: 5px; color: white;" action="#{plagiatorManagement.back()}"/>
+                </div>
+                <div class="col-sm-3">
+                    <h:commandButton value="test" styleClass="btn btn-primary" style="margin: 5px; color: white;" action="#{plagiatorManagement.startTest()}"/>
+                </div>
+                <div id="version-manage" class="col-sm-offset-0 col-sm-12 disable-select" style="margin-top: 100px;">
+                    <p:dataTable var="cProject" value="#{plagiatorManagement.selected}" scrollable="true" scrollHeight="700" emptyMessage="No projects found">
+                        <p:column footerText="Project Name" headerText ="Project Name" style="text-align: center;" styleClass="disable-select text-overflow-custom">
+                            <h:outputText value="#{cProject.name}"/>
+                        </p:column>
+
+                        <p:column footerText="Stundent Information" headerText="Student Information" style="text-align: center;" styleClass="text-overflow-custom">
+                            <h:outputText value="#{cProject.studentId.person.lastName} #{cProject.studentId.person.firstName} #{cProject.studentId.year}"/>
+                        </p:column>
+
+                        <p:column footerText="Select projects" headerText="Select Projects" style="text-align: center;" styleClass="text-overflow-custom">
+                            <p:selectBooleanCheckbox value="#{plagiatorManagement.b}" label="Select">
+                                <p:ajax listener="#{plagiatorManagement.select(cProject)}" />
+                            </p:selectBooleanCheckbox>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+        </h:form>
+    </div>
+</h:body>
+    <script type="text/javascript">
+        $(document).on("ready", function () {
+            $('#page').css({'height' : window.innerHeight + 'px'});
+        });
+    </script>
+</html>

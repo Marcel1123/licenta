@@ -1,6 +1,7 @@
 package entity;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 public class SubVersionContentEntity {
@@ -41,5 +42,20 @@ public class SubVersionContentEntity {
 
     public void setSubVersionEntities(SubVersionEntity subVersionEntities) {
         this.subVersionEntities = subVersionEntities;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SubVersionContentEntity)) return false;
+        SubVersionContentEntity that = (SubVersionContentEntity) o;
+        return getId().equals(that.getId()) &&
+                getFile().equals(that.getFile()) &&
+                getSubVersionEntities().equals(that.getSubVersionEntities());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getFile(), getSubVersionEntities());
     }
 }

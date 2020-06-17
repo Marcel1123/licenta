@@ -71,8 +71,9 @@ public class VersionRepository implements IVersionRepository {
             return null;
         }
         try{
-            entityManager.createNativeQuery("update proiect set finalizat = 'true' where id = ?")
-                    .setParameter(1, versionModel.getProjectId())
+            entityManager.createNativeQuery("update proiect set finalizat = ? where id = ?")
+                    .setParameter(1, id)
+                    .setParameter(2, versionModel.getProjectId())
                     .executeUpdate();
         } catch (TransactionalException e){
             return null;
@@ -111,6 +112,22 @@ public class VersionRepository implements IVersionRepository {
             for(SubVersionContentEntity se : s){
                 se.setSubVersionEntities(null);
             }
+            return s;
+        } catch (NoResultException ne){
+            return null;
+        }
+    }
+
+    @Override
+    public SubVersionEntity getSubById(UUID id){
+        TypedQuery<SubVersionEntity> query = entityManager.createQuery(
+                "select s from SubVersionEntity s where s.id = :id",
+                SubVersionEntity.class
+        );
+        try{
+            SubVersionEntity s = query.setParameter("id", id).getSingleResult();
+            s.getProject().setGroupId(null);
+            s.getProject().setStudentId(null);
             return s;
         } catch (NoResultException ne){
             return null;

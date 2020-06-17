@@ -56,4 +56,9 @@ public class ProjectController {
     public ResponseEntity getUnfinishedProject(@PathVariable String id){
         return ResponseEntity.status(HttpStatus.OK).body(projectService.getUnfinishedProject(id).toArray(new ProjectEntity[0]));
     }
+
+    @RequestMapping(value = "/finished/{id}", method = RequestMethod.GET)
+    public ResponseEntity getFinishedProject(@PathVariable String id){
+        return ResponseEntity.status(HttpStatus.OK).body(projectService.getFinishedProject(id).toArray(new ProjectEntity[0]));
+    }
 }

@@ -31,4 +31,9 @@ public class ProjectService implements IProjectService {
     public List<ProjectEntity> getUnfinishedProject(String studentId) {
         return projectRepository.getUnfinishedProject(studentId);
     }
+
+    @Override
+    public List<ProjectEntity> getFinishedProject(String studentId) {
+        return projectRepository.getFinishedProject(studentId);
+    }
 }

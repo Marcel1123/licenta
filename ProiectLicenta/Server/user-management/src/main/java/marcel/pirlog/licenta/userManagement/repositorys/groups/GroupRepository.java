@@ -231,7 +231,7 @@ public class GroupRepository implements IGroupRepository {
     @Transactional
     public String deleteGroup(String groupId) {
         try{
-            List<ProjectEntity> p = repository.getAllGroupProject(UUID.fromString(groupId));
+            List<ProjectEntity> p = repository.getAllGroupProject1(UUID.fromString(groupId));
 
             if(p != null){
                 for(ProjectEntity ps : p){
@@ -252,6 +252,10 @@ public class GroupRepository implements IGroupRepository {
                                 .setParameter(1, s.getId())
                                 .executeUpdate();
                     }
+
+                    entityManager.createNativeQuery("delete from proiect where id = ?")
+                            .setParameter(1, ps.getId())
+                            .executeUpdate();
                 }
             }
             entityManager.createNativeQuery("delete from group_memger where group_id = ?")

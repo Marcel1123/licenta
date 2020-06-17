@@ -64,7 +64,7 @@ public class LoginScreenController {
                     errorLabel.setVisible(true);
                 }
             } catch (IOException | NullPointerException | InterruptedException e){
-                e.printStackTrace();
+//                e.printStackTrace();
             }
         }
     }

@@ -14,4 +14,5 @@ public interface IProjectRepository {
     String createProject(CreateProjectModel createProjectModel);
     List<ProjectEntity> getAllGroupProject(UUID id);
     List<ProjectEntity> getUnfinishedProject(String studentId);
+    List<ProjectEntity> getFinishedProject(String studentId);
 }

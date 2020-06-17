@@ -5,6 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Projects</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css"/>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
@@ -24,21 +25,16 @@
                 <div id="project-manage" class="col-sm-12 disable-select" style="margin-top: 50px;">
                     <p:dataTable var="cProject" value="#{projectManagement.projects}" scrollable="true" scrollHeight="500" emptyMessage="No students found">
                         <p:column footerText="Project Name" headerText ="Project Name" style="text-align: center;" styleClass="disable-select text-overflow-custom">
-                            <h:outputText value="#{cProject.projectName}"/>
+                            <h:outputText value="#{cProject.name}"/>
                         </p:column>
 
                         <p:column footerText="Stundent Information" headerText="Student Information" style="text-align: center;" styleClass="text-overflow-custom">
-                            <h:outputText value="#{cProject.student}"/>
-                        </p:column>
-
-                        <p:column footerText="Compile Status" headerText="Compile Status" styleClass="text-overflow-custom" style="text-align: center;">
-                            <h:outputText value="#{cProject.compilationStatus}"
-                                          style="#{cProject.compilationStatus == 'impossible' ? 'color:red;' : cProject.compilationStatus == 'success' ? 'color:green;' : 'color:gray;'}"/>
+                            <h:outputText value="#{cProject.studentId.person.lastName} #{cProject.studentId.person.firstName} #{cProject.studentId.year}"/>
                         </p:column>
 
                         <p:column footerText="Status Plagiator" headerText="Status Plagiator" styleClass="text-overflow-custom" style="text-align: center;">
-                            <h:outputText value="#{cProject.statusPlagiere}"
-                                          style="#{cProject.statusPlagiere == 'impossible' ? 'color:red;' : cProject.statusPlagiere == 'unknown' ? 'color:gray;' : 'color:black;'}"/>
+                            <h:outputText value="#{cProject.plagiaryStatus}"
+                                          style="#{cProject.plagiaryStatus == 'impossible' ? 'color:red;' : cProject.plagiaryStatus == 'unknown' ? 'color:gray;' : 'color:black;'}"/>
                         </p:column>
 
                         <p:column footerText="Is ended" headerText="Is ended" styleClass="text-overflow-custom" style="text-align: center;">
@@ -50,17 +46,17 @@
                             <h:commandButton value="Display" class="btn btn-success" style="margin: 5px; color: white;" action="#{projectManagement.goToVersions(cProject)}"/>
                         </p:column>
 
-                        <p:column footerText="Delete" headerText="Delete" style="text-align: center;" styleClass="text-overflow-custom">
-                            <h:commandButton value="Delete" class="btn btn-danger" style="margin: 5px; color: white;"/>
-                        </p:column>
+<!--                        <p:column footerText="Delete" headerText="Delete" style="text-align: center;" styleClass="text-overflow-custom">-->
+<!--                            <h:commandButton value="Delete" class="btn btn-danger" style="margin: 5px; color: white;"/>-->
+<!--                        </p:column>-->
                     </p:dataTable>
                 </div>
             </h:form>
         </div>
-        <script type="text/javascript">
-            $(document).on("ready", function () {
-                $('#page').css({'height' : window.innerHeight + 'px'});
-            });
-        </script>
     </h:body>
+    <script type="text/javascript">
+        $(document).on("ready", function () {
+            $('#page').css({'height' : window.innerHeight + 'px'});
+        });
+    </script>
 </html>

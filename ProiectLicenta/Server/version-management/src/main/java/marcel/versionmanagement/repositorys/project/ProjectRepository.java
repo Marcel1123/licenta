@@ -91,6 +91,27 @@ public class ProjectRepository implements IProjectRepository {
         }
     }
 
+    @Override
+    public List<ProjectEntity> getFinishedProject(String studentId){
+        List<ProjectEntity> result = new LinkedList<>();
+        try{
+            TypedQuery<ProjectEntity> projects = entityManager.createQuery(
+                    "select p from ProjectEntity p where p.groupId.id = :id and p.isFinal != 'true'",
+                    ProjectEntity.class
+            );
+            result = projects.setParameter("id", UUID.fromString(studentId)).getResultList();
+            for(ProjectEntity p : result){
+                p.setGroupId(null);
+                p.setVersionEntities(null);
+                p.getStudentId().getPerson().setAccountId(null);
+                p.setMaterieId(null);
+            }
+            return result;
+        } catch (NoResultException ne){
+            throw new NoResultException("Proiecte negasite");
+        }
+    }
+
     private void hideGroupInformation(GroupEntity e){
         e.setCreator(null);
         e.setGroupMember(null);
