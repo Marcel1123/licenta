@@ -63,7 +63,7 @@ public class PlagiatorManagement {
         }
         try {
             System.out.println(gson.toJson(projectId.toArray(new ProjectEntity[0])));
-            HttpResponse response = HttpRequestAPI.POSTMethod("http://localhost:9093/plagiary/", gson.toJson(projectId.toArray(new ProjectEntity[0])));
+            HttpResponse response = HttpRequestAPI.POSTMethod("http://localhost:9093/plagiary/", "{}"/*gson.toJson(projectId.toArray(new ProjectEntity[0]))*/);
         } catch (IOException | InterruptedException e) {
 //            e.printStackTrace();
         } finally {

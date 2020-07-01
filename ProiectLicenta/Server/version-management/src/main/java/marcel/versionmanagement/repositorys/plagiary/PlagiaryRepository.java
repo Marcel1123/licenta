@@ -11,8 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TransactionRequiredException;
-import javax.transaction.TransactionScoped;
 import javax.transaction.Transactional;
 import javax.transaction.TransactionalException;
 import java.text.DecimalFormat;
@@ -61,33 +59,10 @@ public class PlagiaryRepository implements IPlagiaryRepository {
             System.out.println(m + " %");
             update(finalV[i].getProject().getId(), m + " %");
         }
-
-//        String[] filesArray = files.toArray(new String[0]);
-//        double[][] result = new double[filesArray.length][filesArray.length];
-//        for(int i = 0; i < filesArray.length; i++){
-//            for(int j = i; j < filesArray.length; j++){
-//                double result1 = new Plagiary(filesArray[i], filesArray[j]).calculateDistance();
-//                result1 = result1 / (filesArray[i].length() + filesArray[j].length());
-//                result1 = (1 - result1) * 100;
-//                DecimalFormat d1 = new DecimalFormat("#.####");
-//                result1 = Double.parseDouble(d1.format(result1));
-//                result[i][j] = result1;
-//                result[j][i] = result1;
-//            }
-//        }
-//        for(int i = 0; i < filesArray.length; i++){
-//            double min = Double.MAX_VALUE;
-//            for(int j = 0; j < filesArray.length; j++){
-//                if(result[i][j] < min){
-//                    min = result[i][j];
-//                }
-//            }
-//            update(uuids[i].getId(), String.valueOf(min));
-//        }
     }
 
     private double getFinalResult(List<Count> counts){
-        double d = 0;
+        double d = 0;   
         double mutari_totale = 0;
         double F_L = 0;
         double F_R = 0;
@@ -102,18 +77,13 @@ public class PlagiaryRepository implements IPlagiaryRepository {
 
     @Transactional
     public void update(UUID prj, String value){
-//        String comm = "update proiect set status_plagiere = \'" + value + "\' where id = ?";
         try{
-            entityManager.createNativeQuery("update proiect set status_plagiere = ?1 where id = ?2")
+            entityManager.createNativeQuery("update proiect set status_plagiere = ? where id = ?")
                     .setParameter(1, value)
                     .setParameter(2, prj)
                     .executeUpdate();
-//            entityManager.createNativeQuery("update proiect set status_plagiere = ? where id = ?")
-//                    .setParameter(1, value)
-//                    .setParameter(2, prj)
-//                    .executeUpdate();
         } catch (TransactionalException e){
-            throw new TransactionalException("Exceptie", e);
+//            throw new TransactionalException("Exceptie", e);
         }
     }
 }

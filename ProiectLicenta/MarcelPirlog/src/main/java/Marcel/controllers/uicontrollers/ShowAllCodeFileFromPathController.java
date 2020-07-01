@@ -95,7 +95,21 @@ public class ShowAllCodeFileFromPathController  implements Initializable {
     public void endThreadAction() throws IOException {
         animationTimer.stop();
 
+        fileCodes.clear();
+        fileCodes = new LinkedList<>();
+
+        fileList.clear();
+        fileList = new LinkedList<>();
+
+        contentList.clear();
+        contentList = new LinkedList<>();
+
+        fileList = SearchInDirectory.searchInDirectoryAndSubDirectory(appConfiguration.getLocalProjectLocation().toString());
+        fileCodes = FileCodeController.converToFileCode(fileList);
+
         updateFileListContent();
+
+//        updateFileListContent();
 
         sendFileToServer("true");
 

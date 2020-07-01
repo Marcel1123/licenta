@@ -74,8 +74,8 @@ public class EditGroupMembers {
             HttpResponse response = HttpRequestAPI.POSTMethod("http://localhost:9091/group/members/add/", this.gson.toJson(addMemberModel));
 
             if(response.statusCode() == HttpURLConnection.HTTP_CREATED){
-                this.availableStudents.remove(specialStudentModel1);
                 this.groupStudents.add(specialStudentModel1);
+                this.availableStudents.remove(specialStudentModel1);
             } else {
                 PrimeFaces.current().executeScript("create_error_message(\"Add member\", \"\")");
             }
@@ -85,7 +85,7 @@ public class EditGroupMembers {
             } catch (IOException e) {
             }
         }
-        specialStudentModel1 = null;;
+        specialStudentModel1 = null;
         return "group-management";
     }
 
@@ -94,11 +94,14 @@ public class EditGroupMembers {
             AddMemberModel addMemberModel = new AddMemberModel(this.teacher.getId().toString(),
                     this.subject.getId().toString(),
                     specialStudentModel.getPerson().getId().toString());
-
+            int t = this.groupStudents.indexOf(specialStudentModel);
             HttpResponse response = HttpRequestAPI.POSTMethod("http://localhost:9091/group/members/remove/", this.gson.toJson(addMemberModel));
 
             if(response.statusCode() == HttpURLConnection.HTTP_NO_CONTENT){
-                this.groupStudents.remove(specialStudentModel);
+                StudentEntity[] s = this.groupStudents.toArray(new StudentEntity[0]);
+//                for(StudentEntity s1 : )
+                this.groupStudents.remove(t);
+//                this.groupStudents.remove(specialStudentModel);
                 this.availableStudents.add(specialStudentModel);
             } else {
                 PrimeFaces.current().executeScript("create_error_message(\"Add member\", \"\")");

@@ -22,7 +22,7 @@ public class PlagiaryController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity plagiary(/*@RequestBody ProjectEntity[] uuids*/){
-        List<ProjectEntity> projectEntities = projectService.getFinishedProject("1e8b95d3-d341-4da7-983b-e8249a7ed781");
+        List<ProjectEntity> projectEntities = projectService.getFinishedProject("f20ca3b3-34dc-416c-8275-995d89636224");
         ProjectEntity[] projectEntities1 = new ProjectEntity[3];
         projectEntities1[0] = projectEntities.get(projectEntities.size() - 3);
         projectEntities1[1] = projectEntities.get(projectEntities.size() - 2);

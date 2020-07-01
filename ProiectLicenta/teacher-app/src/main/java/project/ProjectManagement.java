@@ -33,7 +33,11 @@ public class ProjectManagement {
 
             if (response.statusCode() == HttpURLConnection.HTTP_OK){
                 projects = gson.fromJson(response.body().toString(), ProjectEntity[].class);
-
+                for(ProjectEntity p : projects){
+                    if(!p.getIsFinal().equals("false")){
+                        p.setIsFinal("true");
+                    }
+                }
             }
         } catch (IOException | InterruptedException | NullPointerException npe){
             try {
@@ -60,6 +64,10 @@ public class ProjectManagement {
 
     public void setGroupEntity(GroupEntity groupEntity) {
         this.groupEntity = groupEntity;
+    }
+
+    public String plagiator(){
+        return "plagiator";
     }
 
     public String goToVersions(ProjectEntity projectEntity){

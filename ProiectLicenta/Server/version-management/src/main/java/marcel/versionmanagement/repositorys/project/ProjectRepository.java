@@ -96,7 +96,7 @@ public class ProjectRepository implements IProjectRepository {
         List<ProjectEntity> result = new LinkedList<>();
         try{
             TypedQuery<ProjectEntity> projects = entityManager.createQuery(
-                    "select p from ProjectEntity p where p.groupId.id = :id and p.isFinal != 'true'",
+                    "select p from ProjectEntity p where p.groupId.id = :id and p.isFinal != 'false'",
                     ProjectEntity.class
             );
             result = projects.setParameter("id", UUID.fromString(studentId)).getResultList();
